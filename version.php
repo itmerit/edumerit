@@ -25,8 +25,8 @@ function getStorageFile($file_name)
 
 </html>
 
-<?php
+<<<<<<< HEAD
 
-if (isset($_GET['phpinfo'])) {
-    phpinfo();
-}
+=======
+
+>>>>>>> 6c618b0 (initial commit)
