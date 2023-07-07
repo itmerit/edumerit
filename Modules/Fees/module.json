@@ -1,0 +1,15 @@
+{
+    "name": "Fees",
+    "alias": "fees",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Fees\\Providers\\FeesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        
+    ],
+    "requires": []
+}

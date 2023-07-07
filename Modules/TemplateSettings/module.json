@@ -1,0 +1,13 @@
+{
+    "name": "TemplateSettings",
+    "alias": "templatesettings",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\TemplateSettings\\Providers\\TemplateSettingsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

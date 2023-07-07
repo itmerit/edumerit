@@ -1,0 +1,106 @@
+.create-title {
+    position: relative;
+    cursor: pointer;
+}
+
+.create-title::after {
+    content: "\f107";
+    color: #333;
+    top: 12px;
+    right: 0px;
+    position: absolute;
+    font-family: "FontAwesome"
+}
+
+.create-title[aria-expanded="true"]::after {
+    content: "\f106";
+}
+.add_btn_link {
+    font-weight: 500;
+    color: #415094;
+}
+.menu_icon svg{
+    max-width: 18px;
+}
+.ml_20{
+    margin-left: 20px;
+}
+.menu-list{
+    min-height: 100px;
+    margin-bottom: 40px;
+}
+/* .white-box{
+    min-height: 800px;
+    max-height: 800px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+} */
+.closed_section.ui-sortable-handle {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    cursor: move;
+}
+.section_nav {
+    display: flex;
+    justify-content: space-between;
+}
+.setting_icons {
+    cursor: pointer;
+    display: flex;
+    grid-gap: 15px;
+}
+.min-height-400{
+    min-height: 400px;
+}
+.edit_icon{
+    visibility: hidden!important;
+}
+#itemDiv .listed_menu:hover .edit_icon{
+    visibility:visible!important;
+}
+.menu-list .listed_menu:first-child:hover .edit_icon .make-sub-menu {
+    visibility: hidden;
+} 
+/* new style preview menu    */
+
+#previewMenu li a {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--base_color);
+    padding: 9px 7px;
+    padding: 9px 7px 9px 29px;
+    background: var(--bg_white);
+    transition: .3s;
+    position: relative;
+    z-index: 0;
+    display: grid;
+    grid-template-columns: 26px auto !important;
+    grid-gap: 6px;
+    align-items: center;
+    position: relative;
+
+}
+#previewMenu li ul{
+    background: var(--base_color);
+    opacity: .7;
+}
+#previewMenu li ul li a {
+    display: flex;
+    justify-content: space-between;
+}
+#previewMenu li.mm-active > a {
+    color: var(--text_white);
+    background: var(--base_color);
+}
+li.preview_section {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+@media (max-width: 767.98px) {
+    .available_box{
+        min-height: auto;
+    }
+}

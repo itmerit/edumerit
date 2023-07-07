@@ -1,0 +1,37 @@
+
+************* isologschoolsng *************
+Use this for File explorer and file editing: 
+-------------------------------------------------------------------
+https://lms.isologschoolsng.com:420/tiny/tinyfilemanager.php
+
+USERNAME: admin
+PASSWORD: admin@123
+-------------------------------------------------------------------
+lms.isologschoolsng.com/phpmyadmin
+USERNAME: root
+PASSWORD: ISO/log=2021
+
+Application login Details
+ADMIN LOGIN
+https://lms.isologschoolsng.com:420
+EMAIL: soonyworld@gmail.com
+PASSWORD: ADMIN/user=2021
+
+
+BBB_SECURITY_SALT=EKWgwD9MpE6ttn1BW5HRmJmgKhNrJpKNg8SwO16XFw
+BBB_SERVER_BASE_URL=https://lms.isologschoolsng.com/bigbluebutton/
+
+************* end isologschoolsng *************
+
+
+************* aledu *************
+
+https://login.webgo.de/login
+Name: aledu
+Password: Fwhqd8Xtt6WhYSS
+
+
+ZOOM_CLIENT_KEY=T7RlKK-dQIOyFiu7BsPy5g
+ZOOM_CLIENT_SECRET=S6JTTLfSaiKUg0zr1VMpPgzVFho5iP7JkNVy
+
+************* end isologschoolsng *************

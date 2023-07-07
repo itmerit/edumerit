@@ -1,0 +1,902 @@
+/* line 1, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.eduLms_video_area {
+  background: #fff;
+  overflow-x: hidden;
+}
+
+/* line 4, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.eduLms_video_area .edu_video_header {
+  background: #fff;
+  padding: 30px 40px;
+  border-bottom: 1px solid #eceef4;
+}
+
+@media (max-width: 767.98px) {
+  /* line 4, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .eduLms_video_area .edu_video_header {
+    padding: 20px 25px;
+  }
+}
+
+/* line 13, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.eduLms_video_area .edu_video_header .edu_video_header_right .auto_text {
+  display: flex;
+  align-items: center;
+  grid-gap: 15px;
+}
+
+@media (max-width: 575.98px) {
+  /* line 13, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .eduLms_video_area .edu_video_header .edu_video_header_right .auto_text {
+    display: none;
+  }
+}
+
+/* line 20, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.eduLms_video_area .edu_video_header .edu_video_header_right .auto_text span {
+  font-size: 16px;
+  color: #828bb2;
+  font-weight: 500;
+}
+
+/* line 26, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.eduLms_video_area .edu_video_header .edu_video_header_right .next_prev_btn {
+  margin: 0 40px 0 40px;
+}
+
+@media (max-width: 575.98px) {
+  /* line 26, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .eduLms_video_area .edu_video_header .edu_video_header_right .next_prev_btn {
+    margin: 0 10px 0 0px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* line 26, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .eduLms_video_area .edu_video_header .edu_video_header_right .next_prev_btn {
+    margin: 0 20px 0 20px;
+  }
+}
+
+/* line 35, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.eduLms_video_area .edu_video_header .edu_video_header_right .rating_text {
+  grid-gap: 14px;
+  max-width: 290px;
+}
+
+@media (min-width: 1680px) {
+  /* line 35, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .eduLms_video_area .edu_video_header .edu_video_header_right .rating_text {
+    min-width: 290px;
+  }
+}
+
+@media only screen and (min-width: 1440px) and (max-width: 1679px) {
+  /* line 35, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .eduLms_video_area .edu_video_header .edu_video_header_right .rating_text {
+    margin-right: 20px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* line 35, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .eduLms_video_area .edu_video_header .edu_video_header_right .rating_text {
+    margin-right: 20px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1500px) {
+  /* line 35, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .eduLms_video_area .edu_video_header .edu_video_header_right .rating_text {
+    max-width: 290px;
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 991px) {
+  /* line 35, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .eduLms_video_area .edu_video_header .edu_video_header_right .rating_text {
+    display: none !important;
+  }
+}
+
+/* line 54, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.eduLms_video_area .edu_video_header .edu_video_header_right .rating_text i {
+  font-size: 16px;
+  color: #6e7db4;
+}
+
+/* line 58, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.eduLms_video_area .edu_video_header .edu_video_header_right .rating_text span {
+  font-size: 16px;
+  color: #828bb2;
+  font-weight: 400;
+}
+
+/* line 64, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.eduLms_video_area
+  .edu_video_header
+  .edu_video_header_right
+  .shair_progress_info {
+  grid-gap: 20px;
+}
+
+@media (max-width: 991px) {
+  /* line 66, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .eduLms_video_area
+    .edu_video_header
+    .edu_video_header_right
+    .shair_progress_info
+    .primary-btn {
+    display: none;
+  }
+}
+
+/* line 75, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.gap_5 {
+  grid-gap: 5px;
+}
+
+/* line 82, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.video_palyer_area .video_palyer_box .video_screen {
+  background-image: url(../img/edu_banner.png);
+  /* public/backEnd/img/body-bg.jpg  */
+  height: 750px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 991px) {
+  /* line 82, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .video_palyer_area .video_palyer_box .video_screen {
+    height: 400px;
+  }
+}
+
+/* line 94, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.video_palyer_area .video_palyer_box .video_screen p {
+  font-size: 18px;
+  font-weight: 600;
+  font-family: var(--base_font);
+  color: #fff;
+  margin-top: 14px;
+}
+
+/* line 105, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian {
+  overflow-x: auto;
+}
+
+/* line 107, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+/* line 112, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian .card {
+  margin-bottom: 0px;
+  border: 0;
+  overflow: visible;
+  background: transparent;
+  border-bottom: 1px solid #edeff5 !important;
+}
+
+/* line 118, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian .card .card-header {
+  border: 0;
+  padding: 0;
+  border-radius: 0px !important;
+}
+
+/* line 122, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian .card .card-header h2 {
+  padding: 0;
+}
+
+/* line 125, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian .card .card-header h2 .btn {
+  padding: 0;
+  font-size: 14px;
+  font-weight: 500;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  position: relative;
+  padding: 16px 20px 15px 33px;
+  color: #fff;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  border: 0;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  background: #ffffff;
+}
+
+/* line 140, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian .card .card-header h2 .btn h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4b5898;
+  margin-bottom: 1px;
+}
+
+/* line 146, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian .card .card-header h2 .btn span {
+  font-size: 14px;
+  color: #828bb2;
+  font-weight: 400;
+}
+
+/* line 153, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian .card .card-header h2 .btn::before {
+  content: "\e648";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: "themify";
+  font-size: 14px;
+  right: 30px;
+  color: #4b5898;
+}
+
+@media (max-width: 991px) {
+  /* line 153, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .infixLms_accordian .card .card-header h2 .btn::before {
+    right: 20px;
+  }
+}
+
+/* line 167, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian .card .card-header h2 .btn.collapsed {
+  color: var(--base_color);
+  box-shadow: none;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+
+/* line 171, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian .card .card-header h2 .btn.collapsed::before {
+  content: "\e64b";
+  color: var(--base_color);
+}
+
+/* line 176, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian .card .card-header h2 .btn:focus {
+  text-decoration: none;
+}
+
+/* line 182, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_accordian .card .card-body {
+  padding: 20px 0;
+  margin: 0 30px;
+  border-top: 1px solid #edeff5;
+}
+
+@media (max-width: 575.98px) {
+  /* line 182, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .infixLms_accordian .card .card-body {
+    padding: 15px 0;
+    margin: 0 20px;
+  }
+}
+
+/* line 194, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_video_palyer_lists {
+  width: 420px;
+  background: #fff;
+  height: 100%;
+}
+
+/* line 206, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_video_palyer_lists.active {
+  right: 0px;
+}
+
+/* line 209, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_video_palyer_lists .video_palyer_lHEad {
+  grid-gap: 15px;
+  padding: 30px 30px 16px 30px;
+  border-bottom: 1px solid #edeff5;
+}
+
+/* line 213, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_video_palyer_lists .video_palyer_lHEad .lisson_arrow {
+  width: 30px;
+  height: 30px;
+  background: #d9e4fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 30px 0 0;
+  border-radius: 50%;
+  color: var(--base_color);
+}
+
+/* line 224, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_video_palyer_lists .video_palyer_lHEad h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--base_color);
+}
+
+/* line 229, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.infixLms_video_palyer_lists .video_palyer_lHEad .toggler_lines {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  top: 0;
+  left: -40px;
+  z-index: 12;
+  cursor: pointer;
+  color: var(--base_color);
+  font-size: 14px;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 991px) {
+  /* line 229, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+  .infixLms_video_palyer_lists .video_palyer_lHEad .toggler_lines {
+    display: inline-flex;
+  }
+}
+
+/* line 253, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.video_menu_list .single_video_menu_list:not(:last-child) {
+  margin-bottom: 14px;
+}
+
+/* line 256, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.video_menu_list .single_video_menu_list .video_time {
+  font-size: 14px;
+  color: #828bb2;
+  font-weight: 400;
+}
+
+/* line 264, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.primary_vcheckbox {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  align-items: center;
+}
+
+/* line 269, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.primary_vcheckbox .label_name {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: var(--base_font);
+  color: var(--base_color);
+  margin-bottom: 0;
+  grid-gap: 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* line 278, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.primary_vcheckbox .label_name i {
+  font-size: 20px;
+  color: #4b5898;
+}
+
+/* line 282, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.primary_vcheckbox .label_name span {
+  font-size: 14px;
+  color: var(--base_color);
+  font-weight: 400;
+}
+
+/* line 289, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.primary_vcheckbox.white_checkbox .checkmark:after {
+  border-color: #fff;
+}
+
+/* line 293, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.primary_vcheckbox .checkmark {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  top: 0;
+  left: 0;
+  display: block;
+  cursor: pointer;
+  line-height: 18px;
+  flex: 18px 0 0;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+
+/* line 311, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.primary_vcheckbox input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* line 320, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.primary_vcheckbox input:checked ~ .checkmark:after {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  transition: 0.3s;
+  transform: scale(0);
+}
+
+/* line 329, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.primary_vcheckbox input:checked ~ .checkmark {
+  background-image: -moz-linear-gradient(
+    0deg,
+    var(--gradient_1) 0%,
+    #a235ec 70%,
+    #c738d8 100%
+  );
+  background-image: -webkit-linear-gradient(
+    0deg,
+    var(--gradient_1) 0%,
+    #a235ec 70%,
+    #c738d8 100%
+  );
+  background-image: -ms-linear-gradient(
+    0deg,
+    var(--gradient_1) 0%,
+    #a235ec 70%,
+    #c738d8 100%
+  );
+  transition: 0.3s;
+  box-shadow: 0px 10px 20px 0px rgba(108, 39, 255, 0.3);
+}
+
+/* line 353, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.primary_vcheckbox input:checked ~ .checkmark::before {
+  content: "\e64c";
+  font-family: "themify";
+  position: absolute;
+  display: block;
+  top: 0px;
+  left: 3px;
+  text-indent: 1px;
+  color: #828bb2;
+  background-color: transparent;
+  border: 0px;
+  -webkit-transform: rotate(8deg);
+  -moz-transform: rotate(8deg);
+  -ms-transform: rotate(8deg);
+  -o-transform: rotate(8deg);
+  transform: rotate(8deg);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 18px;
+  z-index: 99;
+  color: #fff;
+  transition: 0.3s;
+}
+
+/* line 377, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.primary_vcheckbox .checkmark:after {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: transparent;
+  border-radius: 3px;
+  border: 1px solid #edeff5;
+  transition: 0.3s;
+  transform: scale(1);
+}
+
+/* line 393, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.edu_toggle_check {
+  display: inline-block;
+  height: 20px;
+  position: relative;
+  width: 50px;
+  margin-bottom: 0;
+  flex: 50px 0 0;
+}
+
+/* line 401, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.edu_toggle_check input {
+  opacity: 0;
+}
+
+/* line 404, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.edu_toggle_check .slider:before {
+  bottom: 0px;
+  content: "";
+  height: 25px;
+  left: 0px;
+  left: 0;
+  position: absolute;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  width: 25px;
+  background: #707db7;
+  background: #828bb2;
+  box-shadow: 0px 5px 10px rgba(130, 139, 178, 0.25);
+  top: -2px;
+}
+
+/* line 422, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.edu_toggle_check input:checked + .slider {
+  background: #d9e5fe;
+}
+
+/* line 426, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.edu_toggle_check input:checked + .slider:before {
+  transform: translateX(25px);
+  background-image: -moz-linear-gradient(
+    0deg,
+    var(--gradient_1) 0%,
+    #a235ec 70%,
+    #c738d8 100%
+  );
+  background-image: -webkit-linear-gradient(
+    0deg,
+    var(--gradient_1) 0%,
+    #a235ec 70%,
+    #c738d8 100%
+  );
+  background-image: -ms-linear-gradient(
+    0deg,
+    var(--gradient_1) 0%,
+    #a235ec 70%,
+    #c738d8 100%
+  );
+  box-shadow: 0px 10px 20px 0px rgba(108, 39, 255, 0.3);
+}
+
+/* line 450, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.edu_toggle_check .slider.round {
+  border-radius: 34px;
+}
+
+/* line 454, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.edu_toggle_check .slider.round:before {
+  border-radius: 50%;
+}
+
+/* line 457, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.edu_toggle_check .switch_toggle input {
+  display: none;
+}
+
+/* line 460, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.edu_toggle_check .slider {
+  background-color: #d9e5fe;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+}
+
+/* line 471, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_video.scss */
+.Ellipse_1 {
+  border-radius: 50%;
+  position: absolute;
+  left: 1030px;
+  top: 168px;
+  width: 25px;
+  height: 25px;
+  z-index: 20;
+}
+/* line 1, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_circleProgressbar.scss */
+.shair_progress_info .progress {
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  background: #fff;
+  text-align: center;
+  line-height: 40px;
+  margin: 0px;
+  font-weight: 500;
+  color: #828bb2;
+  z-index: 1;
+  flex: 40px 0 0;
+}
+
+/* line 19, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_circleProgressbar.scss */
+.shair_progress_info .progress .title {
+  position: relative;
+  z-index: 100;
+  color: #828bb2;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* line 28, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_circleProgressbar.scss */
+.shair_progress_info .progress .title::after {
+  content: "%";
+  color: #828bb2;
+}
+
+/* line 34, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_circleProgressbar.scss */
+.shair_progress_info .progress .overlay {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #fff;
+}
+
+/* line 44, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_circleProgressbar.scss */
+.shair_progress_info .progress .left,
+.shair_progress_info .progress .right {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 4px solid #8555f9;
+  border-radius: 100px 0px 0px 100px;
+  border-right: 0;
+  transform-origin: right;
+  z-index: 122;
+}
+
+/* line 57, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_circleProgressbar.scss */
+.shair_progress_info .round_border {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 4px solid #d8e3fe;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+}
+
+/* line 69, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_circleProgressbar.scss */
+.progress .left {
+  animation: load1 1s linear forwards;
+}
+
+/* line 73, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_circleProgressbar.scss */
+.shair_progress_info .progress:nth-of-type(2) .right,
+.shair_progress_info .progress:nth-of-type(3) .right {
+  animation: load2 0.5s linear forwards 1s;
+}
+
+/* line 78, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_circleProgressbar.scss */
+.shair_progress_info .progress:last-of-type .right,
+.shair_progress_info .progress:first-of-type .right {
+  animation: load3 0.8s linear forwards 1s;
+}
+
+@keyframes load1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes load2 {
+  0% {
+    z-index: 100;
+    transform: rotate(180deg);
+  }
+  100% {
+    z-index: 100;
+    transform: rotate(270deg);
+  }
+}
+
+@keyframes load3 {
+  0% {
+    z-index: 100;
+    transform: rotate(180deg);
+  }
+  100% {
+    z-index: 100;
+    transform: rotate(315deg);
+  }
+}
+/* line 491, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_course.scss */
+.play_button {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 100px;
+  position: relative;
+  font-size: 25px;
+  transition: 0.3s;
+  cursor: pointer;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(var(--gradient_1)),
+    color-stop(70%, #a235ec),
+    to(#c738d8)
+  );
+  background: -o-linear-gradient(left, var(--gradient_1) 0%, #a235ec 70%, #c738d8 100%);
+  background: linear-gradient(90deg, var(--gradient_1) 0%, #a235ec 70%, #c738d8 100%);
+}
+
+/* line 506, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_course.scss */
+.play_button:hover {
+  color: #fff;
+}
+
+/* line 511, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_course.scss */
+.theme__overlay {
+  position: relative;
+  z-index: 2;
+}
+
+/* line 514, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_edu_course.scss */
+.theme__overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #010513;
+  opacity: 0.302;
+  z-index: -1;
+}
+.card-header .btn.focus,
+.card-header .btn:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+.infixLms_accordian .card .card-header h2 .btn.hideArrow::before {
+  display: none;
+}
+.infixLms_accordian {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 672px;
+}
+.card-header .btn {
+  white-space: normal;
+}
+
+.second_card_body {
+  padding-left: 10px;
+}
+.information_icon {
+  font-size: 14px;
+  color: var(--base_color);
+  margin-left: 5px;
+}
+.subArrow_icon {
+  font-size: 14px;
+  color: var(--base_color);
+  margin-left: 5px;
+  position: absolute;
+  left: 4px;
+}
+.sub_text {
+  font-size: 14px;
+  color: #828bb2;
+  font-weight: 400;
+  padding-left: 35px;
+  text-transform: capitalize;
+}
+
+.videoList_toggleBtn {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--base_color);
+  color: #fff;
+  font-size: 16px;
+  top: 0;
+  left: -40px;
+  cursor: pointer;
+}
+.video_palyer_list_wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 111;
+  transition: 0.3s;
+  transform: translateX(0%);
+  bottom: 0;
+}
+.video_palyer_box {
+  width: calc(100% - 420px);
+  transition: 0.3s;
+}
+.video_palyer_area.active .video_palyer_box {
+  width: calc(100% - 0px);
+}
+.video_palyer_area.active .video_palyer_list_wrapper {
+  transform: translateX(100%);
+}
+@media (max-width: 991.98px) {
+  .video_palyer_box {
+    width: calc(100% - 0px);
+  }
+  .video_palyer_area.active .video_palyer_box {
+    width: calc(100% - 0px);
+  }
+  .video_palyer_area .video_palyer_list_wrapper {
+    transform: translateX(100%);
+  }
+  .video_palyer_area.active .video_palyer_list_wrapper {
+    transform: translateX(0%);
+  }
+  .video_palyer_area .video_palyer_box .video_screen {
+    height: 750px;
+  }
+}
+@media (max-width: 580.98px) {
+  .infixLms_video_palyer_lists {
+    width: 250px;
+  }
+  .infixLms_accordian {
+    max-height: 324px;
+  }
+  .play_button {
+    width: 50px;
+    height: 50px;
+  }
+}
+.single_video_menu_list .subArrow_collape_arrow {
+  position: relative;
+  transform: rotate(180deg);
+  display: inline-block;
+}
+.single_video_menu_list.collapsed .subArrow_collape_arrow {
+  position: relative;
+  transform: rotate(0deg);
+  display: inline-block;
+}
+
+.fluid_video_wrapper .vast_video_loading{
+  height: auto;
+}
+
+.video_iframe{
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,13 @@
+{
+    "name": "HimalayaSms",
+    "alias": "himalayasms",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\HimalayaSms\\Providers\\HimalayaSmsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
