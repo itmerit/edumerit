@@ -42,7 +42,7 @@
 
                                         <div class="col-lg-3 mt-30" id="select_exam_typ_subject_div">
                                             {{ Form::select('exam_type',[""=>__('exam.select_exam').'*'], null , ['class' => 'primary_select  form-control'. ($errors->has('exam_type') ? ' is-invalid' : ''), 'id'=>'select_exam_typ_subject']) }}
-                                            
+
                                             <div class="pull-right loader loader_style" id="select_exam_type_loader">
                                                 <img class="loader_img_style" src="{{asset('public/backEnd/img/demo_wait.gif')}}" alt="loader">
                                             </div>
@@ -55,7 +55,7 @@
 
                                         <div class="col-lg-3 mt-30" id="select_un_exam_type_subject_div">
                                             {{ Form::select('subject_id',[""=>__('exam.select_subject').'*'], null , ['class' => 'primary_select  form-control'. ($errors->has('subject_id') ? ' is-invalid' : ''), 'id'=>'select_un_exam_type_subject']) }}
-                                            
+
                                             <div class="pull-right loader loader_style" id="select_exam_subject_loader">
                                                 <img class="loader_img_style" src="{{asset('public/backEnd/img/demo_wait.gif')}}" alt="loader">
                                             </div>
@@ -131,7 +131,7 @@
                             </div>
                         </div>
                     {{ Form::close() }}
-                
+
             </div>
         </div>
     </div>
@@ -204,9 +204,9 @@
                                         <input type="hidden" name="markStore[{{$record->student_record_id}}][student]" value="{{$record->student_id}}">
                                         <input type="hidden" name="markStore[{{$record->student_record_id}}][roll_no]" value="{{$record->roll_no}}">
                                         <input type="hidden" name="markStore[{{$record->student_record_id}}][adimission_no]" value="{{$record->studentDetail->admission_no}}">
-                                        @if(@$absent_check->attendance_type != 'P')                                    
-                                        <input type="hidden" name="markStore[{{$record->student_record_id}}][absent_students]" value="{{$record->student_record_id}}">                                    
-                                        @endif 
+                                        @if(@$absent_check->attendance_type != 'P')
+                                        <input type="hidden" name="markStore[{{$record->student_record_id}}][absent_students]" value="{{$record->student_record_id}}">
+                                        @endif
                                         {{$record->studentDetail->admission_no}}
                                     </td>
                                     <td>{{$record->roll_no}}</td>
@@ -225,18 +225,18 @@
                                             <input class="primary_input_field" type="hidden" name="markStore[{{$record->student_record_id}}][exam_Sids][{{$entry_form_count++}}]" value="{{$part->id}}">
                                             <input type="hidden" id="markStore[{{$record->student_record_id}}][part_marks][{{$part->id}}]" name="part_marks" value="{{$part->exam_mark}}">
                                             <label>{{$part->exam_title}} Mark</label>
-                                            
+
                                         </div>
                                     </td>
                                     @endforeach
-                                        <?php 
-                                            $teacher_remarks = App\SmMarkStore::un_teacher_remarks($record->student_id, $exam_type_id, $request, $subject_id, $record->student_record_id); 
+                                        <?php
+                                            $teacher_remarks = App\SmMarkStore::un_teacher_remarks($record->student_id, $exam_type_id, $request, $subject_id, $record->student_record_id);
                                         ?>
                                     <td>
                                         <div class="primary_input mt-10">
                                             <input class="primary_input_field" type="text" name="markStore[{{$record->id}}][teacher_remarks]" value="{{$teacher_remarks}}">
                                             <label class="primary_input_label" for="">@lang('teacher') @lang('remarks')</label>
-                                            
+
                                         </div>
                                     </td>
                                         <?php $is_absent_check = App\SmMarkStore::un_is_absent_check($record->student_id, $part->exam_term_id, $request, $part->subject_id , $record->student_record_id); ?>
@@ -336,16 +336,16 @@
                                         <?php
                                         $search_mark = App\SmMarkStore::get_mark_by_part($record->student_id, $part->exam_term_id, $part->class_id, $part->section_id, $part->subject_id, $part->id, $record->id);
                                         ?>
-                                            <input oninput="numberCheckWithDot(this)" class="primary_input_field marks_input" type="text" step="any" max="{{@$part->exam_mark}}"
-                                            name="markStore[{{$record->id}}][marks][{{$part->id}}]" value="{{!empty($search_mark)?$search_mark:0}}" 
+                                            <input oninput="numberCheckWithDot(this)" class="primary_input_field marks_input" type="number" step="any" max="100"
+                                                   name="markStore[{{$record->id}}][marks][{{$part->id}}]" value="{{!empty($search_mark)?$search_mark:0}}"
                                             {{@($absent_check->attendance_type == 'A' || @$absent_check->attendance_type == '') && !isSkip('exam_attendance') ? 'readonly':''}}>
 
                                             <input class="primary_input_field" type="hidden" name="markStore[{{$record->id}}][exam_Sids][{{$entry_form_count++}}]" value="{{$part->id}}">
 
                                             <input type="hidden" id="markStore[{{$record->id}}][part_marks][{{$part->id}}]" name="part_marks" value="{{$part->exam_mark}}">
 
-                                         
-                                            
+
+
                                         </div>
                                     </td>
                                     @endforeach
@@ -355,10 +355,10 @@
                                     <td>
 
                                         <div class="primary_input mt-10">
-                                          
-                                        <input class="primary_input_field" type="text" name="markStore[{{$record->id}}][teacher_remarks]" value="{{$teacher_remarks}}" {{@($absent_check->attendance_type == 'A' || @$absent_check->attendance_type == '') && !isSkip('exam_attendance')? 'readonly':''}} >
-                                       
-                                        
+
+                                        <input class="primary_input_field" type="number" name="markStore[{{$record->id}}][teacher_remarks]" value="{{$teacher_remarks}}" {{@($absent_check->attendance_type == 'A' || @$absent_check->attendance_type == '') && !isSkip('exam_attendance')? 'readonly':''}} max="100" >
+
+
                                     </div>
                                     </td>
 

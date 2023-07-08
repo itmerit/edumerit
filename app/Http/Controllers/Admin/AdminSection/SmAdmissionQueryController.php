@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\AdminSection;
 
+use App\SmStaff;
 use DataTables;
 use App\SmClass;
 use App\SmSetupAdmin;
@@ -32,7 +33,8 @@ class SmAdmissionQueryController extends Controller
             $classes = SmClass::get();
             $references = SmSetupAdmin::where('type', 4)->get();
             $sources = SmSetupAdmin::where('type', 3)->get();
-            return view('backEnd.admin.admission_query', compact('references', 'classes', 'sources'));
+            $receiptionists = SmStaff::where('role_id', 7)->where('active_status', 1)->get();
+            return view('backEnd.admin.admission_query', compact('references', 'classes', 'sources', 'receiptionists'));
         } catch (\Exception $e) {
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
@@ -64,7 +66,7 @@ class SmAdmissionQueryController extends Controller
             $admission_query->created_by = Auth::user()->id;
             $admission_query->school_id = Auth::user()->school_id;
             $admission_query->save();
-           
+
             Toastr::success('Operation successful', 'Success');
             return redirect()->back();
         } catch (\Exception $e) {
@@ -87,7 +89,7 @@ class SmAdmissionQueryController extends Controller
             }
             return view('backEnd.admin.admission_query_edit', compact('admission_query', 'references', 'classes', 'sources'))->with($data);
         } catch (\Exception $e) {
-           
+
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
         }
@@ -123,7 +125,7 @@ class SmAdmissionQueryController extends Controller
             $admission_query->school_id = Auth::user()->school_id;
             $admission_query->academic_id = getAcademicId();
             $admission_query->save();
-         
+
             Toastr::success('Operation successful', 'Success');
             return redirect()->back();
         } catch (\Exception $e) {
@@ -173,7 +175,7 @@ class SmAdmissionQueryController extends Controller
             Toastr::success('Operation successful', 'Success');
             return redirect()->back();
         } catch (\Exception $e) {
-            DB::rollback(); 
+            DB::rollback();
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
         }
@@ -181,7 +183,7 @@ class SmAdmissionQueryController extends Controller
 
     public function deleteFollowUp($id)
     {
-        try { 
+        try {
             SmAdmissionQueryFollowup::destroy($id);
 
             Toastr::success('Operation successful', 'Success');
@@ -238,7 +240,7 @@ class SmAdmissionQueryController extends Controller
     public function admissionQueryDatatable(Request $request)
     {
         try{
-            if ($request->ajax()) 
+            if ($request->ajax())
             {
                 $date_from = date('Y-m-d', strtotime($request->date_from));
                 $date_to = date('Y-m-d', strtotime($request->date_to));
@@ -273,7 +275,7 @@ class SmAdmissionQueryController extends Controller
                                             href="' . route('add_query', [@$row->id]) . '">' . __('admin.add_query'). '</a>'.
                                 (userPermission('admission_query_edit') === true ? '<a class="dropdown-item modalLink" data-modal-size="large-modal"
                                 title="' . __('admin.edit_admission_query'). '" href="' . route('admission_query_edit', [$row->id]) . '">' . app('translator')->get('common.edit') . '</a>' : '') .
-    
+
                                 (userPermission('admission_query_delete') === true ? (Config::get('app.app_sync') ? '<span data-toggle="tooltip" title="Disabled For Demo"><a class="dropdown-item" href="#" >' . app('translator')->get('common.disable') . '</a></span>' :
                                     '<a onclick="deleteQueryModal(' . $row->id . ');"  class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteAdmissionQueryModal" data-id="' . $row->id . '"  >' . app('translator')->get('common.delete') . '</a>') : '') .
                                 '</div>
