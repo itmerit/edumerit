@@ -28,16 +28,16 @@ class SmAdmissionQueryRequest extends FormRequest
     {
         $rules = [
             'name' =>'nullable',
-            'phone' =>'nullable|regex:/(01)[0-9]{9}/',
+            'phone' =>'required|numeric',
             'email' =>'nullable',
             'address' => 'nullable',
             'description' => 'nullable',
             'date' => 'required|date',
             'next_follow_up_date' => 'required|date|after:date',
             'assigned'=>'required',
-            'reference' =>'required',
+            'reference' =>'nullable',
             'source' => 'required',
-            'no_of_child' =>'required',
+            'no_of_child' =>'nullable',
         ];
         if (moduleStatusCheck('University')) {
             $rules += [

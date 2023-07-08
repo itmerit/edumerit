@@ -170,11 +170,12 @@
                                             <th>@lang('admin.query_date')</th>
                                             <th>@lang('admin.last_follow_up_date')</th>
                                             <th>@lang('admin.next_follow_up_date')</th>
+                                            <th>@lang('admin.assigned')</th>
                                             <th>@lang('common.actions')</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                     </tbody>
                                 </table>
                             </x-table>
@@ -350,10 +351,12 @@
                                             <div class="primary_input">
                                                 <label class="primary_input_label" for="">@lang('admin.assigned')
                                                     *<span></span></label>
-                                                <input class="primary_input_field read-only-input form-control"
-                                                    type="text"
-                                                    name="assigned" id="assigned">
-
+                                                <select class="primary_select " name="assigned" id="assigned">
+                                                    <option data-display="@lang('admin.assigned') *" value="">@lang('admin.assigned')</option>
+                                                    @foreach ($receiptionists as $receiptionist)
+                                                        <option value="{{ $receiptionist->full_name }}">{{ $receiptionist->full_name }}</option>
+                                                    @endforeach
+                                                </select>
                                                 <span class="text-danger" id="assignedError"> </span>
                                             </div>
                                         </div>
@@ -361,19 +364,19 @@
                                 </div>
                                 <div class="col-lg-12 mt-25">
                                     <div class="row">
-                                        <div class="col-lg-3">
-                                            <label class="primary_input_label" for="">@lang('admin.reference')
-                                                *<span></span></label>
-                                            <select class="primary_select " name="reference" id="reference">
-                                                <option data-display="@lang('admin.reference') *"
-                                                    value="">@lang('admin.reference') *
-                                                </option>
-                                                @foreach ($references as $reference)
-                                                    <option value="{{ $reference->id }}">{{ $reference->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            <span class="text-danger" id="referenceError"></span>
-                                        </div>
+{{--                                        <div class="col-lg-3">--}}
+{{--                                            <label class="primary_input_label" for="">@lang('admin.reference')--}}
+{{--                                                *<span></span></label>--}}
+{{--                                            <select class="primary_select " name="reference" id="reference">--}}
+{{--                                                <option data-display="@lang('admin.reference') *"--}}
+{{--                                                    value="">@lang('admin.reference') *--}}
+{{--                                                </option>--}}
+{{--                                                @foreach ($references as $reference)--}}
+{{--                                                    <option value="{{ $reference->id }}">{{ $reference->name }}</option>--}}
+{{--                                                @endforeach--}}
+{{--                                            </select>--}}
+{{--                                            <span class="text-danger" id="referenceError"></span>--}}
+{{--                                        </div>--}}
                                         <div class="col-lg-3">
                                             <label class="primary_input_label" for="">@lang('admin.source')
                                                 *<span></span></label>
@@ -406,7 +409,7 @@
                                         <div class="col-lg-3">
                                             <div class="primary_input">
                                                 <label class="primary_input_label" for="">@lang('admin.number_of_child')
-                                                    *<span></span></label>
+                                                    <span></span></label>
                                                 <input oninput="numberMinCheck(this)"
                                                     class="primary_input_field read-only-input form-control"
                                                     type="text" name="no_of_child" id="no_of_child">
@@ -482,7 +485,7 @@
                     pages: "{{generalSetting()->ss_page_load}}" // number of pages to cache
                 } ),
                 columns: [
-                    {data: 'DT_RowIndex', name: 'id'},               
+                    {data: 'DT_RowIndex', name: 'id'},
                     {data: 'name', name: 'name'},
                     {data: 'phone', name: 'phone'},
                     {data: 'source_setup.name', name: 'source_setup.name'},
@@ -573,7 +576,7 @@
                 columnDefs: [
                     {
                         visible: false,
-                    }, 
+                    },
                 ],
                 responsive: true,
             });

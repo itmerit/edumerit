@@ -221,7 +221,7 @@
 
 
                     $.each(data, function(i, item) {
-                       
+
                         if (item.length) {
                             $.each(item, function(i, section) {
                                 $("#sectionSelectStudent").append(
@@ -230,9 +230,9 @@
                                         text: section.section_name,
                                     })
                                 );
-                                
+
                             });
-                        } 
+                        }
                     });
 
                     $("#sectionSelectStudent").trigger('change').niceSelect('update')
@@ -666,7 +666,7 @@
         $("#save_button_parent").on("click", function() {
             var select_sibling_name = $("#select_sibling_name").val();
             var staff_id = $("#select_staff_parent").val();
-            
+
             if (select_sibling_name == "" && staff_id =="") {
                 $(".sibling_required_error div").remove();
                 $(".sibling_required_error").append(
@@ -691,7 +691,7 @@
                 dataType: "json",
                 url: url + "/" + "ajaxSiblingInfoDetail",
                 success: function(data) {
-                    
+
                     if(data[3] =='sibling') {
                         var fathers_name = data[1].fathers_name;
                         var parent_id = data[0].parent_id;
@@ -720,8 +720,8 @@
                         $("#staff_parent").val(data[2].id);
                         $("#parent_details").hide();
 
-                        
-                       
+
+
                     }
 
                     // if($("#sibling_id").val() != 0){
@@ -738,7 +738,7 @@
     // student admission onclick sibling remove
 
     $(document).on("click", "#parent_remove", function(e) {
-        
+
         $("#parent_info div").remove();
         $("#parent_info input").val("");
         $("#staff_parent").val("");
@@ -2576,7 +2576,7 @@
             var url = $("#url").val();
             var i = 0;
             var select_class = $(this).val();
-            
+
             var formData = {
                 section: $(this).val(),
                 class: $("#select_class").val(),
@@ -2651,7 +2651,7 @@
             if(!$(this).val()) {
                 return ;
             }
-            
+
             if (!select_class) {
                 var select_class = $("#lms_select_class").val()
             }
@@ -2713,7 +2713,7 @@
             });
         });
     });
-    
+
     $(document).ready(function() {
         if ($("#exam_schedule_store").length) {
             $("form#exam_schedule_store").on("submit", function(event) {
@@ -3788,7 +3788,7 @@
             $("#edit_item_receive_bankAccount").addClass('d-none');
         }
     });
-    //Inventory Item Receive End 
+    //Inventory Item Receive End
 
     //Inventory Item Sell Start
     // Add
@@ -3868,26 +3868,26 @@
         } else {
             $("#admission-query-store #assignedError").html("");
         }
-        if ($("#admission-query-store #reference").val() == "") {
-            count++;
-            $("#admission-query-store #referenceError").html("Reference is required");
-        } else {
-            $("#admission-query-store #referenceError").html("");
-        }
+        // if ($("#admission-query-store #reference").val() == "") {
+        //     count++;
+        //     $("#admission-query-store #referenceError").html("Reference is required");
+        // } else {
+        //     $("#admission-query-store #referenceError").html("");
+        // }
         if ($("#admission-query-store #class").val() == "") {
             count++;
             $("#admission-query-store #classError").html("Class is required");
         } else {
             $("#admission-query-store #classError").html("");
         }
-        if ($("#admission-query-store #no_of_child").val() == "") {
-            count++;
-            $("#admission-query-store #no_of_childError").html(
-                "Number of child is required"
-            );
-        } else {
-            $("#admission-query-store #no_of_childError").html("");
-        }
+        // if ($("#admission-query-store #no_of_child").val() == "") {
+        //     count++;
+        //     $("#admission-query-store #no_of_childError").html(
+        //         "Number of child is required"
+        //     );
+        // } else {
+        //     $("#admission-query-store #no_of_childError").html("");
+        // }
 
         if (count != 0) {
             return false;
@@ -5712,7 +5712,7 @@
                 var formData = {
                     id: $(this).val(),
                 };
-                
+
 
                 // get section for student
                 $.ajax({
@@ -5743,7 +5743,7 @@
                                     })
                                 );
                             });
-                        } 
+                        }
                         $('#classSelectStudent').niceSelect('update');
                         $('#classSelectStudent').trigger('change');
                     },
@@ -5773,7 +5773,7 @@
     //             var formData = {
     //                 id: $(this).val(),
     //             };
-                
+
 
     //             // get section for student
     //             $.ajax({
@@ -5804,7 +5804,7 @@
     //                                 })
     //                             );
     //                         });
-    //                     } 
+    //                     }
     //                     $('#classSelectStudent').niceSelect('update');
     //                     $('#classSelectStudent').trigger('change');
     //                 },
@@ -5939,7 +5939,7 @@
                 var url = $("#url").val();
                 var count = $("#assign-subject").children().length;
                 var divCount = count + 1;
-    
+
                 // get section for student
                 $.ajax({
                     type: "GET",
@@ -5966,7 +5966,7 @@
                                 "</option>";
                         });
                         subject_teacher += "</select>";
-    
+
                         subject_teacher +=
                             "<div class='nice-select primary_select form-control' tabindex='0'>";
                         subject_teacher += "<span class='current'>"+window.jsLang('select_subject')+"</span>";
@@ -6054,13 +6054,13 @@
                     url: url + "/" + "ajax-get-class-academicyear",
                     success: function(data) {
                         console.log(data);
-        
+
                         var a = "";
-        
+
                         if (data[1].length) {
                             $("#select-academic-year").find("option").not(":first").remove();
                             $("#academic-year-div ul").find("li").not(":first").remove();
-        
+
                             $.each(data[1], function(i, academicYear) {
                                 $("#select-academic-year").append(
                                     $("<option>", {
@@ -6069,7 +6069,7 @@
                                         text: academicYear.title,
                                     })
                                 );
-        
+
                                 $("#academic-year-div ul").append(
                                     "<li data-value='" +
                                     academicYear.id +
@@ -6110,20 +6110,20 @@
                         data: formData,
                         dataType: "json",
                         url: url + "/" + "ajax-get-classes",
-        
+
                         beforeSend: function() {
                             $('#select_class_loader').addClass('pre_loader');
                             $('#select_class_loader').removeClass('loader');
                         },
-        
+
                         success: function(data) {
                             var a = "";
                             // $.each(data[0], function (i, item) {
-        
+
                             if (data[0].length) {
                                 $("#select-class").find("option").not(":first").remove();
                                 $("#class-div ul").find("li").not(":first").remove();
-        
+
                                 $.each(data[0], function(i, className) {
                                     $("#select-class").append(
                                         $("<option>", {
@@ -6131,7 +6131,7 @@
                                             text: className.class_name,
                                         })
                                     );
-        
+
                                     $("#class-div ul").append(
                                         "<li data-value='" +
                                         className.id +
@@ -6161,13 +6161,13 @@
             );
         });
 
-        // get section by academic , school and class id 
+        // get section by academic , school and class id
 
         $(document).ready(function() {
             $("form#parent-registration #select-class").on("change", function() {
                 var url = $("#url").val();
                 var i = 0;
-        
+
                 var formData = {
                     id: $(this).val(),
                 };
@@ -6177,22 +6177,22 @@
                     data: formData,
                     dataType: "json",
                     url: url + "/" + "ajax-get-sections",
-        
+
                     beforeSend: function() {
                         $('#select_section_loader').addClass('pre_loader');
                         $('#select_section_loader').removeClass('loader');
                     },
-        
+
                     success: function(data) {
                         console.log(data);
-        
+
                         var a = "";
                         // $.each(data[0], function (i, item) {
-        
+
                         if (data.length) {
                             $("#select-section").find("option").not(":first").remove();
                             $("#section-div ul").find("li").not(":first").remove();
-        
+
                             $.each(data, function(i, className) {
                                 $("#select-section").append(
                                     $("<option>", {
@@ -6200,7 +6200,7 @@
                                         text: className.section_name,
                                     })
                                 );
-        
+
                                 $("#section-div ul").append(
                                     "<li data-value='" +
                                     className.id +
@@ -6228,10 +6228,10 @@
                 });
             });
         });
-        
 
 
- 
+
+
 
     ("use strict");
 })(jQuery);

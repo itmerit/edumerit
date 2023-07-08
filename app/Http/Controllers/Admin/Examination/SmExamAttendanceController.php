@@ -37,7 +37,7 @@ class SmExamAttendanceController extends Controller
 	{
         $this->middleware('PM');
 	}
-    
+
     public function examAttendanceCreate()
     {
         try{
@@ -75,7 +75,7 @@ class SmExamAttendanceController extends Controller
                                 ->where('un_subject_id', $request->subject_id)
                                 ->orWhereNull('un_section_id')
                                 ->count();
-    
+
                 if ($exam_schedules == 0 && !isSkip('exam_schedule')) {
                     Toastr::error('You have to create exam schedule first', 'Failed');
                     return redirect('exam-attendance-create');
@@ -87,7 +87,7 @@ class SmExamAttendanceController extends Controller
                                 $q->where('active_status', 1);
                             })
                             ->get();
-            
+
                 if ($students->count() == 0) {
                     Toastr::error('No Record Found', 'Failed');
                     return redirect('exam-attendance-create');
@@ -120,7 +120,7 @@ class SmExamAttendanceController extends Controller
                         'students',
                         'exam_attendance_childs',
                         'subject_id',
-                        
+
                         'exam_id',
                         'un_session',
                         'un_faculty',
@@ -138,15 +138,15 @@ class SmExamAttendanceController extends Controller
                 if ($request->class !=null) {
                         $exam_schedules-> where('class_id', $request->class);
                 }
-                
+
                 if ($request->section !=null) {
                         $exam_schedules->where('section_id', $request->section);
                 }
-                                    
+
                 $exam_schedules=$exam_schedules->where('exam_term_id', $request->exam)
                                 ->where('subject_id', $request->subject)
                                 ->count();
-    
+
                 if ($exam_schedules == 0 && !isSkip('exam_schedule')) {
                     Toastr::error('You have to create exam schedule first', 'Failed');
                     return redirect('exam-attendance-create');
@@ -161,7 +161,7 @@ class SmExamAttendanceController extends Controller
                 if ($request->section !=null) {
                     $students->where('section_id', $request->section);
                 }
-                
+
 
                 $students = $students->where('academic_id', getAcademicId())
                 ->whereHas('studentDetail', function ($q)  {
@@ -169,7 +169,7 @@ class SmExamAttendanceController extends Controller
                 })
                 ->where('school_id', auth()->user()->school_id)->where('is_promote', 0)
                 ->get()->sortBy('roll_no');
-            
+
                 if ($students->count() == 0) {
                     Toastr::error('No Record Found', 'Failed');
                     return redirect('exam-attendance-create');
@@ -189,7 +189,7 @@ class SmExamAttendanceController extends Controller
                 }
                 $exam_attendance =  $exam_attendance->where('exam_id', $request->exam)->first();
                 $exam_attendance_childs = $exam_attendance != "" ? $exam_attendance->examAttendanceChild: [];
-                
+
                 if (teacherAccess()) {
                     $teacher_info = SmStaff::where('user_id', Auth::user()->id)->first();
                     $classes = $teacher_info->classes;
@@ -203,7 +203,7 @@ class SmExamAttendanceController extends Controller
                 $subject_id = $request->subject;
                 $class_id = $request->class;
                 $section_id =$request->section !=null ? $request->section : null;
-                
+
                 $subject_info = SmSubject::find($request->subject);
                 $search_info['class_name'] = SmClass::find($request->class)->class_name;
                 $search_info['section_name'] =  $section_id==null ? 'All Sections' : SmSection::find($request->section)->section_name;
@@ -252,14 +252,14 @@ class SmExamAttendanceController extends Controller
                     $exam_attendance->created_at = YearCheck::getYear() . '-' . date('m-d h:i:s');
                     $exam_attendance->school_id = Auth::user()->school_id;
                     $exam_attendance->un_academic_id = getAcademicId();
-                    
+
                     $exam_attendance->save();
                     $exam_attendance->toArray();
-        
+
                     if ($alreday_assigned != "") {
                         SmExamAttendanceChild::where('exam_attendance_id', $exam_attendance->id)->delete();
                     }
-        
+
                     foreach ($request->attendance as $record_id => $record) {
                         $exam_attendance_child = new SmExamAttendanceChild();
                         $exam_attendance_child->exam_attendance_id = $exam_attendance->id;
@@ -284,7 +284,7 @@ class SmExamAttendanceController extends Controller
                         $alreday_assigned->where('subject_id', $request->subject_id);
                     }
                     $alreday_assigned=$alreday_assigned->where('exam_id', $request->exam_id)->first();
-                   
+
                     DB::beginTransaction();
                    // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
@@ -297,31 +297,31 @@ class SmExamAttendanceController extends Controller
                                                 ->where('subject_id', $request->subject_id)
                                                 ->where('exam_id', $request->exam_id)
                                                 ->first();
-                        }       
+                        }
                         $this->storeAttendance($exam_attendance, $request, $request->section_id, $alreday_assigned);
                     } else {
                         $classSections= SmAssignSubject::where('class_id', $request->class_id)
                                         ->where('subject_id', $request->subject_id)
                                         ->distinct(['section_id','subject_id'])
-                                        ->get();                      
-                        foreach ($classSections as $section) {                           
+                                        ->get();
+                        foreach ($classSections as $section) {
                             $exam_attendance = SmExamAttendance::where('class_id', $request->class_id)
                                                 ->where('section_id', $section->section_id)
                                                 ->where('subject_id', $request->subject_id)
                                                 ->where('exam_id', $request->exam_id)
-                                                ->first();                          
+                                                ->first();
                             if(!$exam_attendance) {
                                 $exam_attendance = new SmExamAttendance();
                             };
                             $this->storeAttendance($exam_attendance, $request, $section->section_id, $alreday_assigned);
-                        
+
                         }
-                       
+
                     }
-                   
+
                     DB::commit();
                 }
-            
+
                 Toastr::success('Operation successful', 'Success');
                 return redirect('exam-attendance-create');
             } catch (\Exception $e) {
@@ -341,7 +341,7 @@ class SmExamAttendanceController extends Controller
         $exam_attendance->academic_id = getAcademicId();
         $exam_attendance->save();
         $exam_attendance->toArray();
-    
+
         if ($alreday_assigned != "") {
             SmExamAttendanceChild::where('exam_attendance_id', $exam_attendance->id)->delete();
         }
