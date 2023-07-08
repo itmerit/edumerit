@@ -244,7 +244,15 @@
                                     >
                                         @if ($menu->link == "/login")
                                             @if (!auth()->check())
-                                                {{$menu->title}}
+                                                <li class="nav-item dropdown">
+                                                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: bold; text-decoration-color: yellow; position: relative; top: -10px;text padding-bottom: 100px;">Login↓
+                                                    </a>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="https://edumerit.uz/login">Branch One</a>
+                                                        <a class="dropdown-item" href="https://oxunboboyev.edumerit.uz/login">Branch Two</a>
+                                                        <!-- Add more branches if needed -->
+                                                    </div>
+                                                </li>
                                             @else
                                                 @lang('common.dashboard')
                                             @endif
