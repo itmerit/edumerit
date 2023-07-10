@@ -1,5 +1,6 @@
 <?php
 
+use App\Eskiz\EskizSmsClient;
 use App\User;
 use App\SmExam;
 use App\SmClass;
@@ -3330,7 +3331,7 @@ if (!function_exists('send_custom_sms')) {
         if ($method == 'get') {
             $response = $client->$method($sms_settings->gateway_url . '?' . http_build_query($request_data));
         } else {
-            $response = $client->$method($sms_settings->gateway_url, $params);
+            $response = EskizSmsClient::send($reciver_number, $message);
         }
 
         return $response;
@@ -3518,10 +3519,10 @@ if(!function_exists('send_notification')){
                 $active_recivers[] = $key;
             }
         }
-        
+
         if(in_array($reciver, $active_recivers)){
             $destinations = $notification->destination;
-            
+
             foreach($destinations as $via => $value){
                 if($value == 1){
                     $active_dest[] = $via;
@@ -3542,7 +3543,7 @@ if(!function_exists('send_notification')){
             if(in_array('SMS', $active_dest)){
                 $sms_body = short_code_messege($notification->template[$reciver]['SMS'], $data);
             }
-            
+
             if(in_array('Web', $active_dest)){
                 $web_body = short_code_messege($notification->template[$reciver]['Web'], $data);
 
@@ -3560,11 +3561,11 @@ if(!function_exists('send_notification')){
             }
 
         }
-       
 
-        
-     
-    
+
+
+
+
         return SmExamSignature::where('active_status' , 1)->get(['title', 'signature']);
     }
 }
@@ -3587,7 +3588,7 @@ if(!function_exists('feesCarryForward')){
             return ;
         }
         $settings = FeesCarryForwardSettings::first();
-        
+
         if(Carbon::now()->format('Y-m-d') <= $carryForward->due_date){
             $totalPayableAmount = 0;
             foreach($payableAmount as $amount){
@@ -3653,7 +3654,7 @@ if(!function_exists('feesCarryForward')){
                     $updateCarry->update();
 
                     carryForwardLog($studentRecordId, $cAmount, 'due', 'Fees Payment', 'fees');
-                    
+
                     $data ['paidFeesType'] = $paidFeesType;
                     $data ['paidFeesAmount'] = $paidFeesAmount;
                     $data['type'] = 'multi_payment';
