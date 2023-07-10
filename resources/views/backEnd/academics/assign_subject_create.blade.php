@@ -1,6 +1,6 @@
 @extends('backEnd.master')
 
-@section('title') 
+@section('title')
 @lang('academics.assign_subject_create')
 @endsection
 
@@ -29,7 +29,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-              
+
                 <div class="white-box">
                     {{ Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'assign_subject_search', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'search_student']) }}
                         <div class="row">
@@ -104,7 +104,7 @@
                                     @foreach($assign_subjects as $assign_subject)
                                     <div class="col-lg-12 mb-30" id="assign-subject-{{$i}}">
                                         <div class="row">
-                                            <div class="col-lg-5 mt-30-md">
+                                            <div class="col-lg-3 mt-30-md">
                                                 <select class="primary_select form-control subject" name="subjects[]">
                                                     <option data-display="@lang('common.select_subjects')" value="">@lang('common.select_subjects')</option>
                                                     @foreach($subjects as $subject)
@@ -112,7 +112,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-lg-5 mt-30-md">
+                                            <div class="col-lg-3 mt-30-md">
                                                 <select class="primary_select form-control" name="teachers[]">
                                                     <option data-display="@lang('common.select_teacher')" value="">@lang('common.select_teacher')</option>
                                                     @foreach($teachers as $teacher)
@@ -120,9 +120,15 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="col-lg-2 mt-30-md">
+                                                <label>
+                                                    <input type="checkbox" name="is_main_subject[]" value="{{$assign_subject->id}}" {{ $assign_subject->is_main_subject ? 'checked' : '' }}>
+                                                    main subject
+                                                </label>
+                                            </div>
 
                                              @if(userPermission(252))
-                                            <div class="col-lg-2">
+                                                <div class="col-lg-4">
                                                 <button class="primary-btn icon-only fix-gr-bg" id="removeSubject" onclick="deleteSubject({{$i}})" type="button">
                                                     <span class="ti-trash" ></span>
                                                 </button>

@@ -22,7 +22,7 @@ class SmAssignSubjectController extends Controller
     public function __construct()
     {
         $this->middleware('PM');
-     
+
     }
     public function index(Request $request)
     {
@@ -87,7 +87,7 @@ class SmAssignSubjectController extends Controller
         ]);
 
         if ($validator->fails()) {
-            
+
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
@@ -104,10 +104,10 @@ class SmAssignSubjectController extends Controller
 
             $subjects = SmSubject::where('active_status', 1)->where('school_id', Auth::user()->school_id)->where('academic_id', getAcademicId())->get();
             $teachers = SmStaff::where('active_status', 1)
-                ->where(function($q)  {                
-                $q->where('role_id', 4)->orWhere('previous_role_id', 4);             
+                ->where(function($q)  {
+                $q->where('role_id', 4)->orWhere('previous_role_id', 4);
                 })->where('school_id', Auth::user()->school_id)->get();
-         
+
             $class_id = $request->class;
             $section_id = $request->section;
             $classes = SmClass::where('active_status', 1)->where('academic_id', getAcademicId())->where('school_id', Auth::user()->school_id)->get();
@@ -127,7 +127,7 @@ class SmAssignSubjectController extends Controller
             $teachers = SmStaff::status()->where(function($q)  {
 	$q->where('role_id', 4)->orWhere('previous_role_id', 4);})->get();
 
-           
+
             return response()->json([$subjects, $teachers]);
         } catch (\Exception $e) {
             return Response::json(['error' => 'Error msg'], 404);
@@ -136,7 +136,7 @@ class SmAssignSubjectController extends Controller
 
     public function assignSubjectStore(Request $request)
     {
-       
+
         try {
             if((is_null($request->subjects[0]) && is_null($request->teachers[0]))) {
                 Toastr::warning('Empty data submit', 'warning');
@@ -147,18 +147,19 @@ class SmAssignSubjectController extends Controller
                 //  $k = 0;
                 if (isset($request->subjects)) {
                     foreach ($request->subjects as $key=>$subject) {
-                        if ($subject != "") {                            
+                        if ($subject != "") {
                             if($request->section_id==null){
                                 $k = 0;
                                 $all_section=SmClassSection::where('class_id',$request->class_id)->get();
                                $t_teacher=count($request->teachers);
-                                foreach($all_section as $section){                                        
+                                foreach($all_section as $section){
                                     $assign_subject = new SmAssignSubject();
                                     $assign_subject->class_id = $request->class_id;
                                     $assign_subject->school_id = Auth::user()->school_id;
                                     $assign_subject->section_id = $section->section_id;
-                                    $assign_subject->subject_id = $subject;                            
-                                    $assign_subject->teacher_id = $request->teachers[$key];                                
+                                    $assign_subject->subject_id = $subject;
+                                    $assign_subject->teacher_id = $request->teachers[$key];
+                                    $assign_subject->is_main_subject = isset($request->is_main_subject[$key]) ? true : false;
                                     $assign_subject->created_at = YearCheck::getYear() . '-' . date('m-d h:i:s');
                                     $assign_subject->academic_id = getAcademicId();
                                     $assign_subject->save();
@@ -173,6 +174,7 @@ class SmAssignSubjectController extends Controller
                             $assign_subject->section_id = $request->section_id;
                             $assign_subject->subject_id = $subject;
                             $assign_subject->teacher_id = $request->teachers[$i];
+                            $assign_subject->is_main_subject = isset($request->is_main_subject[$key]) ? true : false;
                             $assign_subject->created_at = YearCheck::getYear() . '-' . date('m-d h:i:s');
                             $assign_subject->academic_id = getAcademicId();
                             $assign_subject->save();
@@ -188,24 +190,25 @@ class SmAssignSubjectController extends Controller
 
                     $i = 0;
                     if (! empty($request->subjects)) {
-            
+
                         foreach ($request->subjects as $key=>$subject) {
                             $k = 0;
                             if (!empty($subject)) {
 
                                 $all_section=SmClassSection::where('class_id',$request->class_id)->get();
                                 foreach($all_section as $section){
-                         
+
                                 $assign_subject = new SmAssignSubject();
                                 $assign_subject->class_id = $request->class_id;
                                 $assign_subject->section_id = $section->section_id;
                                 $assign_subject->subject_id = $subject;
                                 $assign_subject->teacher_id = $request->teachers[$key];
+                                $assign_subject->is_main_subject = isset($request->is_main_subject[$key]) ? true : false;
                                 $assign_subject->created_at = YearCheck::getYear() . '-' . date('m-d h:i:s');
                                 $assign_subject->academic_id = getAcademicId();
                                 $assign_subject->school_id = Auth::user()->school_id;
 
-                                
+
                                 $assign_subject->save();
                                 event(new CreateClassGroupChat($assign_subject));
                                 $k++;
@@ -216,12 +219,12 @@ class SmAssignSubjectController extends Controller
 
                 }else{
                     SmAssignSubject::where('class_id', $request->class_id)->where('section_id', $request->section_id)->delete();
-               
+
                     $i = 0;
                     if (! empty($request->subjects)) {
-            
-                        foreach ($request->subjects as $subject) {
-                                
+
+                        foreach ($request->subjects as $key => $subject) {
+
                             if (!empty($subject)) {
                                 $assign_subject = new SmAssignSubject();
                                 $assign_subject->class_id = $request->class_id;
@@ -229,6 +232,7 @@ class SmAssignSubjectController extends Controller
                                 $assign_subject->subject_id = $subject;
                                 $assign_subject->teacher_id = $request->teachers[$i];
                                 $assign_subject->created_at = YearCheck::getYear() . '-' . date('m-d h:i:s');
+                                $assign_subject->is_main_subject = isset($request->is_main_subject[$key]) ? true : false;
                                 $assign_subject->academic_id = getAcademicId();
                                 $assign_subject->school_id = Auth::user()->school_id;
                                 $result =  $assign_subject->save();

@@ -8,6 +8,7 @@ use App\SmStaff;
 use App\SmSection;
 use App\SmStudent;
 use App\SmSubject;
+use App\SmSubjectAttendance;
 use App\YearCheck;
 use App\SmExamType;
 use App\SmSeatPlan;
@@ -1844,7 +1845,7 @@ class SmExaminationController extends Controller
                 ->where('school_id', auth()->user()->school_id)
                 ->with('student')
                 ->get();
-                
+
             $marks = SmMarkStore::where('exam_term_id', $request->exam)
                 ->whereIn('student_record_id', $students->pluck('id')->toArray())
                 ->get();
@@ -2095,6 +2096,8 @@ class SmExaminationController extends Controller
                     $class = SmClass::with('academic')->find($InputClassId);
                     $section = SmSection::find($InputSectionId);
                     $exam = SmExamType::find($InputExamId);
+                    $exam_year = SmAcademicYear::find($class->academic_id)->year;;
+                    $exam_month = substr($exam->title, -2);
 
                     $optional_subject_setup = SmClassOptionalSubject::where('class_id', '=', $request->class)->first();
 
@@ -2238,12 +2241,79 @@ class SmExaminationController extends Controller
                             ['student_id', $SingleStudent->id],
                         ])->sum('total_gpa_point');
 
-                        $total_marks = SmResultStore::where([
+                        $marks = SmResultStore::where([
                             ['exam_type_id', $InputExamId],
                             ['class_id', $InputClassId],
                             ['section_id', $InputSectionId],
                             ['student_id', $SingleStudent->id],
-                        ])->sum('total_marks');
+                        ]);
+                        $total_marks =$marks->sum('total_marks');
+                        $subjects_average_mark = $marks->average('total_marks');
+//                        dd($total_marks);
+                        $main_assign_subjectIds = SmAssignSubject::where('class_id', $class->id)
+                            ->where('section_id', $section->id)
+                            ->where('academic_id', getAcademicId())
+                            ->where('school_id', Auth::user()->school_id)->where('is_main_subject', '1')
+                            ->whereIn('subject_id', $examSubjectIds)
+                            ->pluck('subject_id');
+                        $main_subjects_marks = SmResultStore::where([
+                            ['exam_type_id', $InputExamId],
+                            ['class_id', $InputClassId],
+                            ['section_id', $InputSectionId],
+                            ['student_id', $SingleStudent->id],
+                        ])->whereIn('subject_id', $main_assign_subjectIds)->get();
+                        $main_subjects_average_mark = $main_subjects_marks->avg('total_marks');
+
+                        $attendance = SmSubjectAttendance::with('student')->where('student_id',$SingleStudent->id)
+                            ->where('attendance_date', 'like', $exam_year . '-' . $exam_month . '%')
+                            ->where('academic_id', getAcademicId())
+                            ->where('school_id',Auth::user()->school_id)->get();
+                        $attendances = $attendance->pluck('attendance_type')->toArray();
+                        $attendances_count = count($attendances);
+                        $behaviours = $attendance->pluck('behaviour_type')->toArray();
+                        $behaviours_count = count($behaviours);
+                        $attendances_mapping = [
+                            'P' => 100,
+                            'A' => 0,
+                            'L' => 40
+                        ];
+
+                        $attendance_numbers = [];
+                        foreach ($attendances as $attendance) {
+                            if (isset($attendances_mapping[$attendance])) {
+                                $attendance_numbers[] = $attendances_mapping[$attendance];
+                            }
+                        }
+                        $attendances_average = array_sum($attendance_numbers) / $attendances_count;
+
+
+                        $behaviours_mapping = [
+                            'G' => 50,
+                            'Y' => 30,
+                            'R' => 20
+                        ];
+
+                        $behaviour_numbers = [];
+                        foreach ($behaviours as $behaviour) {
+                            if (isset($behaviours_mapping[$behaviour])) {
+                                $behaviour_numbers[] = $behaviours_mapping[$behaviour];
+                            }
+                        }
+                        $behaviour_average = array_sum($behaviour_numbers) / $behaviours_count;
+
+                        // calculation behavioral appraisal
+
+                        $attendance_percent = 5;
+                        $behaviour_percent = 5;
+                        $subject_exam_marks_percent = 40;
+                        $main_subjects_exam_mark_percent = 50;
+
+                        $attendance_ball = ($attendances_average * $attendance_percent) / 100;
+                        $behaviour_ball = ($behaviour_average * $behaviour_percent) / 100;
+                        $subject_exam_marks_ball = ($subjects_average_mark * $subject_exam_marks_percent) / 100;
+                        $main_subjects_exam_mark_ball = ($main_subjects_average_mark * $main_subjects_exam_mark_percent) / 100;
+
+                        $behavioural_appraisal = $attendance_ball + $behaviour_ball + $subject_exam_marks_ball + $main_subjects_exam_mark_ball;
 
                         $dat = array();
                         $sum_of_mark = ($total_marks == 0) ? 0 : $total_marks;
@@ -2297,6 +2367,7 @@ class SmExaminationController extends Controller
                         $insert_results->subjects_string = $subject_strings;
                         $insert_results->marks_string = $marks_string;
                         $insert_results->total_marks = $sum_of_mark;
+                        $insert_results->behavioural_appraisal = $behavioural_appraisal;
                         $insert_results->average_mark = $average_mark;
                         $insert_results->gpa_point = $exart_gp_point;
                         $insert_results->iid = $iid;
@@ -2551,7 +2622,7 @@ class SmExaminationController extends Controller
         if(db_engine() !="pgsql"){
             DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         }
-      
+
         $request->validate([
             'exam' => 'required',
             'class' => 'required',
@@ -2924,7 +2995,7 @@ class SmExaminationController extends Controller
                     'section_id', 'exam_content', 'total_class_days', 'student_attendance', 'optional_subject_setup'));
             }
         } catch (\Exception $e) {
-            
+
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
         }
@@ -3346,7 +3417,7 @@ class SmExaminationController extends Controller
                     ->where('subject_id', $request->subject)
                     ->first();
             }
-            
+
 
             if ($exam) {
                 $pass_mark = $exam->pass_mark;
@@ -3372,17 +3443,17 @@ class SmExaminationController extends Controller
             } else {
                 $mark_sheet = SmResultStore::query();
                 $mark_sheet->where('exam_type_id', $request->exam_type);
-                
+
                 if(moduleStatusCheck('University')){
-                    $mark_sheet = universityFilter($mark_sheet, $request)->where('un_subject_id', $request->un_subject_id); 
+                    $mark_sheet = universityFilter($mark_sheet, $request)->where('un_subject_id', $request->un_subject_id);
                 }else{
                     $mark_sheet = $mark_sheet->where('class_id', $request->class)
                         ->where('section_id', $request->section)
                         ->where('subject_id', $request->subject);
                 }
                 $mark_sheet =$mark_sheet->orderBy('total_marks', 'DESC')->with('studentRecords')->get();
-               
-                
+
+
                 return view('backEnd.examination.report.marksheetReport', compact('exams', 'classes', 'mark_sheet','examInfo', 'subjectInfo', 'classInfo', 'sectionInfo','pass_mark','exam_rule','data'));
             }
         } catch (\Exception $e) {
@@ -3394,7 +3465,7 @@ class SmExaminationController extends Controller
     public function percentMarksheetPrint(Request $request)
     {
         try {
-            
+
             $examInfo = SmExamType::find($request->exam);
             $subjectInfo = SmSubject::find($request->subject);
             $classInfo = SmClass::find($request->class);
