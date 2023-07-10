@@ -160,7 +160,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-      
+
         // RobinCSamuel\LaravelMsg91\LaravelMsg91ServiceProvider::class,
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
@@ -177,7 +177,9 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\TranslationServiceProvider::class,
-       // SpondonIt\FCM\FcmNotificationServiceProvider::class,
+        App\Providers\EskizSmsServiceProvider::class,
+
+        // SpondonIt\FCM\FcmNotificationServiceProvider::class,
         // Vimeo\Laravel\VimeoServiceProvider::class
 
 
@@ -231,7 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
         'PDF' => Barryvdh\DomPDF\Facade::class,
-    
+
         // 'LaravelMsg91' => RobinCSamuel\LaravelMsg91\Facades\LaravelMsg91::class,
         'Carbon' => 'Carbon\Carbon',
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
@@ -242,6 +244,8 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Str' => Illuminate\Support\Str::class,
         // 'Vimeo' => Vimeo\Laravel\Facades\Vimeo::class,
+        'EskizSms' => App\Facades\EskizSmsFacade::class,
+
 
     ],
 
