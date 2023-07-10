@@ -151,7 +151,7 @@
 
                                     <div class="col-lg-3 mt-30" id="select_exam_typ_subject_div">
                                         {{ Form::select('exam_type',[""=>__('exam.select_exam').'*'], null , ['class' => 'primary_select  form-control'. ($errors->has('exam_type') ? ' is-invalid' : ''), 'id'=>'select_exam_typ_subject']) }}
-                                        
+
                                         <div class="pull-right loader loader_style" id="select_exam_type_loader">
                                             <img class="loader_img_style" src="{{asset('public/backEnd/img/demo_wait.gif')}}" alt="loader">
                                         </div>
@@ -164,7 +164,7 @@
 
                                     <div class="col-lg-3 mt-30" id="select_un_student_div">
                                         {{ Form::select('student_id',[""=>__('common.select_student').'*'], null , ['class' => 'primary_select  form-control'. ($errors->has('student_id') ? ' is-invalid' : ''), 'id'=>'select_un_student']) }}
-                                        
+
                                         <div class="pull-right loader loader_style" id="select_un_student_loader">
                                             <img class="loader_img_style" src="{{asset('public/backEnd/img/demo_wait.gif')}}" alt="loader">
                                         </div>
@@ -305,16 +305,16 @@
                                                             <tr>
                                                                 <th>@lang('common.name')</th>
                                                                 <th>@lang('student.admission_no')</th>
-                                                                <th>@lang('student.roll_no')</th>
+                                                                <th>Behavioral appraisal</th>
                                                                 <th>@lang('reports.position')</th>
                                                                 {{-- <th>@lang('common.total_mark')</th> --}}
                                                                 {{-- <th>@lang('common.obtained_marks')</th> --}}
                                                                 <th>@lang('exam.total_mark')</th>
                                                                 @if(generalSetting()->result_type == 'mark')
                                                                 <th>@lang('exam.average')</th>
-                                                                @else 
+                                                                @else
                                                                 <th>@lang('reports.gpa')</th>
-                                                                @endif 
+                                                                @endif
                                                                 @foreach($subjectlist as $subject)
                                                                     <th>{{$subject}}</th>
                                                                 @endforeach
@@ -330,14 +330,14 @@
                                                                 <tr>
                                                                     <td>{{$row->student_name}}</td>
                                                                     <td>{{$row->admission_no}}</td>
-                                                                    <td>{{$row->studentinfo->roll_no}}</td>
+                                                                    <td>{{$row->behavioural_appraisal}}</td>
                                                                     <td>{{@getStudentMeritPosition($InputClassId, $InputSectionId, $InputExamId, $row->studentinfo->studentRecord->id)}}</td>
                                                                     <td>{{$row->total_marks}}</td>
                                                                     @if(generalSetting()->result_type == 'mark')
                                                                     <td>{{ number_format(($row->total_marks / count($markslist)),2) }}</td>
-                                                                    @else 
+                                                                    @else
                                                                     <td>{{$row->gpa_point}}</td>
-                                                                    @endif 
+                                                                    @endif
                                                                     @if(!empty($markslist))
                                                                         @foreach($markslist as $mark)
                                                                             @php

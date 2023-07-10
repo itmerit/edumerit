@@ -1,5 +1,5 @@
 @extends('backEnd.master')
-@section('title') 
+@section('title')
 @lang('student.subject_wise_attendance')
 @endsection
 @push('css')
@@ -32,12 +32,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">  
+            <div class="col-lg-12">
                 <div class="white-box">
                     {{ Form::open(['class' => 'form-horizontal','route' => 'subject-attendance-search', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'search_studentA']) }}
                         <div class="row">
-                            <input type="hidden" name="url" id="url" value="{{URL::to('/')}}"> 
-                        @if(moduleStatusCheck('University'))  
+                            <input type="hidden" name="url" id="url" value="{{URL::to('/')}}">
+                        @if(moduleStatusCheck('University'))
                             @includeIf('university::common.session_faculty_depart_academic_semester_level',['required'=>['USN','UD', 'UA', 'US','USL','USUB']])
                             <div class="col-lg-3 mt-25">
                                 <div class="row no-gutters input-right-icon">
@@ -45,7 +45,7 @@
                                         <div class="primary_input">
                                             <input class="primary_input_field  primary_input_field date form-control form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }} {{isset($date)? 'read-only-input': ''}}" id="startDate" type="text"
                                                 name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">
-                            
+
                                             @if ($errors->has('attendance_date'))
                                             <span class="text-danger custom-error-message" role="alert">
                                                 {{ $errors->first('attendance_date') }}
@@ -58,7 +58,7 @@
                                     </button>
                                 </div>
                             </div>
-                        @else 
+                        @else
                         <div class="col-lg-3 mt-30-md">
                             <select class="primary_select form-control {{ $errors->has('class') ? ' is-invalid' : '' }}" id="select_class" name="class">
                                 <option data-display="@lang('common.select_class')*" value="">@lang('common.select_class') *</option>
@@ -71,7 +71,7 @@
                                 {{ $errors->first('class') }}
                             </span>
                             @endif
-                        </div> 
+                        </div>
                         <div class="col-lg-3 mt-30-md" id="select_section_div">
                             <select class="primary_select form-control{{ $errors->has('section') ? ' is-invalid' : '' }} select_section" id="select_section" name="section">
                                 <option data-display="@lang('common.select_section') *" value="">@lang('common.select_section') *</option>
@@ -89,7 +89,7 @@
                                 {{ $errors->first('section') }}
                             </span>
                             @endif
-                        </div> 
+                        </div>
                         <div class="col-lg-3 mt-30-md" id="select_subject_div">
                             <select class="primary_select form-control{{ $errors->has('subject') ? ' is-invalid' : '' }} select_subject" id="select_subject" name="subject">
                                 <option data-display="{{__('student.select_subject')}} *" value="">{{__('student.select_subject')}} *</option>
@@ -110,7 +110,7 @@
                                 {{ $errors->first('subject') }}
                             </span>
                             @endif
-                        </div> 
+                        </div>
                         <div class="col-lg-3 mt-30-md">
                             <div class="row no-gutters input-right-icon">
                                 <div class="col">
@@ -118,8 +118,8 @@
                                         <input class="primary_input_field  primary_input_field date form-control form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }} {{isset($date)? 'read-only-input': ''}}" id="startDate" type="text"
                                             name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">
                                         <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>
-                                        
-                                        
+
+
                                         @if ($errors->has('attendance_date'))
                                         <span class="text-danger" >
                                             {{ $errors->first('attendance_date') }}
@@ -150,26 +150,26 @@
         <div class="row mt-40">
             <div class="col-lg-12 ">
                 <div class=" white-box mb-40">
-                    <div class="row"> 
+                    <div class="row">
                         <div class="col-lg-12">
                             <div class="main-title">
                                 <h3 class="mb-30 text-center">@lang('student.subject_wise_attendance') </h3>
                             </div>
                         </div>
-                        @if(moduleStatusCheck('University'))                        
+                        @if(moduleStatusCheck('University'))
                             <div class="col-lg-3">
-                                <strong> @lang('university::un.faculty_department'): </strong> 
+                                <strong> @lang('university::un.faculty_department'): </strong>
                                 {{ isset($unFaculty) ? $unFaculty->name .'('. (isset($unDepartment) ? $unDepartment->name:'').')':''}}
                             </div>
                             <div class="col-lg-3">
-                                <strong>  @lang('university::un.semester(label)'): </strong> 
+                                <strong>  @lang('university::un.semester(label)'): </strong>
                                 {{ isset($unSemester) ? $unSemester->name .'('. (isset($unSemesterLabel) ? $unSemesterLabel->name : '') .')' :''}}
                             </div>
                             <div class="col-lg-3">
-                                <strong> @lang('common.subject'): </strong> 
+                                <strong> @lang('common.subject'): </strong>
                                 {{ isset($unSubject) ? $unSubject->subject_name :''}}
                             </div>
-                        @else  
+                        @else
                             <div class="col-lg-3">
                                 <strong> @lang('common.class'): </strong> {{$search_info['class_name']}}
                             </div>
@@ -183,8 +183,8 @@
                         <div class="col-lg-3">
                             <strong> @lang('common.date'): </strong> {{dateConvert($input['attendance_date'])}}
                         </div>
-                    </div> 
-                </div> 
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 no-gutters">
                         @if($attendance_type != "" && $attendance_type == "H")
@@ -241,7 +241,7 @@
                                 </form>
                             @endif
                         </div>
-                    </div> 
+                    </div>
                 {{-- HoliDay End --}}
 
                 {{ Form::open(['class' => 'form-horizontal', 'route' => 'subject-attendance-store', 'method' => 'POST'])}}
@@ -260,7 +260,7 @@
                                         <th>@lang('common.sl')</th>
                                         <th>@lang('student.admission_no')</th>
                                         <th>@lang('student.student_name')</th>
-                                        <th>@lang('student.roll_number')</th>
+                                        <th>@lang('student.behaviour')</th>
                                         <th>@lang('student.attendance')</th>
                                         <th>@lang('common.note')</th>
                                     </tr>
@@ -268,7 +268,7 @@
 
                                 <tbody>
                                     @php $count=1; @endphp
-                                 
+
                                     @foreach($students as $student)
                                     {{-- student means student record data--}}
                                         <tr>
@@ -289,7 +289,24 @@
                                                 @endif
                                             </td>
                                             <td>{{$student->studentDetail->first_name.' '.$student->studentDetail->last_name}}</td>
-                                            <td>{{$student->roll_no}}</td>
+                                            <td>
+                                                <div class="d-flex radio-btn-flex">
+                                                    <div class="mr-20">
+                                                        <input type="radio" name="attendance[{{$student->id}}][behaviour_type]" id="behaviourR{{$student->id}}" value="R" class="common-radio attendanceP subject_attendance_type" {{ $student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "" ? 'checked' :'') : ''}}>
+                                                        <label for="behaviourR{{$student->id}}" style="color: red;">Red</label>
+                                                    </div>
+                                                    <div class="mr-20">
+                                                        <input type="radio" name="attendance[{{$student->id}}][behaviour_type]" id="behaviourY{{$student->id}}" value="Y" class="common-radio subject_attendance_type" {{ $student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "L" ? 'checked' :''):'checked'}}>
+                                                        <label for="behaviourY{{$student->id}}" style="color: #ebdb34;">Yellow</label>
+                                                    </div>
+                                                    <div class="mr-20">
+                                                        <input type="radio" name="attendance[{{$student->id}}][behaviour_type]" id="behaviourG{{$student->id}}" value="G" class="common-radio subject_attendance_type" {{$student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "A" ? 'checked' :''):''}}>
+                                                        <label for="behaviourG{{$student->id}}" style="color: green;">Green</label>
+                                                    </div>
+                                                </div>
+
+
+                                            </td>
                                             <td>
                                                 <div class="d-flex radio-btn-flex">
                                                     <div class="mr-20">
@@ -304,10 +321,10 @@
                                                         <input type="radio" name="attendance[{{$student->id}}][attendance_type]" id="attendanceA{{$student->id}}" value="A" class="common-radio subject_attendance_type" {{$student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "A" ? 'checked' :''):''}}>
                                                         <label for="attendanceA{{$student->id}}">@lang('student.absent')</label>
                                                     </div>
-                                                    <div>
-                                                        <input type="radio" name="attendance[{{$student->id}}][attendance_type]" id="attendanceH{{$student->id}}" value="F" class="common-radio subject_attendance_type" {{$student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "F" ? 'checked' :'') : ''}}>
-                                                        <label for="attendanceH{{$student->id}}">@lang('student.half_day')</label>
-                                                    </div>
+{{--                                                    <div>--}}
+{{--                                                        <input type="radio" name="attendance[{{$student->id}}][attendance_type]" id="attendanceH{{$student->id}}" value="F" class="common-radio subject_attendance_type" {{$student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "F" ? 'checked' :'') : ''}}>--}}
+{{--                                                        <label for="attendanceH{{$student->id}}">@lang('student.half_day')</label>--}}
+{{--                                                    </div>--}}
                                                 </div>
                                             </td>
                                             <td>
