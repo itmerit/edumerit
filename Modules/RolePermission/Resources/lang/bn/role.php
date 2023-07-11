@@ -1,0 +1,20 @@
+<?php
+return [
+    "role_list" => "রুল তালিকা",
+    "add_role" => "রুল যোগ করো",
+    "edit_role" => "রুল সম্পাদন করো",
+    "update_role" => "রুল আপডেট করো",
+    "delete_role" => "রুল মুছে ফেলুন",
+    "login_permission" => "লগিন অনুমতি",
+    "student_permission" => "ছাত্র অনুমতি",
+    "parents_permission" => "অভিভাবক অনুমতি",
+    "student_password" => "ছাত্র পাসওয়ার্ড",
+    "parents_password" => "অভিভাবক পাসওয়ার্ড",
+    "update_password" => "পাসওয়ার্ড আপডেট করুন",
+    "Role" => "রুল",
+    "assign_permission" => "অনুমতি স্বাক্ষর",
+    "role_permission" => "রুল অনুমতি",
+    "role" => "রুল",
+    "role_permission " => "রুল অনুমতি",
+    "role_&_permission" => "রুল অনুমতি",
+    ];

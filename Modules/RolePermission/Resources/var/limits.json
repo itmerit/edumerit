@@ -1,0 +1,6 @@
+{
+  "role_permission" : {
+    "lang" : "rolepermission::role.role_&_permission",
+    "module_id" : 417
+  }
+}

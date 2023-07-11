@@ -1,0 +1,586 @@
+/* line 2, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar {
+  width: 60px;
+  z-index: 1;
+  overflow: visible !important;
+  min-width: 60px;
+  max-width: 60px;
+  position: absolute;
+  z-index: 9999999;
+}
+
+/* line 10, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar .mini_logo {
+  display: block;
+}
+
+/* line 13, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar .large_logo {
+  display: none;
+}
+
+/* line 17, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar .has-arrow::before {
+  display: none;
+}
+
+/* line 21, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar .sidebar-header {
+  padding-left: 11px;
+}
+
+/* line 24, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar .update_sidebar img {
+  max-width: 40px !important;
+}
+
+/* line 28, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu ul li ul {
+  overflow: visible;
+  position: absolute;
+  z-index: 999;
+  left: 100% !important;
+  top: 100%;
+}
+
+/* line 35, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li {
+  position: relative;
+}
+
+/* line 38, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li ul li a {
+  white-space: nowrap;
+  padding-left: 18px;
+  color: #fff;
+  width: 180px;
+}
+
+/* line 44, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li > a {
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: 44px auto !important;
+}
+
+/* line 51, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li > a.has-arrow::after {
+  display: none;
+}
+
+/* line 57, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li > a .nav_title {
+  display: none;
+}
+
+/* line 60, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li > a:hover, #sidebar.sidebar.mini_sidebar #sidebar_menu > li > a:active {
+  width: 240px;
+}
+
+/* line 64, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li > a:hover .nav_icon_small, #sidebar.sidebar.mini_sidebar #sidebar_menu > li > a:active .nav_icon_small {
+  display: inline-block;
+}
+
+/* line 67, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li > a:hover .nav_title, #sidebar.sidebar.mini_sidebar #sidebar_menu > li > a:active .nav_title {
+  display: inline-block;
+}
+
+/* line 70, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li > a:hover.has-arrow::after, #sidebar.sidebar.mini_sidebar #sidebar_menu > li > a:active.has-arrow::after {
+  display: inline-block;
+}
+
+/* line 76, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li:hover > a {
+  width: 240px !important;
+}
+
+/* line 80, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li:hover > a:hover, #sidebar.sidebar.mini_sidebar #sidebar_menu > li:hover > a.active {
+  width: 240px;
+}
+
+/* line 84, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li:hover > a:hover .nav_icon_small, #sidebar.sidebar.mini_sidebar #sidebar_menu > li:hover > a.active .nav_icon_small {
+  display: inline-block;
+}
+
+/* line 87, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li:hover > a:hover .nav_title, #sidebar.sidebar.mini_sidebar #sidebar_menu > li:hover > a.active .nav_title {
+  display: inline-block;
+}
+
+/* line 90, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li:hover > a:hover.has-arrow::after, #sidebar.sidebar.mini_sidebar #sidebar_menu > li:hover > a.active.has-arrow::after {
+  display: inline-block;
+}
+
+/* line 99, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li.mm-active:hover {
+  overflow: visible;
+}
+
+/* line 101, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li.mm-active:hover > a {
+  background: var(--base_color);
+}
+
+/* line 104, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li.mm-active:hover > a .nav_icon_small {
+  display: inline-block;
+}
+
+/* line 107, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li.mm-active:hover > a .nav_title {
+  display: inline-block;
+}
+
+/* line 110, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li.mm-active:hover > a.has-arrow::after {
+  display: inline-block;
+}
+
+/* line 114, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li.mm-active:hover ul {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* line 120, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li.mm-active ul {
+  left: 100%;
+  left: 60px;
+  position: absolute;
+  top: 100%;
+  width: 180px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* line 139, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#main-content.mini_main_content {
+  margin-left: 70px;
+  width: calc(100% - 70px);
+}
+
+@media (max-width: 1370px) {
+  /* line 139, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+  #main-content.mini_main_content {
+    width: calc(100% - 70px);
+  }
+}
+
+@media (min-width: 1200px) {
+  /* line 139, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+  #main-content.mini_main_content {
+    padding: 30px 30px;
+  }
+}
+
+@media (max-width: 991px) {
+  /* line 139, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+  #main-content.mini_main_content {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+/* line 157, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.mini_sidebar ul li ul {
+  background: var(--base_color);
+  opacity: .9;
+  position: absolute;
+  left: 100%;
+}
+
+/* line 164, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+.collaspe_icon.open_miniSide {
+  position: relative;
+  left: 0;
+  top: 44%;
+  transform: translateY(-50%);
+  margin-left: 2px;
+}
+
+@media (max-width: 991px) {
+  /* line 164, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+  .collaspe_icon.open_miniSide {
+    display: none;
+  }
+}
+
+/* line 172, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+.collaspe_icon.open_miniSide i {
+  color: var(--base_color);
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 15px;
+}
+
+/* line 180, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+.lms_collaspe_icon {
+  width: 40px;
+  height: 40px;
+  background: #FFFFFF;
+  box-shadow: 0px 10px 15px rgba(235, 215, 241, 0.22);
+  border-radius: 5px;
+  text-align: center;
+  line-height: 40px;
+  margin-right: 35px;
+}
+
+/* line 189, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+.lms_collaspe_icon i {
+  margin: 0 !important;
+  position: relative;
+  top: 1px;
+}
+
+/* line 200, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li.metis_submenu_up_collaspe ul {
+  top: auto;
+  bottom: 100%;
+}
+
+/* line 208, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu li ul li.metis_submenu {
+  position: relative;
+}
+
+/* line 210, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_mini_sidebar.scss */
+#sidebar.sidebar.mini_sidebar #sidebar_menu li ul li.metis_submenu ul {
+  top: 100%;
+  left: 0 !important;
+  position: relative;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* line 3, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+#sidebar ul li a:hover, #sidebar ul li a.active, #sidebar ul li.mm-active > a {
+  color: #ffffff;
+  background: var(--base_color);
+  border-left: 6px solid var(--gradient_1);
+  border-image-source: linear-gradient(#c738d8, var(--gradient_1));
+  border-image-slice: 6;
+}
+
+/* line 11, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar .mini_logo {
+  display: none;
+}
+
+/* line 14, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar .large_logo {
+  display: block;
+}
+
+/* line 19, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li a {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--base_color);
+  padding: 9px 7px;
+  padding: 9px 7px 9px 29px;
+  background: #fff;
+  transition: .3s;
+  position: relative;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: 26px auto !important;
+  grid-gap: 6px;
+  align-items: center;
+  position: relative;
+  background: transparent;
+}
+
+/* line 53, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li a i {
+  font-size: 12px;
+  margin-right: 12px;
+  color: #707DB7;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+/* line 63, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li a span {
+  margin: 0;
+}
+
+/* line 67, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li a.has-arrow::after {
+  color: var(--base_color);
+  font-weight: 600;
+  font-size: 12px;
+  right: 20px;
+}
+
+/* line 73, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li a.has-arrow:hover::after {
+  color: var(--base_color);
+}
+
+/* line 77, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li a:hover {
+  background: var(--sidebar_hover);
+  color: var(--text_white);
+}
+
+/* line 80, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li a:hover i {
+  color: var(--text_white);
+}
+
+/* line 83, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li a:hover::before {
+  width: 6px;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* line 93, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li.mm-active > a {
+  color: var(--text_white);
+  background: var(--sidebar_active);
+}
+
+/* line 97, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li.mm-active > a.has-arrow::after {
+  color: var(--base_color);
+  font-weight: 600;
+  font-size: 12px;
+  right: 20px;
+}
+
+/* line 103, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li.mm-active > a.has-arrow:hover::after {
+  color: var(--base_color);
+}
+
+/* line 112, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li.mm-active.metis_dropmenu > a {
+  padding-top: 29px;
+  padding-bottom: 30px;
+  color: var(--base_color);
+}
+
+/* line 119, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li.mm-active > a i {
+  color: var(--base_color);
+}
+
+/* line 122, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li.mm-active > a::before {
+  opacity: 1;
+  width: 6px;
+  visibility: visible;
+}
+
+/* line 131, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li ul li a {
+  white-space: nowrap;
+  padding-left: 55px;
+  font-size: 11px;
+  color: var(--text_white);
+}
+
+/* line 135, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li ul li a:hover, .sidebar #sidebar_menu li ul li a.active {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 6px solid var(--gradient_1);
+}
+
+/* line 140, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu li ul li.metis_submenu > a {
+  background: rgba(255, 255, 255, 0.05);
+  /* border-left: 6px solid var(--gradient_1); */
+}
+
+/* line 174, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap {
+  margin-bottom: 30px;
+}
+
+/* line 178, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap ul li {
+  background: #fff7f8;
+  border-top: 1px solid #eee1e2;
+  border-bottom: 1px solid #eee1e2;
+  padding: 30px 0 30px 30px;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  /* line 178, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+  .admin_profile_Wrap ul li {
+    padding: 30px 0 30px 20px;
+  }
+}
+
+/* line 189, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap ul li a {
+  display: block;
+}
+
+/* line 194, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap ul li a .admin_profile_inner .thumb img {
+  width: 50px;
+  height: 50px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+/* line 200, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap ul li a .admin_profile_inner .welcome_rext {
+  margin-left: 15px;
+}
+
+/* line 202, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap ul li a .admin_profile_inner .welcome_rext h5 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222222;
+  margin-bottom: 1px;
+  white-space: nowrap;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  /* line 202, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+  .admin_profile_Wrap ul li a .admin_profile_inner .welcome_rext h5 {
+    font-size: 12px;
+  }
+}
+
+/* line 212, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap ul li a .admin_profile_inner .welcome_rext span {
+  display: block;
+  font-size: 12px;
+  color: #7e7172;
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  /* line 212, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+  .admin_profile_Wrap ul li a .admin_profile_inner .welcome_rext span {
+    font-size: 11px;
+  }
+}
+
+/* line 225, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap ul li ul {
+  padding-left: 70px;
+}
+
+/* line 228, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap ul li ul li {
+  padding: 0;
+  border: 0;
+}
+
+/* line 231, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap ul li ul li a {
+  font-size: 13px;
+  color: #7e7172;
+  font-weight: 400;
+  padding-bottom: 17px;
+}
+
+/* line 238, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap ul li ul li:last-child a {
+  padding-bottom: 0;
+}
+
+/* line 243, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap ul li ul li:first-child a {
+  margin-top: 29px;
+}
+
+/* line 251, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.admin_profile_Wrap .metismenu .has-arrow::after {
+  top: 38%;
+}
+
+/* line 275, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu ul li.metis_submenu a.has-arrow::after {
+  color: #fff;
+}
+
+/* line 278, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu ul li.metis_submenu ul {
+  opacity: 1;
+}
+
+/* line 281, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_sidebar.scss */
+.sidebar #sidebar_menu ul li.metis_submenu ul li a {
+  padding-left: 63px;
+}
+
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before, [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
+  margin-left: 0;
+}
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li > a::after{
+  right: 5px;
+}
+#sidebar.sidebar.mini_sidebar #sidebar_menu > li:hover > a::after{
+  right:20px;
+}
+
+html[dir=rtl] .sidebar #sidebar_menu li a i {
+  margin-right: 0;
+}
+html[dir=rtl] .sidebar #sidebar_menu li a {
+  padding: 9px 29px 9px 9px;
+}
+html[dir=rtl] .metismenu .mm-active > .has-arrow::after, .metismenu .has-arrow[aria-expanded="true"]::after {
+  transform: rotate(180deg) translate(0, -50%);
+}
+html[dir=rtl] .metismenu .has-arrow::after {
+  transform: rotate(0deg) translate(0, -50%);
+}
+html[dir=rtl] .sidebar #sidebar_menu li a.has-arrow::after {
+  right: auto;
+  left: 15px;
+}
+html[dir=rtl] .collaspe_icon.open_miniSide {
+  left: auto;
+  right: 0;
+}
+html[dir=rtl] #sidebar.sidebar.mini_sidebar #sidebar_menu > li.mm-active ul {
+  right: 100%;
+  left: auto;
+}
+html[dir=rtl] #main-content.mini_main_content {
+  margin-left: 0px;
+  width: calc(100% - 0px);
+  margin-right: 70px;
+}
+html[dir=rtl] #sidebar.mini_sidebar ul li ul {
+  left: auto;
+  right: 100%;
+}
+html[dir=rtl] .admin .sidebar_icon {
+  right: 60px;
+  left: auto;
+}
+html[dir=rtl] #sidebar.sidebar.mini_sidebar #sidebar_menu > li:hover > a::after {
+  left: 20px;
+  right: auto;
+}
+
+html[dir="rtl"] #sidebar ul li a:hover, html[dir="rtl"] #sidebar ul li a.active {
+  border-left: 0 !important;
+}
+html[dir="rtl"] .collaspe_icon.open_miniSide {
+  position: relative;
+  left: 0;
+  top: 8px;
+  transform: translateY(-50%);
+  margin-left: 10px;
+}
+

@@ -1,0 +1,26 @@
+{
+    "ExamPlan": {
+
+        "migration": {
+            "admit_card_settings" : "Modules/ExamPlan/Database/Migrations/2022_01_11_065535_create_admit_card_settings_table.php",
+            "seat_plan_settings" : "Modules/ExamPlan/Database/Migrations/2022_01_11_065552_create_seat_plan_settings_table.php",
+            "admit_cards" : "Modules/ExamPlan/Database/Migrations/2022_01_11_065604_create_admit_cards_table.php",
+            "seat_plans" : "Modules/ExamPlan/Database/Migrations/2022_01_11_065617_create_seat_plans_table.php"
+        },
+        "names": [
+            "admit_card_settings",
+            "seat_plan_settings",
+            "admit_cards",
+            "seat_plans"
+        ],
+        "versions": [
+            "1.0"
+        ],
+        "url": [
+            "https://spondonit.com/contact"
+        ],
+        "notes": [
+            "This is ExamPlan module for Generate Exam Admit Card & Seat Plans . Thanks for using."
+        ]
+    }
+}

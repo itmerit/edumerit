@@ -1,0 +1,40 @@
+{
+    "Chat": {
+        
+        "item_id": "321321",
+
+        "migration": [
+            "2014_11_13_000003_create_statuses_table.php",
+            "2021_02_15_111736_create_invitations_table.php",
+            "2021_02_15_130414_create_conversations_table.php",
+            "2021_02_17_165101_create_block_users_table.php",
+            "2021_03_01_131441_create_notifications_table.php",
+            "2021_03_03_112535_create_groups_table.php",
+            "2021_03_03_112734_create_group_users_table.php",
+            "2021_03_03_112908_create_group_message_recipients_table.php",
+            "2021_03_18_172321_create_group_message_removes_table.php"
+        
+        ],
+        "names": [
+            "statuses",
+            "invitations",
+            "conversations",
+            "block_users",
+            "notifications",
+            "groups",
+            "group_users",
+            "group_message_recipients",
+            "group_message_removes"
+
+        ],
+        "versions": [
+            "0.2"
+        ],
+        "url": [
+            "https://spondonit.com/contact"
+        ],
+        "notes": [
+            "This is Chat module for communicate to each other. Thanks for using."
+        ]
+    }
+}

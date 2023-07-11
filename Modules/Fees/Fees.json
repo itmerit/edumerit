@@ -1,0 +1,37 @@
+{
+  "Fees": {
+    "migration": {
+      "no_table": "",
+      "fm_fees_groups":"Modules/Fees/Database/Migrations/2021_07_20_110254_create_fm_fees_groups_table.php",
+      "fm_fees_types":"Modules/Fees/Database/Migrations/2021_07_20_110718_create_fm_fees_types_table.php",
+      "fm_fees_invoice_settings":"Modules/Fees/Database/Migrations/2021_07_26_045723_create_fm_fees_invoice_settings_table.php",
+      "fm_fees_invoices":"Modules/Fees/Database/Migrations/2021_07_29_120251_create_fm_fees_invoices_table.php",
+      "fm_fees_invoice_chields":"Modules/Fees/Database/Migrations/2021_07_31_072347_create_fm_fees_invoice_chields_table.php",
+      "fm_fees_weavers":"Modules/Fees/Database/Migrations/2021_08_03_035307_create_fm_fees_weavers_table.php",
+      "fm_fees_transactions":"Modules/Fees/Database/Migrations/2021_08_03_094121_create_fm_fees_transactions_table.php",
+      "fm_fees_transaction_chields":"Modules/Fees/Database/Migrations/2021_11_02_062835_create_fm_fees_transaction_chields_table.php",
+      "fees_xtra":"Modules/Fees/Database/Migrations/2022_01_12_094218_create_fees_xtra_table.php",
+      "no_table":"Modules/Fees/Database/Migrations/2022_11_10_092640_add_service_charge_table.php"
+    },
+    "names": [
+      "fm_fees_groups",
+      "fm_fees_types",
+      "fm_fees_invoice_settings",
+      "fm_fees_invoices",
+      "fm_fees_invoice_chields",
+      "fm_fees_weavers",
+      "fm_fees_transactions",
+      "fm_fees_transaction_chields",
+      "fees_xtra"
+    ],
+    "versions": [
+      "1.0"
+    ],
+    "url": [
+      "https://spondonit.com/contact"
+    ],
+    "notes": [
+      "This is module for advanced fees collection"
+    ]
+  }
+}

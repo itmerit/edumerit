@@ -1,0 +1,270 @@
+
+.ms-options-wrap.ms-has-selections > button {
+  color: #415094;
+}
+.ms-options-wrap {
+  position: relative;
+}
+.ms-options-wrap > button,
+.ms-options-wrap > button:focus {
+  border: 1px solid #eceef4;
+  font-size: 14px;
+  color: #415094;
+  padding-left: 20px;
+  height: 46px;
+  border-radius: 30px;
+  width: 100%;
+  padding-right: 15px;
+}
+.ms-options-wrap > .ms-options {
+  width: 100%;
+  background-color: #fff;
+  overflow: auto !important;
+  border-radius: 0 0 10px 10px;
+  margin-top: 1px;
+  z-index: 9999 !important;
+  box-shadow: 0 10px 20px rgba(108, 39, 255, 0.3);
+  border: 0;
+}
+.ms-options-wrap > .ms-options li label {
+  cursor: pointer;
+  line-height: 40px;
+  list-style: none;
+  min-height: 40px;
+  outline: none;
+  text-align: left;
+  transition: all 0.2s;
+  color: #415094;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 0 29px 0 35px;
+  margin: 0;
+}
+.ms-options-wrap > .ms-options .ms-search {
+  padding: 10px;
+}
+.ms-options-wrap > .ms-options .ms-search input {
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid rgba(130, 139, 178, 0.3);
+  border-radius: 3px;
+  box-shadow: none;
+  color: #333;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 8px;
+  width: 100% !important;
+  height: 36px;
+  line-height: 36px;
+  outline: 0 !important;
+}
+.ms-options-wrap > .ms-options > ul input[type="checkbox"] {
+  left: 9px;
+  top: 12px;
+}
+.ms-options-wrap > .ms-options > .ms-selectall.global {
+  color: #415094;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 8px 13px !important;
+  text-decoration: none;
+}
+.ms-options-wrap > .ms-options > ul label {
+  border: 0;
+}
+.ms-options-wrap > .ms-options > ul li.selected label {
+  background-color: #f6f6f6;
+  color: #7c32ff;
+}
+.ms-options-wrap > button:after {
+  content: "";
+  display: block;
+  height: 10px;
+  margin-top: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 14px;
+  top: 10px;
+  transition: all 0.15s ease-in-out;
+  width: auto;
+  right: 25px;
+  content: "\f0d7";
+  border: 0;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #828bb2;
+  font-size: 14px;
+}
+.multypol_check_select {
+  display: inline-block;
+  margin: 0;
+}
+.multypol_check_select,
+.multypol_check_select .checkmark {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex: 18px 0 0;
+  line-height: 18px;
+}
+.multypol_check_select .checkmark {
+  top: 0;
+  left: 0;
+  display: block;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.multypol_check_select input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+}
+.multypol_check_select input:checked ~ .checkmark:after {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  transition: 0.3s;
+  transform: scale(0);
+}
+.multypol_check_select input:checked ~ .checkmark {
+  background: linear-gradient(90deg, #7c32ff 0.47%, #c738d8);
+  box-shadow: 0 5px 10px rgba(108, 39, 255, 0.25);
+  transition: 0.3s;
+}
+.multypol_check_select input:checked ~ .checkmark:before {
+  content: "\E64C";
+  font-family: themify;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 3px;
+  text-indent: 1px;
+  color: #828bb2;
+  background-color: transparent;
+  border: 0;
+  transform: rotate(8deg);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 18px;
+  z-index: 99;
+  color: #fff;
+  transition: 0.3s;
+}
+.multypol_check_select .checkmark:after {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: transparent;
+  border-radius: 50px;
+  border: 1px solid #828bb2;
+  transition: 0.3s;
+  transform: scale(1);
+}
+.multypol_check_select.small_checkbox {
+  width: 13px;
+  height: 13px;
+  flex: 13px 0 0;
+}
+.multypol_check_select.small_checkbox input:checked ~ .checkmark:before {
+  left: 2px;
+  font-size: 7px;
+  line-height: 13px;
+  top: -1px;
+}
+.multypol_check_select.small_checkbox .checkmark {
+  width: 13px;
+  height: 13px;
+  flex: 13px 0 0;
+}
+.multypol_check_select.small_checkbox .checkmark:after {
+  width: 13px;
+  height: 13px;
+}
+.infix_ul_lists li {
+  position: relative;
+}
+.infix_ul_lists li input {
+  opacity: 0;
+  visibility: hidden;
+}
+.infix_ul_lists li.selected:before {
+  transform: scale(0);
+}
+.infix_ul_lists li.selected .checkmark {
+  transform: scale(1);
+}
+.infix_ul_lists li:before {
+  display: block;
+  content: "";
+  background: transparent;
+  border-radius: 50px;
+  border: 1px solid #828bb2;
+  transform: scale(1);
+  z-index: 11;
+}
+.infix_ul_lists li .checkmark,
+.infix_ul_lists li:before {
+  position: absolute;
+  top: 10px;
+  left: 9px;
+  width: 18px;
+  height: 18px;
+  transition: 0.3s;
+}
+.infix_ul_lists li .checkmark {
+  background: linear-gradient(90deg, #7c32ff 0.47%, #c738d8);
+  box-shadow: 0 5px 10px rgba(108, 39, 255, 0.25);
+  display: inline-block;
+  border-radius: 50%;
+  transform: scale(0);
+}
+.infix_ul_lists li .checkmark:before {
+  content: "\E64C";
+  font-family: themify;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 3px;
+  text-indent: 1px;
+  color: #828bb2;
+  background-color: transparent;
+  border: 0;
+  transform: rotate(8deg);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 18px;
+  z-index: 99;
+  color: #fff;
+  transition: 0.3s;
+}
+.infix_ul_lists li .checkmark:after {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  transition: 0.3s;
+  transform: scale(1);
+}
+.ms-options-wrap > .ms-options {
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+.ms-options-wrap.ms-active .ms-options {
+  opacity: 1;
+  visibility: visible;
+}
+
+.is-invalid ~ div button {
+  border-color: #e3342f !important;
+}

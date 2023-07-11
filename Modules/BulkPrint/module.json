@@ -1,0 +1,13 @@
+{
+    "name": "BulkPrint",
+    "alias": "bulkprint",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\BulkPrint\\Providers\\BulkPrintServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

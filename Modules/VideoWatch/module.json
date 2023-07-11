@@ -1,0 +1,13 @@
+{
+    "name": "VideoWatch",
+    "alias": "videowatch",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\VideoWatch\\Providers\\VideoWatchServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,3 @@
+1. Email template used in student regsitraion(student, parent), student parent registration(student, parent), student approve(student, parent), forget password, Dues fees send to student. 
+
+2. Sms Template integrated in Dues Fees Send by Twilio, Msg91.

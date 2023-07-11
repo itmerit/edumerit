@@ -1,0 +1,13 @@
+{
+    "name": "StudentAbsentNotification",
+    "alias": "studentabsentnotification",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\StudentAbsentNotification\\Providers\\StudentAbsentNotificationServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,148 @@
+//Sidebar
+ @if(userPermission(800))
+                        <li>
+                            <a href="#subMenuTeacherLesson" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                                <span class="flaticon-professor"></span>
+                                @lang('lang.lesson_plan')
+                            </a>
+
+                            <ul class="collapse list-unstyled" id="subMenuTeacherLesson">
+                                @if(userPermission(801))
+                                    <li>
+                                        <a href="{{url('/lesson')}}"> @lang('lang.lesson')</a>
+                                    </li>
+                                @endif
+                                @if(userPermission(805))
+                                    <li>
+                                        <a href="{{url('/lesson/topic')}}"> @lang('common.topic')</a>
+                                    </li>
+                                @endif
+                                @if(userPermission(809))
+                                    <li>
+                                        <a href="{{url('/lesson/topic-overview')}}"> @lang('lang.topic_overview')</a>
+                                    </li>
+                                @endif
+                                @if(userPermission(810) )
+                                <li>
+                                    <a href="{{url('/lesson/lesson-plan')}}"> @lang('lang.lesson_plan')</a>
+                                </li>
+                                @endif
+
+                                @if(userPermission(815) )
+                                <li>
+                                    <a href="{{url('/lesson/lessonPlan-overiew')}}"> @lang('lang.lesson_plan_overview')</a>
+                                </li>
+                                @endif
+                                @if(Auth::user()->role_id == 4)
+                                <li> <a href="{{route('view-teacher-lessonPlan')}}">@lang('lang.my_lesson_plan') </a>  </li>               
+                                <li> <a href="{{route('view-teacher-lessonPlan-overview')}}">@lang('lang.my_lesson_plan_overview')</a>
+                                        </li>
+                                    @endif
+
+                            </ul>
+                        </li>
+                    @endif
+//student Sidebar
+   @if(userPermission(800))
+      <li>
+            <a href="#subMenuLessonPlan" data-toggle="collapse" aria-expanded="false"
+            class="dropdown-toggle"> <span class="flaticon-calendar-1"></span>
+                @lang('lang.lesson')
+            </a>
+
+            <ul class="collapse list-unstyled" id="subMenuLessonPlan">
+                 @if(userPermission(810))
+                    <li>
+                         <a href="{{route('lesson-student-lessonPlan')}}">Lesson plan</a>
+                    </li>
+                @endif
+                  @if(userPermission(815))
+                    <li>
+                         <a href="{{route('lesson-student-lessonPlan-overview')}}">Lesson plan overview</a>
+                    </li>
+                   @endif 
+            
+            </ul>
+     </li>
+     @endif
+
+//Parent Sidebar
+  @if(userPermission(97))
+    <li>
+         <a href="#subMenuLessonPlan" data-toggle="collapse" aria-expanded="false"    class="dropdown-toggle">
+            <span class="flaticon-calendar-1"></span>
+            @lang('lang.lesson')
+         </a>
+         <ul class="collapse list-unstyled" id="subMenuLessonPlan">
+            @foreach($childrens as $children) 
+             @if(userPermission(98))  
+                <li>
+                    <a href="{{route('lesson-parent-lessonPlan',[$children->id])}}"> {{$children->full_name}}-Lesson plan</a>
+                </li>
+                @endif
+
+                 @if(userPermission(99))
+                <li>
+                    <a href="{{route('lesson-parent-lessonPlan-overview',[$children->id])}}"> {{$children->full_name}}- Lesson plan overview</a>
+                </li>
+                @endif
+            @endforeach
+         </ul>
+    </li>
+    @endif
+
+//lesson Plan validate 
+
+    validateLssonPlan = () => {
+        var lesson = document.getElementById("select_lesson").value;
+        var topic = document.getElementById("select_topic").value;
+
+
+        var i = 0;
+        if (lesson == "") {
+            document.getElementById("lesson_error").innerHTML =
+                "Lesson field is required";
+            i++;
+        } else {
+            document.getElementById("lesson_error").innerHTML = "";
+        }
+        if (topic == "") {
+            document.getElementById("topic_error").innerHTML =
+                "Topic field is required";
+            i++;
+        } else {
+            document.getElementById("topic_error").innerHTML = "";
+        }
+
+        if (i > 0) {
+            return false;
+        }
+    };
+
+//language
+	    [19, 'lesson', 'Lesson', 'Lesson', 'পাঠ', 'Lesson'],
+            [19, 'plan', 'Plan', 'Plan', 'পরিকল্পনা', 'Plan'],
+            [19, 'sub', 'Sub', 'Sub', 'উপ', 'Sub'],
+            [19, 'lesson_plan', 'Lesson Plan', 'Lesson Plan', 'পাঠ পরিকল্পনা', 'Lesson Plan'], 
+            [19, 'lesson_plan_overview', 'Lesson Plan Overview', 'Lesson Plan Overview', 'পাঠ পরিকল্পনা বিবরণ', 'Lesson Plan Overview'], 
+            [19, 'sup_topic', 'Sup Topic', 'Sup Topic', 'উপ বিষয়', 'Sup Topic'], 
+            [19, 'topic', 'Topic', 'Topic', 'বিষয়', 'Topic'],
+            [19, 'overview', 'Overview', 'Overview', 'সংক্ষিপ্ত বিবরণ', 'Overview'],
+            [19, 'topic_overview', 'Topic Overview', 'Topic Overview', 'বিষয় বিবরণ', 'Topic Overview'], 
+            [19, 'progress', 'Progress', 'Progreso', 'অগ্রগতি', 'Progression'],
+            [19, 'upcoming', 'Upcoming', 'Upcoming', 'আসন্ন', 'Upcoming'],
+            [19, 'teaching', 'Teaching', 'Teaching', 'শিক্ষাদান', 'Teaching'],
+            [19, 'general', 'General', 'General', 'সাধারণ', 'General'],
+            [19, 'objectives', 'Objectives', 'Objectives', 'উদ্দেশ্য', 'Objectives'],
+            [19, 'knowledge', 'Knowledge', 'Knowledge', 'জ্ঞান', 'Knowledge'],
+            [19, 'comprehensive', 'Comprehensive', 'Comprehensive', 'বিস্তৃত', 'Comprehensive'],
+            [19, 'lecture', 'Lecture', 'Lecture', 'লেকচার', 'Lecture'],
+            [19, 'youtube', 'YouTube', 'YouTube', 'ইউটিউব', 'YouTube'],
+            [19, 'multiple', 'Multiple', 'Multiple', 'একাধিক', 'Multiple'],
+            [19, 'separate', 'Separate', 'Separate', 'পৃথক', 'Separate'],
+            [19, 'coma', 'Coma', 'Coma', 'কমা', 'Coma'],
+
+
+//infix permission already you have 
+//include footer.blade.php (backend) 
+<script src="{{asset('public/backEnd/')}}/js/lesson_plan.js"></script>

@@ -1,0 +1,21 @@
+{
+    "VideoWatch": {
+        "item_id": "30626608",
+
+        "migration": [
+            "2021_02_09_085146_create_infix_video_watches_table.php"
+        ],
+        "names": [
+            "infix_video_watches"
+        ],
+        "versions": [
+            "1.0"
+        ],
+        "url": [
+            "https://spondonit.com/contact"
+        ],
+        "notes": [
+            "This is Parent VideoWatch module for VideoWatch. Thanks for using."
+        ]
+    }
+}

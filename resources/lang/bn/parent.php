@@ -1,0 +1,22 @@
+<?php
+return [
+    "parent_dashboard" => "প্যারেন্ট ড্যাশবোর্ড",
+    "total_subject" => "মোট বিষয়",
+    "total_notice" => "মোট নোটিশ",
+    "total_exam" => "মোট এক্সডাম",
+    "total_online_exam" => "মোট অনলাইন এক্সাম",
+    "total_issued_book" => "মোট ইস্যুকৃত বই",
+    "total_pending_home_work" => "মোট পেন্ডিং হোমওয়ার্ক",
+    "total_attendance_in_current_month" => "বর্তমান মন্থর সর্বমোট অ্যাটেনডেন্স",
+    "pending_home_work" => "পেন্ডিং হোমওয়ার্ক",
+    "attendance_in_current_month" => "বর্তমান মন্থর মধ্যে সংযুক্ত করা হচ্ছে",
+    "Calendar" => "ক্যালেন্ডার",
+    "my_children" => "আমার বাচ্চারা",
+    "calendar" => "ক্যালেন্ডার",
+    "teachers" => "শিক্ষকরা",
+    "notice" => "নোটিশ",
+    "total_teachers" => "মোট শিক্ষক",
+    "exam" => "এক্সাম",
+    "online_exam" => "অনলাইন এক্সাম",
+    "issued_book" => "ইস্যুকৃত বই",
+    ];

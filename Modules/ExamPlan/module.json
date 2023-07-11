@@ -1,0 +1,13 @@
+{
+    "name": "ExamPlan",
+    "alias": "examplan",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ExamPlan\\Providers\\ExamPlanServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

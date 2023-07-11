@@ -1,0 +1,27 @@
+{
+    "Lesson": {
+        "migration": [
+            "2020_11_18_113808_create_sm_lessons_table.php",
+            "2020_11_18_121616_create_sm_lesson_details_table.php",
+            "2020_11_20_044018_create_sm_lesson_topics_table.php",
+            "2020_11_20_045211_create_sm_lesson_topic_details_table.php",
+            "2020_12_10_095530_create_lesson_planners_table.php"
+        ],
+        "names": [
+            "sm_lessons",
+            "sm_lesson_details",
+            "sm_lesson_topic_details",
+            "sm_lesson_topic_details",
+            "lesson_planners"
+        ],
+        "versions": [
+            "0.1"
+        ],
+        "url": [
+            "https://spondonit.com/contact"
+        ],
+        "notes": [
+            "This is Lesson Planner Module for manage module. Thanks for using."
+        ]
+    }
+}

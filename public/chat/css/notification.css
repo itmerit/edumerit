@@ -1,0 +1,160 @@
+/* line 168, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap {
+    background: #FFFFFF;
+    box-shadow: 0px 10px 15px rgba(6, 0, 8, 0.22);
+    border-radius: 10px;
+    position: absolute;
+    right: 0;
+    width: 350px;
+    transform: translateY(30px) translateX(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    z-index: 100;
+}
+
+@media (max-width: 575.98px) {
+    /* line 168, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+    .Menu_NOtification_Wrap {
+        width: 300px;
+        transform: translateY(30px) translateX(55px);
+    }
+}
+
+/* line 183, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(20px) translateX(20px);
+}
+
+@media (max-width: 575.98px) {
+    /* line 183, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+    .Menu_NOtification_Wrap.active {
+        transform: translateY(16px) translateX(55px);
+    }
+}
+
+/* line 191, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap .notification_Header {
+    padding: 25px 20px;
+    border-radius: 10px 10px 0px 0px;
+    background: linear-gradient(90deg, var(--gradient_1) 0%, #c738d8 100%);
+}
+
+/* line 195, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap .notification_Header h4 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+/* line 202, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap .Notification_body {
+    padding: 25px 20px;
+    height: 300px;
+    overflow: auto;
+}
+
+/* line 206, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap .Notification_body .single_notify {
+    margin-bottom: 15px;
+}
+
+/* line 208, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap .Notification_body .single_notify:last-child {
+    margin-bottom: 0;
+}
+
+/* line 211, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap .Notification_body .single_notify .notify_thumb {
+    margin-right: 15px;
+}
+
+/* line 213, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap .Notification_body .single_notify .notify_thumb img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+/* line 221, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap .Notification_body .single_notify .notify_content a h5 {
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* line 227, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap .Notification_body .single_notify .notify_content p {
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+/* line 236, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap .nofity_footer {
+    padding: 15px 20px;
+}
+
+/* line 239, G:/laragon/www/CRM_frontend/Admin_crm/public/frontend/scss/_common_grid_style.scss */
+.Menu_NOtification_Wrap .nofity_footer .submit_button a {
+    font-size: 12px;
+    color: #fff !important;
+}
+.chat_badge {
+    color: #ffffff;
+    border-radius: 20px;
+    font-size: 10px;
+    position: relative;
+    left: -11px;
+    top: -12px;
+    padding: 3px 4px !important;
+    max-width: 18px;
+    max-height: 18px;
+    box-shadow: none;
+    background: #9e35ed;
+}
+
+.chat-icon-size{
+    font-size: 1em;
+    color:#6c79af;
+}
+
+.chat-icon-size:hover{
+    color: #8e33f6!important;
+}
+
+.chat-icon-size-comment{
+    font-size: 1em;
+    color:#6c79af;
+}
+
+.chat-icon-size-comment:hover{
+    color: #8e33f6!important;
+}
+
+.chat-icon-size:active{
+    color: #8e33f6!important;
+}
+.chat-quick-link {
+    padding: 5px;
+    font-size: 1.25em;
+    cursor: pointer;
+    color:#6c79af;
+}
+.chat-quick-link:hover{
+    color: #8e33f6!important;
+}
+
+.chat-quick-link:active{
+    color: #8e33f6!important;
+}
+
+.flaticon-notification:before {
+    margin-left: 0!important;
+}
+.scroll_notification_list{
+    position: relative;
+}
