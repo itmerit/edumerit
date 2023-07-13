@@ -251,20 +251,20 @@ class User extends Authenticatable
             if($setting){
                 $expired_time = Carbon::now()->addSeconds($setting->expired_time);
             }
-            
+
             $code = rand(1000, 9999);
             $value = \Modules\TwoFactorAuth\Entities\UserOtpCode::where('user_id',auth()->user()->id)->first();
             if(is_null($value)){
                 $value = new \Modules\TwoFactorAuth\Entities\UserOtpCode();
             }
-                $value->user_id = auth()->user()->id; 
-                $value->otp_code = $code ; 
-                $value->expired_time = $expired_time ; 
-                $value->save() ; 
-            
+                $value->user_id = auth()->user()->id;
+                $value->otp_code = $code ;
+                $value->expired_time = $expired_time ;
+                $value->save() ;
+
             $receiver_name = auth()->user()->full_name;
             $reciver_email = auth()->user()->email;
-            $receiver_No = auth()->user()->phone;
+            $receiver_No = auth()->user()->phone_number ?? auth()->user()->username;
             $sender_email= generalSetting()->email;
 
             $compact['first_name'] = auth()->user()->first_name;
@@ -283,7 +283,7 @@ class User extends Authenticatable
             if($setting->via_email){
                 @send_mail($reciver_email, $receiver_name, 'two_factor_code', $compact);
             }
-    
+
         } catch (Exception $e) {
             Log::info($e->getMessage());
         }
@@ -294,5 +294,5 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\DueFeesLoginPrevent', 'id', 'user_id');
     }
 
-    
+
 }
