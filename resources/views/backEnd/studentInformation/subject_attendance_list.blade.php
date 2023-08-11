@@ -262,6 +262,7 @@
                                         <th>@lang('student.student_name')</th>
                                         <th>@lang('student.behaviour')</th>
                                         <th>@lang('student.attendance')</th>
+                                        <th>@lang('student.grade')</th>
                                         <th>@lang('common.note')</th>
                                     </tr>
                                 </thead>
@@ -292,15 +293,15 @@
                                             <td>
                                                 <div class="d-flex radio-btn-flex">
                                                     <div class="mr-20">
-                                                        <input type="radio" name="attendance[{{$student->id}}][behaviour_type]" id="behaviourR{{$student->id}}" value="R" class="common-radio attendanceP subject_attendance_type" {{ $student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "" ? 'checked' :'') : ''}}>
+                                                        <input type="radio" name="attendance[{{$student->id}}][behaviour_type]" id="behaviourR{{$student->id}}" value="R" class="common-radio attendanceP subject_attendance_type" {{ $student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->behaviour_type == "R" ? 'checked' :'') : ''}}>
                                                         <label for="behaviourR{{$student->id}}" style="color: red;">Red</label>
                                                     </div>
                                                     <div class="mr-20">
-                                                        <input type="radio" name="attendance[{{$student->id}}][behaviour_type]" id="behaviourY{{$student->id}}" value="Y" class="common-radio subject_attendance_type" {{ $student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "L" ? 'checked' :''):'checked'}}>
+                                                        <input type="radio" name="attendance[{{$student->id}}][behaviour_type]" id="behaviourY{{$student->id}}" value="Y" class="common-radio subject_attendance_type" {{ $student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->behaviour_type == "Y" ? 'checked' :''):'checked'}}>
                                                         <label for="behaviourY{{$student->id}}" style="color: #ebdb34;">Yellow</label>
                                                     </div>
                                                     <div class="mr-20">
-                                                        <input type="radio" name="attendance[{{$student->id}}][behaviour_type]" id="behaviourG{{$student->id}}" value="G" class="common-radio subject_attendance_type" {{$student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "A" ? 'checked' :''):''}}>
+                                                        <input type="radio" name="attendance[{{$student->id}}][behaviour_type]" id="behaviourG{{$student->id}}" value="G" class="common-radio subject_attendance_type" {{$student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->behaviour_type == "G" ? 'checked' :''):''}}>
                                                         <label for="behaviourG{{$student->id}}" style="color: green;">Green</label>
                                                     </div>
                                                 </div>
@@ -325,6 +326,11 @@
 {{--                                                        <input type="radio" name="attendance[{{$student->id}}][attendance_type]" id="attendanceH{{$student->id}}" value="F" class="common-radio subject_attendance_type" {{$student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "F" ? 'checked' :'') : ''}}>--}}
 {{--                                                        <label for="attendanceH{{$student->id}}">@lang('student.half_day')</label>--}}
 {{--                                                    </div>--}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="primary_input">
+                                                    <input class="primary_input_field form-control note_{{$student->id}}" type="number" step="1" name="attendance[{{$student->id}}][grade]" value="{{$student->studentDetail->DateSubjectWiseAttendances !=null ? $student->studentDetail->DateSubjectWiseAttendances->grades :''}}">
                                                 </div>
                                             </td>
                                             <td>

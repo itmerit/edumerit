@@ -62,7 +62,7 @@ class SmSubjectAttendanceController extends Controller
                 ->get();
 
             $students = StudentRecord::with('studentDetail', 'studentDetail.DateSubjectWiseAttendances')->where('class_id', $input['class'])->where('section_id', $input['section'])->where('academic_id', getAcademicId())->where('school_id', Auth::user()->school_id)->get();
-           
+
             if (moduleStatusCheck('University')) {
                 $data['un_semester_label_id'] = $request->un_semester_label_id;
                 $interface = App::make(UnCommonRepositoryInterface::class);
@@ -88,14 +88,14 @@ class SmSubjectAttendanceController extends Controller
             }
 
             $search_info['date'] = $input['attendance_date'];
-            
+
             if (generalSetting()->attendance_layout==1) {
                 return view('backEnd.studentInformation.subject_attendance_list', compact('classes', 'subjects', 'sections', 'students', 'attendance_type', 'search_info', 'input'))->with($data);
             } else {
                 return view('backEnd.studentInformation.subject_attendance_list2', compact('classes', 'subjects', 'sections', 'students', 'attendance_type', 'search_info', 'input'))->with($data);
             }
 
-            
+
         }catch (\Exception $e) {
              ;
             Toastr::error('Operation Failed', 'Failed');
@@ -129,6 +129,8 @@ class SmSubjectAttendanceController extends Controller
                 $attendance->class_id = gv($student, 'class');
                 $attendance->section_id = gv($student, 'section');
                 $attendance->attendance_type = gv($student, 'attendance_type');
+                $attendance->behaviour_type = gv($student, 'behaviour_type');
+                $attendance->grade = gv($student, 'grade');
                 $attendance->notes = gv($student, 'note');
                 $attendance->school_id = Auth::user()->school_id;
                 $attendance->academic_id = getAcademicId();
@@ -448,7 +450,7 @@ class SmSubjectAttendanceController extends Controller
             $assign_subjects = SmAssignSubject::where('class_id',$class_id)
                 ->where('section_id',$section_id)
                 ->first();
-                
+
             if(!$assign_subjects){
                 Toastr::warning('Subject Not Assign', 'Failed');
                 return redirect()->back();
@@ -474,7 +476,7 @@ class SmSubjectAttendanceController extends Controller
             }
             if ($section_id != "") {
                 $student_records->where('section_id', $section_id);
-            }  
+            }
             $student_records = $student_records->get();
             $attendances = [];
             foreach ($student_records as $record) {
@@ -671,7 +673,7 @@ class SmSubjectAttendanceController extends Controller
             }
             if ($section_id != "") {
                 $student_records->where('section_id', $section_id);
-            }  
+            }
             $student_records = $student_records->get();
             $attendances = [];
             foreach ($student_records as $record) {

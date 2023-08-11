@@ -49,7 +49,7 @@
                             }
 
                             $attendances = $student_detail->studentAttendances->where('academic_id', generalSetting()->session_id);
-                            
+
                         @endphp
                     </div>
                 </div>
@@ -261,7 +261,7 @@
                                                     @php
                                                         $used = [];
                                                         $tr = [];
-                                                        
+
                                                     @endphp
                                                     @foreach ($sm_weekends as $sm_weekend)
                                                         @php
@@ -289,12 +289,12 @@
                                                                     $tr[$i][$sm_weekend->name][$loop->index]['is_break'] = $routine->is_break;
                                                                     $used[] = $routine->id;
                                                                 }
-                                                                
+
                                                             @endphp
                                                         @endforeach
 
                                                         @php
-                                                            
+
                                                             $i++;
                                                         @endphp
                                                     @endforeach
@@ -405,7 +405,7 @@
                                                             <th>@lang('exam.time')</th>
                                                             <th>@lang('exam.duration')</th>
                                                             <th>@lang('exam.room')</th>
-                        
+
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -419,22 +419,22 @@
                                                                 </td>
                                                                 <td>{{ $exam_routine->class ? $exam_routine->class->class_name :'' }} {{ $exam_routine->section ? '('. $exam_routine->section->section_name .')':'' }}</td>
                                                                 <td>{{ $exam_routine->teacher ? $exam_routine->teacher->full_name :'' }}</td>
-                        
+
                                                                 <td> {{ date('h:i A', strtotime(@$exam_routine->start_time))  }}
                                                                     - {{ date('h:i A', strtotime(@$exam_routine->end_time))  }} </td>
                                                                 <td>
                                                                     @php
                                                                         $duration=strtotime($exam_routine->end_time)-strtotime($exam_routine->start_time);
                                                                     @endphp
-                        
+
                                                                     {{ timeCalculation($duration)}}
                                                                 </td>
-                        
+
                                                                 <td>{{ $exam_routine->classRoom ? $exam_routine->classRoom->room_no :''  }}</td>
-                        
+
                                                             </tr>
                                                         @endforeach
-                        
+
                                                         </tbody>
                                                     </table>
                                                 </x-table>
