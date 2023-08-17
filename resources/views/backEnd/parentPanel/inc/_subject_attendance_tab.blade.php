@@ -79,7 +79,8 @@
                     <div class="row mt-40">
                         <div class="col-lg-6 no-gutters">
                             <div class="main-title mb-30">
-                                <h3 class="mb-0">@lang('student.student_attendance_report')
+{{--                                <h3 class="mb-0">@lang('student.student_attendance_report')--}}
+                                <h3 class="mb-0">Student Attendance and Grades Report
                                     <small>
                                         <span class="text-success">P:<span id="total_present"></span></span>
                                         <span class="text-warning">L:<span id="total_late"></span></span>
@@ -287,6 +288,26 @@
                                                         }
                                                     @endphp
                                                 @endif
+                                            </td>
+                                        @endfor
+                                    </tr>
+                                    <tr>
+                                        <!-- Add data cells for the new row -->
+                                        <td colspan="8">Daily Subject Grades</td>
+                                        <!-- Calculate and add the subject grades for each day -->
+{{--                                        @dd($subjectAttendance);--}}
+
+                                        @for ($i = 1; $i <= $days; $i++)
+                                            <td>
+                                                @foreach ($subjectAttendance as $attendance)
+                                                    @if (date('j', strtotime($attendance->attendance_date)) == $i)
+                                                        @if(!is_null($attendance->grade))
+                                                            {{ $attendance->subject->subject_name . '-' . $attendance->grade }} <br>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                                <!-- display daily subject and grade for each day -->
+
                                             </td>
                                         @endfor
                                     </tr>
