@@ -37,7 +37,7 @@ class SmClassRoomController extends Controller
         }
     }
 
- 
+
     public function create()
     {
         //
@@ -50,6 +50,7 @@ class SmClassRoomController extends Controller
             $class_room = new SmClassRoom();
             $class_room->room_no = $request->room_no;
             $class_room->capacity = $request->capacity;
+            $class_room->camera_link = $request->camera_link;
             $class_room->school_id = Auth::user()->school_id;
             if(moduleStatusCheck('University')){
                 $class_room->un_academic_id = getAcademicId();
@@ -98,10 +99,11 @@ class SmClassRoomController extends Controller
             $class_room = SmClassRoom::find($request->id);
             $class_room->room_no = $request->room_no;
             $class_room->capacity = $request->capacity;
+            $class_room->camera_link = $request->camera_link;
             $result = $class_room->save();
             Toastr::success('Operation successful', 'Success');
             return redirect('class-room');
-            
+
         } catch (\Exception $e) {
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
@@ -123,7 +125,7 @@ class SmClassRoomController extends Controller
                         } else {
                             return ApiBaseMethod::sendError('Something went wrong, please try again.');
                         }
-                    } 
+                    }
                     Toastr::success('Operation successful', 'Success');
                     return redirect()->back();
                 } else {

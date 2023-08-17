@@ -94,7 +94,7 @@
                                                     @php
                                                         $used = [];
                                                         $tr = [];
-                                                        
+
                                                     @endphp
                                                     @foreach ($sm_weekends as $sm_weekend)
                                                         @php
@@ -122,12 +122,12 @@
                                                                     $tr[$i][$sm_weekend->name][$loop->index]['is_break'] = $routine->is_break;
                                                                     $used[] = $routine->id;
                                                                 }
-                                                                
+
                                                             @endphp
                                                         @endforeach
 
                                                         @php
-                                                            
+
                                                             $i++;
                                                         @endphp
                                                     @endforeach
@@ -161,15 +161,19 @@
                                                                                     </strong>
                                                                                     ({{ $classes[$i]['subject_code'] }})
                                                                                     <br> </span>
+                                                                                @if ($classes[$i]['teacher'])
+                                                                                    <span class="">
+                                                                                        {{ $classes[$i]['teacher'] }} <br>
+                                                                                    </span>
+                                                                                @endif
                                                                                 @if ($classes[$i]['class_room'])
                                                                                     <span class="">
                                                                                         <strong>@lang('academics.room') :</strong>
                                                                                         {{ $classes[$i]['class_room'] }}
-                                                                                        <br> </span>
-                                                                                @endif
-                                                                                @if ($classes[$i]['teacher'])
-                                                                                    <span class="">
-                                                                                        {{ $classes[$i]['teacher'] }} <br>
+                                                                                        <br>
+                                                                                    <a href="#" class="camera-link">
+                                                                                        <i class="fa fa-video-camera"></i> Camera </a>
+{{--                                                                                    <a href="{{ $classes[$i]['camera_link'] }}" class="camera-link">Camera</a>--}}
                                                                                     </span>
                                                                                 @endif
                                                                             @endif

@@ -1,5 +1,5 @@
 @extends('backEnd.master')
-@section('title') 
+@section('title')
 @lang('academics.class_room')
 @endsection
 @section('mainContent')
@@ -40,14 +40,14 @@
                                  @else
                                     @lang('academics.add_class_room')
                                 @endif
-                               
+
                             </h3>
                         </div>
                         @if(isset($class_room))
                         {{ Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => array('class-room-update',@$class_room->id), 'method' => 'PUT']) }}
                         @else
                         @if(userPermission("class-room-store"))
-           
+
                         {{ Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'class-room', 'method' => 'POST']) }}
                         @endif
                         @endif
@@ -56,13 +56,13 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <input type="hidden" name="url" id="url" value="{{URL::to('/')}}">
-                                        
+
                                         <div class="primary_input">
                                             <label class="primary_input_label" for="">@lang('academics.room_no') <span class="text-danger"> *</span></label>
                                             <input class="primary_input_field form-control{{ $errors->has('room_no') ? ' is-invalid' : '' }}" type="text" name="room_no" autocomplete="off" value="{{isset($class_room)? $class_room->room_no: old('room_no')}}">
                                             <input type="hidden" name="id" value="{{isset($class_room)? $class_room->id: ''}}">
-                                           
-                                            
+
+
                                             @if ($errors->has('room_no'))
                                                 <span class="text-danger" >
                                                     {{ $errors->first('room_no') }}
@@ -73,12 +73,12 @@
                                 </div>
                                 <div class="row mt-15">
                                     <div class="col-lg-12">
-                                        
+
                                          <div class="primary_input">
                                             <label class="primary_input_label" for="">@lang('academics.capacity') <span class="text-danger"> *</span></label>
                                             <input oninput="numberCheckWithDot(this)" class="primary_input_field form-control{{ $errors->has('capacity') ? ' is-invalid' : '' }}" type="text" name="capacity" autocomplete="off" value="{{isset($class_room)? $class_room->capacity: old('capacity')}}">
-                                           
-                                            
+
+
                                             @if ($errors->has('capacity'))
                                                 <span class="text-danger" >
                                                     {{ $errors->first('capacity') }}
@@ -87,7 +87,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                @php 
+                                <div class="row mt-15">
+                                    <div class="col-lg-12">
+                                        <div class="primary_input">
+                                            <label class="primary_input_label" for="">Camera link <span class="text-danger"> </span></label>
+                                            <input class="primary_input_field form-control{{ $errors->has('camera_link') ? ' is-invalid' : '' }}" type="text" name="camera_link" autocomplete="off" value="{{isset($class_room)? $class_room->camera_link: old('camera_link')}}">
+                                            @if ($errors->has('camera_link'))
+                                                <span class="text-danger" >
+                                                    {{ $errors->first('camera_link') }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                @php
                                   $tooltip = "";
                                   if(userPermission("class-room-store")){
                                         $tooltip = "";
@@ -105,7 +118,7 @@
                                                 @lang('academics.update_class_room')
                                             @else
                                                 @lang('academics.save_class_room')
-                                            @endif                                           
+                                            @endif
 
                                         </button>
                                     </div>
@@ -128,15 +141,16 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        
+
                         <x-table>
                             <table id="table_id" class="table" cellspacing="0" width="100%">
 
                                 <thead>
-                                   
+
                                     <tr>
                                         <th>@lang('academics.room_no')</th>
                                         <th>@lang('academics.capacity')</th>
+                                        <th>Camera Link</th>
                                         <th>@lang('common.action')</th>
                                     </tr>
                                 </thead>
@@ -145,7 +159,8 @@
                                     <tr>
                                         <td valign="top">{{ @$class_room->room_no}}</td>
                                         <td class="pl-4" valign="top">{{ @$class_room->capacity}}</td>
-                                        
+                                        <td class="pl-4" valign="top">{{ @$class_room->camera_link}}</td>
+
                                         <td valign="top">
                                             <x-drop-down>
                                                     @if(userPermission("class-room-edit"))
@@ -164,12 +179,12 @@
                                                     <h4 class="modal-title">@lang('academics.delete_class_room')</h4>
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
-    
+
                                                 <div class="modal-body">
                                                     <div class="text-center">
                                                         <h4>@lang('common.are_you_sure_to_delete')</h4>
                                                     </div>
-    
+
                                                     <div class="mt-40 d-flex justify-content-between">
                                                         <button type="button" class="primary-btn tr-bg" data-dismiss="modal">@lang('common.cancel')</button>
                                                         {{ Form::open(['route' => array('class-room-delete',$class_room->id), 'method' => 'DELETE', 'enctype' => 'multipart/form-data']) }}
@@ -177,7 +192,7 @@
                                                          {{ Form::close() }}
                                                     </div>
                                                 </div>
-    
+
                                             </div>
                                         </div>
                                     </div>
