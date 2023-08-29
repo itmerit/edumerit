@@ -52,71 +52,70 @@ class SmFrontendController extends Controller
 
     public function index()
     {
-        return redirect()->away('https://iftixormaktabi.uz');
 
-//        try {
-//
-//            $setting = SmGeneralSettings::where('school_id', app('school')->id)->first();
-//            $permisions = SmFrontendPersmission::where('parent_id', 1)->where('is_published', 1)->get();
-//            $per = [];
-//            foreach ($permisions as $permision) {
-//                $per[$permision->name] = 1;
-//            }
-//
-//            $data = [
-//                'setting' => $setting,
-//                'per' => $per,
-//            ];
-//
-//            $home_data = [
-//                'exams' => SmExam::where('school_id', app('school')->id)->get(),
-//                'news' => SmNews::where('school_id', app('school')->id)->orderBy('order', 'asc')->limit(3)->get(),
-//                'testimonial' => SmTestimonial::where('school_id', app('school')->id)->get(),
-//                'academics' => SmCourse::where('school_id', app('school')->id)->orderBy('id', 'asc')->limit(3)->get(),
-//                'exam_types' => SmExamType::where('school_id', app('school')->id)->get(),
-//                'events' => SmEvent::where('school_id', app('school')->id)->get(),
-//                'notice_board' => SmNoticeBoard::where('school_id', app('school')->id)->where('is_published', 1)->orderBy('created_at', 'DESC')->take(3)->get(),
-//                'classes' => SmClass::where('school_id', app('school')->id)->where('active_status', 1)->get(),
-//                'subjects' => SmSubject::where('school_id', app('school')->id)->where('active_status', 1)->get(),
-//                'section' => SmSection::where('school_id', app('school')->id)->where('active_status', 1)->get(),
-//                'homePage' => SmHomePageSetting::where('school_id', app('school')->id)->first(),
-//            ];
-//
-//
-//            $url = explode('/', $setting->website_url);
-//
-//
-//
-//
-//
-//            if ($setting->website_btn == 0) {
-//                if(auth()->check()){
-//                    return redirect('dashboard');
-//                }
-//                return redirect('login');
-//            } else {
-//
-//                if ($setting->website_url == '') {
-//                    return view('frontEnd.home.light_home')->with(array_merge($data, $home_data));
-//
-//                } elseif ($url[max(array_keys($url))] == 'home') {
-//
-//
-//                    return view('frontEnd.home.light_home')->with(array_merge($data, $home_data));
-//
-//                } else if(rtrim($setting->website_url, '/') == url()->current()) {
-//                    return view('frontEnd.home.light_home')->with(array_merge($data, $home_data));
-//                 } else {
-//                    $url = $setting->website_url;
-//                    return Redirect::to($url);
-//                }
-//            }
-//
-//
-//        } catch (\Exception $e) {
-//            Toastr::error('Operation Failed', 'Failed');
-//            return redirect()->back();
-//        }
+        try {
+
+            $setting = SmGeneralSettings::where('school_id', app('school')->id)->first();
+            $permisions = SmFrontendPersmission::where('parent_id', 1)->where('is_published', 1)->get();
+            $per = [];
+            foreach ($permisions as $permision) {
+                $per[$permision->name] = 1;
+            }
+
+            $data = [
+                'setting' => $setting,
+                'per' => $per,
+            ];
+
+            $home_data = [
+                'exams' => SmExam::where('school_id', app('school')->id)->get(),
+                'news' => SmNews::where('school_id', app('school')->id)->orderBy('order', 'asc')->limit(3)->get(),
+                'testimonial' => SmTestimonial::where('school_id', app('school')->id)->get(),
+                'academics' => SmCourse::where('school_id', app('school')->id)->orderBy('id', 'asc')->limit(3)->get(),
+                'exam_types' => SmExamType::where('school_id', app('school')->id)->get(),
+                'events' => SmEvent::where('school_id', app('school')->id)->get(),
+                'notice_board' => SmNoticeBoard::where('school_id', app('school')->id)->where('is_published', 1)->orderBy('created_at', 'DESC')->take(3)->get(),
+                'classes' => SmClass::where('school_id', app('school')->id)->where('active_status', 1)->get(),
+                'subjects' => SmSubject::where('school_id', app('school')->id)->where('active_status', 1)->get(),
+                'section' => SmSection::where('school_id', app('school')->id)->where('active_status', 1)->get(),
+                'homePage' => SmHomePageSetting::where('school_id', app('school')->id)->first(),
+            ];
+
+
+            $url = explode('/', $setting->website_url);
+
+
+
+
+
+            if ($setting->website_btn == 0) {
+                if(auth()->check()){
+                    return redirect('dashboard');
+                }
+                return redirect('login');
+            } else {
+
+                if ($setting->website_url == '') {
+                    return view('frontEnd.home.light_home')->with(array_merge($data, $home_data));
+
+                } elseif ($url[max(array_keys($url))] == 'home') {
+
+
+                    return view('frontEnd.home.light_home')->with(array_merge($data, $home_data));
+
+                } else if(rtrim($setting->website_url, '/') == url()->current()) {
+                    return view('frontEnd.home.light_home')->with(array_merge($data, $home_data));
+                 } else {
+                    $url = $setting->website_url;
+                    return Redirect::to($url);
+                }
+            }
+
+
+        } catch (\Exception $e) {
+            Toastr::error('Operation Failed', 'Failed');
+            return redirect()->back();
+        }
     }
 
     public function about()
