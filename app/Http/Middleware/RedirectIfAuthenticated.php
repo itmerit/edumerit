@@ -36,6 +36,8 @@ class RedirectIfAuthenticated
             else{
                 return redirect()->back();
             }
+        } elseif(!Auth::guard($guard)->check()) {
+            return redirect()->route('https://iftixormaktabi.uz');
         }
 
         return $next($request);
