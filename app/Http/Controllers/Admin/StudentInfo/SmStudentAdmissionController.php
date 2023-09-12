@@ -1523,7 +1523,7 @@ class SmStudentAdmissionController extends Controller
                                         $parent->guardians_occupation = $value->guardian_occupation;
                                         $parent->guardians_address = $value->guardian_address;
                                         $parent->guardians_email = $value->guardian_email;
-                                        $parent->school_id = Auth::user()->l_id;
+                                        $parent->school_id = Auth::user()->school_id;
                                         $parent->academic_id = $request->session;
 
                                         $parent->created_at = $academic_year->year . '-01-01 12:00:00';
