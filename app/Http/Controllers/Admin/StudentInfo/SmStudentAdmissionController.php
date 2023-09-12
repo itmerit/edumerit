@@ -94,7 +94,7 @@ class SmStudentAdmissionController extends Controller
 
                 }
             }
-           
+
             $data = $this->loadData();
             $data['max_admission_id'] = SmStudent::where('school_id', Auth::user()->school_id)->max('admission_no');
             $data['max_roll_id'] = SmStudent::where('school_id', Auth::user()->school_id)->max('roll_no');
@@ -114,7 +114,7 @@ class SmStudentAdmissionController extends Controller
     {
         // return $request->all();
         $validator = Validator::make($request->all(), $this->generateValidateRules("student_registration"));
-        
+
         if ($validator->fails()) {
             $errors = $validator->errors();
             foreach ($errors->all() as $error) {
@@ -199,7 +199,7 @@ class SmStudentAdmissionController extends Controller
         $staff =  $staffParent->staff($guardians_email, $guardians_phone, $request->staff_parent);
         $exitStaffParent = $staffParent->parent($guardians_email, $guardians_phone);
         // end
-        
+
         $destination = 'public/uploads/student/document/';
         $student_file_destination = 'public/uploads/student/';
 
@@ -221,9 +221,9 @@ class SmStudentAdmissionController extends Controller
             } else {
                 $academic_year = SmAcademicYear::find($request->session);
             }
-           
+
             $currentLanguage = userLanguage();
-            
+
 
             $user_stu = new User();
             $user_stu->role_id = 2;
@@ -231,7 +231,8 @@ class SmStudentAdmissionController extends Controller
             $user_stu->username = $request->phone_number ?: ($request->email_address ?: $request->admission_number);
             $user_stu->email = $request->email_address;
             $user_stu->phone_number = $request->phone_number;
-            $user_stu->password = Hash::make(123456);
+            $user_stu->password = Hash::make(substr(str_replace(' ', '', $guardians_phone), -7));
+
             $user_stu->language = $currentLanguage;
             $user_stu->school_id = Auth::user()->school_id;
             $user_stu->created_at = $academic_year->year . '-01-01 12:00:00';
@@ -242,8 +243,8 @@ class SmStudentAdmissionController extends Controller
                     $userIdParent = null;
                     $hasParent = null;
                 if ($request->filled('guardians_phone') || $request->filled('guardians_email')) {
-                    
-                    if (!$staff) {  
+
+                    if (!$staff) {
                         $user_parent = new User();
                         $user_parent->role_id = 3;
                         $user_parent->username = $guardians_phone ? $guardians_phone : $guardians_email;
@@ -253,7 +254,8 @@ class SmStudentAdmissionController extends Controller
                         }
                         $user_parent->email = $guardians_email;
                         $user_parent->phone_number = $guardians_phone;
-                        $user_parent->password = Hash::make(123456);
+                        $user_parent->password = Hash::make(substr(str_replace(' ', '', $guardians_phone), -7));
+
                         $user_parent->language = $currentLanguage;
                         $user_parent->school_id = Auth::user()->school_id;
                         $user_parent->created_at = $academic_year->year . '-01-01 12:00:00';
@@ -262,10 +264,10 @@ class SmStudentAdmissionController extends Controller
                     }
                     $userIdParent = $staff ? $staff->user_id: $user_parent->id;
                 }
-                
+
 
                 if ($parentInfo && !$request->staff_parent) {
-                    
+
                     $parent = new SmParent();
                     $parent->user_id = $staff ? $staff->user_id : $userIdParent;
                     $parent->fathers_name = $request->fathers_name;
@@ -441,8 +443,8 @@ class SmStudentAdmissionController extends Controller
                 Toastr::success('Operation successful', 'Success');
                 return redirect()->back();
             }
-        } catch (\Exception $e) {  
-            DB::rollback();          
+        } catch (\Exception $e) {
+            DB::rollback();
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
         }
@@ -530,7 +532,7 @@ class SmStudentAdmissionController extends Controller
             } elseif (($request->sibling_id == 2 || $request->sibling_id == 1) && $request->parent_id != "") {
             } else {
                 if ($parentInfo) {
-                   
+
                     if (($request->sibling_id == 0 || $request->sibling_id == 1) && $request->parent_id == "") {
                         // when find parent
                         if ($parentUserId) {
@@ -647,7 +649,7 @@ class SmStudentAdmissionController extends Controller
                 //Custom Field Start
                 $student->custom_field_form_name = "student_registration";
                 $student->custom_field = json_encode($dataImage, true);
-                //Custom Field End               
+                //Custom Field End
             }
             if (moduleStatusCheck('Lead') == true) {
                 $student->lead_city_id = $request->lead_city;
@@ -766,7 +768,7 @@ class SmStudentAdmissionController extends Controller
                 $custom_field_values = null;
             }
             $sessions = SmAcademicYear::get(['id', 'year', 'title']);
-            
+
             $now = Carbon::now();
             $year = $now->year;
             $month  = $now->month ;
@@ -799,7 +801,7 @@ class SmStudentAdmissionController extends Controller
                                                             'id'=>$item->id,
                                                             'name'=>$item->name,
                                                             'title'=>$item->semesterDetails->name .'['. $item->academicYearDetails->name .'] '. $item->name,
-                                                        ]; 
+                                                        ];
                                                     });
                 }
                 $student_id = $student_detail->id;
@@ -947,7 +949,7 @@ class SmStudentAdmissionController extends Controller
             ]);
         }
         if (generalSetting()->multiple_roll == 0 && $request->roll_number) {
-           
+
             StudentRecord::where('student_id', $request->student_id)
             ->where('school_id', auth()->user()->school_id)
             ->when(moduleStatusCheck('University'), function ($query) {
@@ -957,8 +959,8 @@ class SmStudentAdmissionController extends Controller
             })->update([
                     'roll_no' => $request->roll_number,
                 ]);
-        } 
-       
+        }
+
         if ($request->record_id) {
             $studentRecord = StudentRecord::with('studentDetail')->find($request->record_id);
             $groups = \Modules\Chat\Entities\Group::where([
@@ -1004,9 +1006,9 @@ class SmStudentAdmissionController extends Controller
         }
         $studentRecord->school_id = Auth::user()->school_id;
         $studentRecord->academic_id = $request->session;
-       
+
         $studentRecord->save();
-       
+
         if (moduleStatusCheck('University')) {
             $subjectIds = [];
             $this->assignSubjectStudent($studentRecord, $subjectIds, $pre_record);
@@ -1056,7 +1058,7 @@ class SmStudentAdmissionController extends Controller
             'session_id' => $data['record']->un_session_id,
             'department_id' => $data['record']->un_department_id,
             'faculty_id' => $data['record']->un_faculty_id,
-            
+
         ];
 
         $data['sessions'] = SmAcademicYear::get(['id', 'year', 'title']);
@@ -1075,7 +1077,7 @@ class SmStudentAdmissionController extends Controller
     public function recordUpdate(Request $request)
     {
         try {
-            
+
             $exitRoll = null;
             if (moduleStatusCheck('University')) {
                 $studentRecord = StudentRecord::where('un_faculty_id', $request->un_faculty_id)
@@ -1144,7 +1146,7 @@ class SmStudentAdmissionController extends Controller
 
     public function assignSubjectStudent($studentRecord, $subjectIds = null, $pre_record = null)
     {
-      
+
         if (!$studentRecord) {
             return false ;
         }
@@ -1154,7 +1156,7 @@ class SmStudentAdmissionController extends Controller
             ->get()->map(function ($item, $key) {
                 return [
                     'un_subject_id' => $item->id
-                   
+
                 ];
             });
         } else {
@@ -1165,7 +1167,7 @@ class SmStudentAdmissionController extends Controller
                 ];
             });
         }
-        
+
         if ($assignSubjects) {
             foreach ($assignSubjects as $subject) {
                 $studentSubject = new UnSubjectAssignStudent;
@@ -1180,7 +1182,7 @@ class SmStudentAdmissionController extends Controller
                     $this->assignSubjectFees($studentRecord->id, $subject['un_subject_id'], $studentRecord->un_semester_label_id);
                    }
             }
-            $have_credit = $studentRecord->student->feesCredits->sum('amount'); 
+            $have_credit = $studentRecord->student->feesCredits->sum('amount');
             if( $have_credit){
                 $this->adjustCreditWithFees($studentRecord->id);
             }
@@ -1223,11 +1225,11 @@ class SmStudentAdmissionController extends Controller
             ->where('student_id', $request->student_id)
             ->first();
             $type = $request->type ? 'delete' : 'disable';
-          
+
             $studentMultiRecordController = new StudentMultiRecordController();
             $studentMultiRecordController->deleteRecordCondition($record->student_id, $record->id, $type);
             //code...
-   
+
             if ($record && $type == 'delete') {
                 $groups = \Modules\Chat\Entities\Group::where([
                     'class_id' => $record->class_id,
@@ -1243,10 +1245,10 @@ class SmStudentAdmissionController extends Controller
                         }
                     }
                 }
-              
+
                 $record->delete();
             }
-            
+
             Toastr::success('Operation successful', 'Success');
             return redirect()->back();
         } catch (\Throwable $th) {
@@ -1433,7 +1435,7 @@ class SmStudentAdmissionController extends Controller
 
                             }
 
-                            $academic_year = moduleStatusCheck('University') 
+                            $academic_year = moduleStatusCheck('University')
                             ? UnAcademicYear::find($request->un_session_id) : SmAcademicYear::find($request->session);
 
 
@@ -1444,7 +1446,7 @@ class SmStudentAdmissionController extends Controller
                             $user_stu->email = $value->email;
                             $user_stu->phone_number = $value->mobile ?? null;
                             $user_stu->school_id = Auth::user()->school_id;
-                            $user_stu->password = Hash::make(123456);
+                            $user_stu->password = Hash::make(substr(str_replace(' ', '', $value->guardian_phone), -7));
                             $user_stu->created_at = $academic_year->year . '-01-01 12:00:00';
                             $user_stu->save();
 
@@ -1471,7 +1473,7 @@ class SmStudentAdmissionController extends Controller
 
                                     $user_parent->email = $value->guardian_email;
 
-                                    $user_parent->password = Hash::make(123456);
+                                    $user_parent->password = Hash::make(substr(str_replace(' ', '', $value->guardian_phone), -7));
                                     $user_parent->school_id = Auth::user()->school_id;
 
                                     $user_parent->created_at = $academic_year->year . '-01-01 12:00:00';
@@ -1508,7 +1510,7 @@ class SmStudentAdmissionController extends Controller
                                         }
                                         $parent->guardians_relation = $relationFull;
                                         $parent->relation = $relation;
-                                        
+
                                         $parent->user_id = $userIdParent;
                                         $parent->fathers_name = $value->father_name;
                                         $parent->fathers_mobile = $value->father_phone;
@@ -1521,7 +1523,7 @@ class SmStudentAdmissionController extends Controller
                                         $parent->guardians_occupation = $value->guardian_occupation;
                                         $parent->guardians_address = $value->guardian_address;
                                         $parent->guardians_email = $value->guardian_email;
-                                        $parent->school_id = Auth::user()->school_id;
+                                        $parent->school_id = Auth::user()->l_id;
                                         $parent->academic_id = $request->session;
 
                                         $parent->created_at = $academic_year->year . '-01-01 12:00:00';
@@ -1567,7 +1569,7 @@ class SmStudentAdmissionController extends Controller
                                         $student->school_id = Auth::user()->school_id;
                                         $student->academic_id = $request->session;
                                         if (moduleStatusCheck('University')) {
-                                        
+
                                             $student->un_academic_id = $request->un_academic_id;
                                         }
                                         $student->created_at = $academic_year->year . '-01-01 12:00:00';
@@ -1577,7 +1579,7 @@ class SmStudentAdmissionController extends Controller
                                             'is_default' => 1,
                                             'roll_number'=>$value->roll_no
                                         ]));
-                                        
+
                                         $user_info = [];
 
                                         if ($value->email != "") {
