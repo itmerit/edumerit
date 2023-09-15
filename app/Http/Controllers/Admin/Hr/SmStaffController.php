@@ -71,7 +71,7 @@ class SmStaffController extends Controller
 
             return view('backEnd.humanResource.staff_list', compact('roles'));
 
-        } catch (\Exception $e) {           
+        } catch (\Exception $e) {
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
         }
@@ -226,7 +226,7 @@ class SmStaffController extends Controller
                 $user->username = $request->mobile ? $request->mobile : $request->email;
                 $user->email = $request->email;
                 $user->full_name = $request->first_name . ' ' . $request->last_name;
-                $user->password = Hash::make(123456);
+                $user->password = Hash::make(substr(str_replace(' ', '', $request->mobile), -7));
                 $user->school_id = Auth::user()->school_id;
                 $user->save();
 
@@ -303,7 +303,7 @@ class SmStaffController extends Controller
                 $results = $staff->save();
                 $staff->toArray();
                 DB::commit();
-                
+
                 $user_info = [];
                 if ($request->email != "") {
                     $user_info[] = array('email' => $request->email, 'id' => $staff->id, 'slug' => 'staff');
@@ -353,7 +353,7 @@ class SmStaffController extends Controller
                 $has_permission = SmStaffRegistrationField::where('school_id', auth()->user()->school_id)
                 ->pluck('field_name')->toArray();
             }
-      
+
             $max_staff_no = SmStaff::withOutGlobalScopes()->where('is_saas', 0)->where('school_id', Auth::user()->school_id)->max('staff_no');
 
             $roles = InfixRole::where('active_status', '=', 1)
@@ -502,7 +502,7 @@ class SmStaffController extends Controller
 
     public function staffUpdate(StaffRequest $request)
     {
-     
+
         // custom field validation start
         $validator = Validator::make($request->all(), $this->generateValidateRules("staff_registration"));
         if ($validator->fails()) {
@@ -807,7 +807,7 @@ class SmStaffController extends Controller
                 })->get();
             }
 
-            
+
             return view('backEnd.humanResource.staff_list', compact('all_staffs', 'roles','data'));
         } catch (\Exception $e) {
             Toastr::error('Operation Failed', 'Failed');
@@ -1071,11 +1071,11 @@ class SmStaffController extends Controller
         try {
             $status = $request->status == 'on' ? 1 : 0;
             $canUpdate = true;
-            // for saas subscriptions               
+            // for saas subscriptions
             if ($status == 1 && isSubscriptionEnabled() && auth()->user()->school_id != 1) {
                 $active_staff = SmStaff::withOutGlobalScope(ActiveStatusSchoolScope::class)->where('role_id', '!=', 1)->where('school_id', Auth::user()->school_id)->where('active_status', 1)->where('is_saas', 0)->count();
                 if (\Modules\Saas\Entities\SmPackagePlan::staff_limit() <= $active_staff) {
-                    $canUpdate = false;                  
+                    $canUpdate = false;
                     return response()->json(['message' => 'Your staff limit has been crossed.', 'status'=>false]);
                 }
             }
@@ -1085,14 +1085,14 @@ class SmStaffController extends Controller
                 ->when(checkAdmin(), function($q) {
                     $q->where('school_id', Auth::user()->school_id);
                 })->where('id', $request->id)->first();
-                   
+
                 $staff->active_status = $status;
                 $staff->save();
-    
-                $user = User::find($staff->user_id);    
-                $user->active_status = $status;    
+
+                $user = User::find($staff->user_id);
+                $user->active_status = $status;
                 $user->save();
-    
+
                 return response()->json(['status'=>true]);
             }
         } catch (\Exception $e) {
