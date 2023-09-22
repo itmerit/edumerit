@@ -54,7 +54,7 @@ class SmSubjectAttendanceController extends Controller
             $input['attendance_date']= $request->attendance_date;
             $input['class']= $request->class_id;
             $input['subject']= $request->subject_id;
-            $input['section']= $request->section_id;
+            $input['section']= SmClassSection::where('class_id', $request->subject_id)->first()->section_id;
 
             $classes = SmClass::get();
             $sections = SmClassSection::with('sectionName')->where('class_id', $input['class'])->get();
@@ -83,7 +83,7 @@ class SmSubjectAttendanceController extends Controller
 
             if (!moduleStatusCheck('University')) {
                 $search_info['class_name'] = SmClass::find($request->class_id)->class_name;
-                $search_info['section_name'] = SmSection::find($request->section_id)->section_name;
+                $search_info['section_name'] = SmSection::find($input['section'])->section_name;
                 $search_info['subject_name'] = SmSubject::find($request->subject_id)->subject_name;
             }
 
