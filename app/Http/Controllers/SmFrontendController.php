@@ -52,7 +52,8 @@ class SmFrontendController extends Controller
 
     public function index()
     {
-        return redirect()->away('https://edumerit.uz');
+
+        return redirect()->away('https://iftixormaktabi.uz');
 
 //        try {
 //
@@ -121,7 +122,7 @@ class SmFrontendController extends Controller
 
     public function about()
     {
-        return redirect()->away('https://edumerit.uz');
+        return redirect()->away('https://iftixormaktabi.uz');
 
 //        try {
 //            $exams = SmExam::where('school_id', app('school')->id)->get();
@@ -148,8 +149,7 @@ class SmFrontendController extends Controller
 
     public function news()
     {
-
-        return redirect()->away('https://edumerit.uz');
+        return redirect()->away('https://iftixormaktabi.uz');
 
 //        try {
 //            $exams = SmExam::where('school_id', app('school')->id)->get();
@@ -166,7 +166,8 @@ class SmFrontendController extends Controller
 
     public function contact()
     {
-        return redirect()->away('https://edumerit.uz');
+        return redirect()->away('https://iftixormaktabi.uz');
+
 
 //        try {
 //            $exams = SmExam::where('school_id', app('school')->id)->get();
@@ -259,7 +260,7 @@ class SmFrontendController extends Controller
 
     public function newsPage()
     {
-        return redirect()->away('https://edumerit.uz');
+        return redirect()->away('https://iftixormaktabi.uz');
 
 //        try {
 //            $news = SmNews::where('school_id', app('school')->id)->paginate(8);
@@ -273,15 +274,17 @@ class SmFrontendController extends Controller
 
     public function loadMorenews(Request $request)
     {
-        try {
-            $count = SmNews::count();
-            $skip = $request->skip;
-            $limit = $count - $skip;
-            $due_news = SmNews::skip($skip)->where('school_id', app('school')->id)->take(4)->get();
-            return view('frontEnd.home.loadMoreNews', compact('due_news', 'skip', 'count'));
-        } catch (\Exception $e) {
-            return response('error');
-        }
+        return redirect()->away('https://iftixormaktabi.uz');
+
+//        try {
+//            $count = SmNews::count();
+//            $skip = $request->skip;
+//            $limit = $count - $skip;
+//            $due_news = SmNews::skip($skip)->where('school_id', app('school')->id)->take(4)->get();
+//            return view('frontEnd.home.loadMoreNews', compact('due_news', 'skip', 'count'));
+//        } catch (\Exception $e) {
+//            return response('error');
+//        }
     }
 
     public function sendMessage(Request $request)
@@ -324,14 +327,16 @@ class SmFrontendController extends Controller
 
     public function contactMessage(Request $request)
     {
-        try {
-            $contact_messages = SmContactMessage::where('school_id', app('school')->id)->orderBy('id', 'desc')->get();
-            $module_links = InfixPermissionAssign::where('role_id', Auth::user()->role_id)->where('school_id', Auth::user()->school_id)->pluck('module_id')->toArray();
-            return view('frontEnd.contact_message', compact('contact_messages', 'module_links'));
-        } catch (\Exception $e) {
-            Toastr::error('Operation Failed', 'Failed');
-            return redirect()->back();
-        }
+        return redirect()->away('https://iftixormaktabi.uz');
+
+//        try {
+//            $contact_messages = SmContactMessage::where('school_id', app('school')->id)->orderBy('id', 'desc')->get();
+//            $module_links = InfixPermissionAssign::where('role_id', Auth::user()->role_id)->where('school_id', Auth::user()->school_id)->pluck('module_id')->toArray();
+//            return view('frontEnd.contact_message', compact('contact_messages', 'module_links'));
+//        } catch (\Exception $e) {
+//            Toastr::error('Operation Failed', 'Failed');
+//            return redirect()->back();
+//        }
     }
 
     //user register method start
@@ -413,7 +418,7 @@ class SmFrontendController extends Controller
 
     public function course()
     {
-        return redirect()->away('https://edumerit.uz');
+        return redirect()->away('https://iftixormaktabi.uz');
 
 //        try {
 //            $exams = SmExam::where('school_id', app('school')->id)->get();
@@ -433,28 +438,32 @@ class SmFrontendController extends Controller
 
     public function courseDetails($id)
     {
-        try {
-            $course = SmCourse::where('school_id', app('school')->id)->find($id);
-            $course_details = SmCoursePage::where('school_id', app('school')->id)->where('is_parent', 0)->first();
-            $courses = SmCourse::where('school_id', app('school')->id)->orderBy('id', 'asc')->whereNotIn('id', [$id])->limit(3)->get();
-            return view('frontEnd.home.light_course_details', compact('course', 'courses', 'course_details'));
-        } catch (\Exception $e) {
-            Toastr::error('Operation Failed', 'Failed');
-            return redirect()->back();
-        }
+        return redirect()->away('https://iftixormaktabi.uz');
+
+//        try {
+//            $course = SmCourse::where('school_id', app('school')->id)->find($id);
+//            $course_details = SmCoursePage::where('school_id', app('school')->id)->where('is_parent', 0)->first();
+//            $courses = SmCourse::where('school_id', app('school')->id)->orderBy('id', 'asc')->whereNotIn('id', [$id])->limit(3)->get();
+//            return view('frontEnd.home.light_course_details', compact('course', 'courses', 'course_details'));
+//        } catch (\Exception $e) {
+//            Toastr::error('Operation Failed', 'Failed');
+//            return redirect()->back();
+//        }
     }
 
     public function loadMoreCourse(Request $request)
     {
-        try {
-            $count = SmCourse::count();
-            $skip = $request->skip;
-            $limit = $count - $skip;
-            $due_courses = SmCourse::skip($skip)->where('school_id', app('school')->id)->take(3)->get();
-            return view('frontEnd.home.loadMorePage', compact('due_courses', 'skip', 'count'));
-        } catch (\Exception $e) {
-            return response('error');
-        }
+        return redirect()->away('https://iftixormaktabi.uz');
+
+//        try {
+//            $count = SmCourse::count();
+//            $skip = $request->skip;
+//            $limit = $count - $skip;
+//            $due_courses = SmCourse::skip($skip)->where('school_id', app('school')->id)->take(3)->get();
+//            return view('frontEnd.home.loadMorePage', compact('due_courses', 'skip', 'count'));
+//        } catch (\Exception $e) {
+//            return response('error');
+//        }
     }
 
     public function socialMedia()
