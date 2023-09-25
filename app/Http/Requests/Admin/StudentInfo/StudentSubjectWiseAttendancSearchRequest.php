@@ -20,14 +20,14 @@ class StudentSubjectWiseAttendancSearchRequest extends FormRequest
                 'un_department_id' => 'required',
                 'un_academic_id' => 'required',
                 'un_semester_id' => 'required',
-                'un_section_id' => 'required',
+//                'un_section_id' => 'required',
                 'un_semester_label_id' => 'required',
                 'un_subject_id' => 'required',
             ];
         } else {
             return [
                 'class_id' => 'required | numeric ',
-                'section_id' => 'required | numeric ',
+//                'section_id' => 'required | numeric ',
                 'subject_id' => 'required | numeric ',
                 'attendance_date' => 'required|date',
             ];

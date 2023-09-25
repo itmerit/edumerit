@@ -1,5 +1,5 @@
 @extends('backEnd.master')
-@section('title') 
+@section('title')
 @lang('student.subject_wise_attendance')
 @endsection
 @section('mainContent')
@@ -44,8 +44,8 @@
                                                 <input class="primary_input_field  primary_input_field date form-control form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }} {{isset($date)? 'read-only-input': ''}}" id="startDate" type="text"
                                                     name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">
                                                 <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>
-                                                
-                                                
+
+
                                                 @if ($errors->has('attendance_date'))
                                                 <span class="text-danger" >
                                                     {{ $errors->first('attendance_date') }}
@@ -59,18 +59,18 @@
                                             </label>
                                         </button>
                                     </div>
-                                    
+
                                 </div>
-                            @else   
+                            @else
                             @include('backEnd.common.search_criteria', [
                             'div'=>'col-lg-3',
                             'subject'=>true,
-                            'required'=>['class', 'section', 'subject'],
-                            'visiable'=>['class', 'section', 'subject'],    
+                            'required'=>['class', 'subject'],
+                            'visiable'=>['class', 'subject'],
                             ])
-                           
+
                             <div class="col-lg-3 mt-30-md md_mb_20">
-                               
+
                                 <div class="primary_input">
                                     <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>
                                     <div class="primary_datepicker_input">
@@ -204,7 +204,7 @@
                                             <div class="primary_input">
                                                 <textarea class="primary_input_field form-control" cols="0" rows="2" name="note[{{$already_assigned_student->studentInfo->id}}]" id="">{{$already_assigned_student->notes}}</textarea>
                                                 <label class="primary_input_label" for="">@lang('student.add_note_here')</label>
-                                                
+
                                                 <span class="text-danger">
                                                     <strong>@lang('common.error')</strong>
                                                 </span>
@@ -241,7 +241,7 @@
                                             <div class="primary_input">
                                                 <textarea class="primary_input_field form-control" cols="0" rows="2" name="note[{{$student->id}}]" id=""></textarea>
                                                 <label class="primary_input_label" for="">@lang('student.add_note_here')</label>
-                                                
+
                                                 <span class="text-danger">
                                                     <strong>@lang('common.error')</strong>
                                                 </span>

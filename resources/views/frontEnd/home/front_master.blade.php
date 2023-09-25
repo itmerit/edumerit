@@ -248,8 +248,8 @@
                                                     <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: bold; text-decoration-color: yellow; position: relative; top: -10px;text padding-bottom: 100px;">Login↓
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                        <a class="dropdown-item" href="https://edumerit.uz/login">Branch One</a>
-                                                        <a class="dropdown-item" href="https://oxunboboyev.edumerit.uz/login">Branch Two</a>
+                                                        <a class="dropdown-item" href="https://edumerit.uz/login">Merit school</a>
+                                                        <a class="dropdown-item" href="https://academy.edumerit.uz/login">Academy (Shahriston)</a>
                                                         <!-- Add more branches if needed -->
                                                     </div>
                                                 </li>
