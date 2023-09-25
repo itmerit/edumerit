@@ -52,7 +52,7 @@ class SmFrontendController extends Controller
 
     public function index()
     {
-        return redirect()->away('https://academy.edumerit.uz');
+        return redirect()->away('https://academy.edumerit.uz/login');
 
 //        try {
 //
