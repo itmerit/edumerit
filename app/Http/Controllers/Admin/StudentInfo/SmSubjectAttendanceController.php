@@ -83,7 +83,7 @@ class SmSubjectAttendanceController extends Controller
 
             if (!moduleStatusCheck('University')) {
                 $search_info['class_name'] = SmClass::find($request->class_id)->class_name;
-                $search_info['section_name'] = SmSection::find($request->section_id)->section_name;
+                $search_info['section_name'] = SmSection::find($input['section'])->section_name;
                 $search_info['subject_name'] = SmSubject::find($request->subject_id)->subject_name;
             }
 
