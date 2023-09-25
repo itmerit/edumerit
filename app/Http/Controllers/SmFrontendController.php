@@ -52,7 +52,6 @@ class SmFrontendController extends Controller
 
     public function index()
     {
-
         return redirect()->away('https://iftixormaktabi.uz');
 
 //        try {
