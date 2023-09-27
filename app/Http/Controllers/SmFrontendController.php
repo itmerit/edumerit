@@ -52,7 +52,7 @@ class SmFrontendController extends Controller
 
     public function index()
     {
-        return redirect()->away('https://iftixormaktabi.uz');
+        return redirect()->away('https://iftixoredu.uz/login');
 
 //        try {
 //
@@ -121,7 +121,7 @@ class SmFrontendController extends Controller
 
     public function about()
     {
-        return redirect()->away('https://iftixormaktabi.uz');
+        return redirect()->away('https://iftixoredu.uz/login');
 
 //        try {
 //            $exams = SmExam::where('school_id', app('school')->id)->get();
@@ -148,7 +148,7 @@ class SmFrontendController extends Controller
 
     public function news()
     {
-        return redirect()->away('https://iftixormaktabi.uz');
+        return redirect()->away('https://iftixoredu.uz/login');
 
 //        try {
 //            $exams = SmExam::where('school_id', app('school')->id)->get();
@@ -165,7 +165,7 @@ class SmFrontendController extends Controller
 
     public function contact()
     {
-        return redirect()->away('https://iftixormaktabi.uz');
+        return redirect()->away('https://iftixoredu.uz/login');
 
 
 //        try {
@@ -259,7 +259,7 @@ class SmFrontendController extends Controller
 
     public function newsPage()
     {
-        return redirect()->away('https://iftixormaktabi.uz');
+        return redirect()->away('https://iftixoredu.uz/login');
 
 //        try {
 //            $news = SmNews::where('school_id', app('school')->id)->paginate(8);
@@ -273,7 +273,7 @@ class SmFrontendController extends Controller
 
     public function loadMorenews(Request $request)
     {
-        return redirect()->away('https://iftixormaktabi.uz');
+        return redirect()->away('https://iftixoredu.uz/login');
 
 //        try {
 //            $count = SmNews::count();
@@ -326,7 +326,7 @@ class SmFrontendController extends Controller
 
     public function contactMessage(Request $request)
     {
-        return redirect()->away('https://iftixormaktabi.uz');
+        return redirect()->away('https://iftixoredu.uz/login');
 
 //        try {
 //            $contact_messages = SmContactMessage::where('school_id', app('school')->id)->orderBy('id', 'desc')->get();
@@ -417,7 +417,7 @@ class SmFrontendController extends Controller
 
     public function course()
     {
-        return redirect()->away('https://iftixormaktabi.uz');
+        return redirect()->away('https://iftixoredu.uz/login');
 
 //        try {
 //            $exams = SmExam::where('school_id', app('school')->id)->get();
@@ -437,7 +437,7 @@ class SmFrontendController extends Controller
 
     public function courseDetails($id)
     {
-        return redirect()->away('https://iftixormaktabi.uz');
+        return redirect()->away('https://iftixoredu.uz/login');
 
 //        try {
 //            $course = SmCourse::where('school_id', app('school')->id)->find($id);
@@ -452,7 +452,7 @@ class SmFrontendController extends Controller
 
     public function loadMoreCourse(Request $request)
     {
-        return redirect()->away('https://iftixormaktabi.uz');
+        return redirect()->away('https://iftixoredu.uz/login');
 
 //        try {
 //            $count = SmCourse::count();
