@@ -37,7 +37,7 @@ class RedirectIfAuthenticated
                 return redirect()->back();
             }
         } elseif(!Auth::guard($guard)->check()) {
-            return redirect()->route('https://academy.edumerit.uz/login');
+            return redirect()->away('https://academy.edumerit.uz/login');
         }
 
         return $next($request);
