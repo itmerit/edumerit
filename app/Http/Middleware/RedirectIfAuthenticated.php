@@ -36,9 +36,10 @@ class RedirectIfAuthenticated
             else {
                 return redirect()->back();
             }
-        } elseif(!Auth::guard($guard)->check()) {
-            return redirect()->away('https://academy.edumerit.uz/login');
         }
+//        } elseif(!Auth::guard($guard)->check()) {
+//            return redirect()->away('https://academy.edumerit.uz/login');
+//        }
 
         return $next($request);
     }
