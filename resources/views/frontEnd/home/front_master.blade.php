@@ -249,7 +249,7 @@
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                         <a class="dropdown-item" href="https://edumerit.uz/login">Merit school</a>
-                                                        <a class="dropdown-item" href="https://academy.edumerit.uz/login">Academy (Shahriston)</a>
+                                                        <a class="dropdown-item" href="https://academy.edumerit.uz/login">Merit Academy</a>
                                                         <!-- Add more branches if needed -->
                                                     </div>
                                                 </li>
