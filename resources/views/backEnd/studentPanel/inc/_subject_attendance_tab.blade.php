@@ -290,6 +290,26 @@
                                             </td>
                                         @endfor
                                     </tr>
+                                    <tr>
+                                        <!-- Add data cells for the new row -->
+                                        <td colspan="8">Daily Subject Grades</td>
+                                        <!-- Calculate and add the subject grades for each day -->
+                                        {{--                                        @dd($subjectAttendance);--}}
+
+                                        @for ($i = 1; $i <= $days; $i++)
+                                            <td>
+                                                @foreach ($subjectAttendance as $attendance)
+                                                    @if (date('j', strtotime($attendance->attendance_date)) == $i)
+                                                        @if(!is_null($attendance->grade))
+                                                            {{ $attendance->subject->subject_name . '-' . $attendance->grade }} <br>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                                <!-- display daily subject and grade for each day -->
+
+                                            </td>
+                                        @endfor
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
