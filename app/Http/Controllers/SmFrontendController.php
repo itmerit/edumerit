@@ -417,7 +417,7 @@ class SmFrontendController extends Controller
 
     public function course()
     {
-        return redirect()->away('https://iftixormaktabi.uz');
+        return redirect()->away('https://iftixoredu.uz/login');
 
 //        try {
 //            $exams = SmExam::where('school_id', app('school')->id)->get();
