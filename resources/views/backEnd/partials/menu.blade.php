@@ -46,7 +46,7 @@
                     <div class="select_style d-flex">
                         @if (generalSetting()->website_btn == 1)
                             <a target="_blank" class="primary-btn white mr-10 tab_hide"
-                                href="https://iftixoredu.uz">@lang('common.website')</a>
+                                href="https://iftixormaktabi.uz">@lang('common.website')</a>
                         @endif
                         @if (generalSetting()->dashboard_btn == 1)
                             @if (Auth::user()->role_id == $coltroller_role)
