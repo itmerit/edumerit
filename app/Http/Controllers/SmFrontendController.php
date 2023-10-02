@@ -52,7 +52,7 @@ class SmFrontendController extends Controller
 
     public function index()
     {
-        return redirect()->away('https://academy.edumerit.uz/login');
+        return redirect()->away('https://academy.edumerit.uz');
 
 //        try {
 //
@@ -121,7 +121,7 @@ class SmFrontendController extends Controller
 
     public function about()
     {
-        return redirect()->away('https://edumerit.uz');
+        return redirect()->away('https://academy.edumerit.uz');
 
 //        try {
 //            $exams = SmExam::where('school_id', app('school')->id)->get();
@@ -149,7 +149,7 @@ class SmFrontendController extends Controller
     public function news()
     {
 
-        return redirect()->away('https://edumerit.uz');
+        return redirect()->away('https://academy.edumerit.uz');
 
 //        try {
 //            $exams = SmExam::where('school_id', app('school')->id)->get();
@@ -166,7 +166,7 @@ class SmFrontendController extends Controller
 
     public function contact()
     {
-        return redirect()->away('https://edumerit.uz');
+        return redirect()->away('https://academy.edumerit.uz');
 
 //        try {
 //            $exams = SmExam::where('school_id', app('school')->id)->get();
@@ -259,7 +259,7 @@ class SmFrontendController extends Controller
 
     public function newsPage()
     {
-        return redirect()->away('https://edumerit.uz');
+        return redirect()->away('https://academy.edumerit.uz');
 
 //        try {
 //            $news = SmNews::where('school_id', app('school')->id)->paginate(8);
@@ -413,7 +413,7 @@ class SmFrontendController extends Controller
 
     public function course()
     {
-        return redirect()->away('https://edumerit.uz');
+        return redirect()->away('https://academy.edumerit.uz');
 
 //        try {
 //            $exams = SmExam::where('school_id', app('school')->id)->get();
