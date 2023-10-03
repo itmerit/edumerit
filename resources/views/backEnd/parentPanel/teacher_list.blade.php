@@ -32,12 +32,12 @@
 </section>
 <section class="admin-visitor-area up_admin_visitor">
     <div class="container-fluid p-0">
-       
+
         <div class="row">
             <div class="col-lg-12 student-details up_admin_visitor">
                 <ul class="nav nav-tabs tabs_scroll_nav ml-0" role="tablist">
 
-                @foreach($records as $key => $record) 
+                @foreach($records as $key => $record)
                     <li class="nav-item mb-0">
                         <a class="nav-link mb-0 @if($key== 0) active @endif " href="#tab{{$key}}" role="tab" data-toggle="tab">{{$record->class->class_name}} ({{$record->section->section_name}}) </a>
                     </li>
@@ -46,29 +46,25 @@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    @foreach($records as $key => $record) 
+                    @foreach($records as $key => $record)
                         <div role="tabpanel" class="tab-pane fade  @if($key== 0) active show @endif" id="tab{{$key}}">
                             <div class="row mt-10">
                                 <div class="col-lg-12">
                                     <table id="table_id" class="table" cellspacing="0" width="100%">
 
                                         <thead>
-                                            <tr> 
+                                            <tr>
                                                 <th>@lang('hr.teacher_name')</th>
-                                                <th>@lang('common.email')</th>
-                                                <th>@lang('common.phone')</th>
                                             </tr>
                                         </thead>
-            
+
                                         <tbody>
                                             @foreach($record->StudentTeacher as $value)
-                                            <tr> 
+                                            <tr>
                                                 <td>
                                                     <img src="{{ file_exists(@$value->teacher->staff_photo) ? asset(@$value->teacher->staff_photo) : asset('public/uploads/staff/demo/staff.jpg') }}" class="img img-thumbnail" style="width: 60px; height: auto;">
                                                     {{@$value->teacher !=""?@$value->teacher->full_name:""}}
-                                                </td> 
-                                                <td>{{@$value->teacher !=""?@$value->teacher->email:""}}</td>
-                                                <td>{{@$value->teacher !=""?@$value->teacher->mobile:""}}</td>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
