@@ -169,235 +169,80 @@ $visiable = $visiable ?? [];
 @endif
 
 @push('script')
-<script>
-    $(document).ready(function () {
-        let class_required = "{{ in_array('class', $required) ? ' *' : '' }}";
-        let section_required = "{{ in_array('section', $required) ? ' *' : '' }}";
-        let subject_required = "{{ in_array('subject', $required) ? ' *' : '' }}";
-        let student_required = "{{ in_array('student', $required) ? ' *' : '' }}";
-        $("#common_academic_year").on(
-            "change",
-            function () {
+    <script>
+        $(document).ready(function () {
+            let class_required = "{{ in_array('class', $required) ? ' *' : '' }}";
+            let subject_required = "{{ in_array('subject', $required) ? ' *' : '' }}";
+            let student_required = "{{ in_array('student', $required) ? ' *' : '' }}";
+            $("#common_academic_year").on("change", function () {
                 var url = $("#url").val();
-                var i = 0;
                 var formData = {
                     id: $(this).val(),
                 };
-
-                // get class
-                $.ajax({
-                    type: "GET",
-                    data: formData,
-                    dataType: "json",
-                    url: url + "/" + "academic-year-get-class",
-
+            @@ -192,10 +189,8 @@ function () {
+                url: url + "/" + "academic-year-get-class",
                     beforeSend: function () {
-                        $('#common_select_class_loader').addClass('pre_loader').removeClass(
-                            'loader');
-                    },
-
-                    success: function (data) {
-                        $("#common_select_class").empty().append(
-                            $("<option>", {
-                                value: '',
-                                text: window.jsLang('select_class') + class_required,
-                            })
-                        );
-
-                        if (data[0].length) {
-                            $.each(data[0], function (i, className) {
-                                $("#common_select_class").append(
-                                    $("<option>", {
-                                        value: className.id,
-                                        text: className.class_name,
-                                    })
-                                );
-                            });
-                        }
-                        $('#common_select_class').niceSelect('update');
-                        $('#common_select_class').trigger('change');
-                    },
-                    error: function (data) {
-                        console.log('Error:', data);
-                    },
-                    complete: function () {
-                        i--;
-                        if (i <= 0) {
-                            $('#common_select_class_loader').removeClass('pre_loader').addClass(
-                                'loader');
-                        }
-                    }
+                    $('#common_select_class_loader').addClass('pre_loader').removeClass('loader');
+                },
+                success: function (data) {
+                    $("#common_select_class").empty().append(
+                        $("<option>", {
+                            @@ -221,183 +216,62 @@ function () {
+                                console.log('Error:', data);
+                            },
+                            complete: function () {
+                                $('#common_select_class_loader').removeClass('pre_loader').addClass('loader');
+                            }
+                        });
                 });
-            }
-        );
-
-        $("#common_select_class").on("change", function () {
-
-            var url = $("#url").val();
-            var i = 0;
-            var formData = {
-                id: $(this).val(),
-            };
-            $.ajax({
-                type: "GET",
-                data: formData,
-                dataType: "json",
-                url: url + "/" + "ajaxStudentPromoteSection",
-
-                beforeSend: function () {
-                    $('#common_select_section_loader').addClass('pre_loader').removeClass(
-                        'loader');
-                },
-                success: function (data) {
-                    $("#common_select_section").empty().append(
-                        $("<option>", {
-                            value: '',
-                            text: window.jsLang('select_section') +
-                                section_required,
-                        })
-                    );
-
-                    if (data[0].length) {
-                        $.each(data[0], function (i, section) {
-                            $("#common_select_section").append(
+                $("#common_select_class").on("change", function () {
+                    var class_id = $(this).val();
+                    var section_id = 1; // Replace with the desired section ID or "O'zbek"
+                    getSubject(class_id, section_id);
+                });
+                function getSubject(class_id, section_id) {
+                    var url = $("#url").val();
+                    var formData = {
+                        class: class_id,
+                        section: section_id,
+                    };
+                    $.ajax({
+                        type: "GET",
+                        data: formData,
+                        dataType: "json",
+                        url: url + "/" + "ajaxSelectSubject",
+                        beforeSend: function () {
+                            $('#common_select_student_loader').addClass('pre_loader').removeClass('loader');
+                        },
+                        success: function (data) {
+                            $("#common_select_subject").empty().append(
                                 $("<option>", {
-                                    value: section.id,
-                                    text: section.section_name,
+                                    value: '',
+                                    text: window.jsLang('select_subject'),
                                 })
                             );
-                        });
-                    }
-                    $('#common_select_section').niceSelect('update');
-                    $('#common_select_section').trigger('change');
-
-                },
-                error: function (data) {
-                    console.log("Error:", data);
-                },
-                complete: function () {
-                    i--;
-                    if (i <= 0) {
-                        $('#common_select_section_loader').removeClass('pre_loader')
-                            .addClass('loader');
-                    }
+                            if (data[0].length) {
+                                $.each(data[0], function (i, subject) {
+                                    $("#common_select_subject").append(
+                                        $("<option>", {
+                                            value: subject.id,
+                                            text: subject.subject_name,
+                                        })
+                                    );
+                                });
+                            }
+                            $('#common_select_subject').niceSelect('update');
+                            $('#common_select_subject').trigger('change');
+                        },
+                        error: function (data) {
+                            console.log("Error:", data);
+                        },
+                        complete: function () {
+                            $('#common_select_student_loader').removeClass('pre_loader').addClass('loader');
+                        }
+                    });
                 }
             });
-        });
-        $("#common_select_section").on("change", function () {
-            var url = $("#url").val();
-            var i = 0;
-            var subject = "{{ $subject }}";
-            var select_class = $("#common_select_class").val();
-            var class_id = $("#common_select_class").val();
-            var section_id = $(this).val();
+    </script>
 
-            var formData = {
-                section: $(this).val(),
-                class: $("#common_select_class").val(),
-            };
-            // get section for student
-            if(subject == false)
-            {
-            $.ajax({
-                type: "GET",
-                data: formData,
-                dataType: "json",
-                url: url + "/" + "ajaxSelectStudent",
-
-                beforeSend: function () {
-                    $('#common_select_student_loader').addClass('pre_loader').removeClass(
-                        'loader');
-                },
-
-                success: function (data) {
-
-                    $("#common_select_student").empty().append(
-                        $("<option>", {
-                            value: '',
-                            text: window.jsLang('select_student') +
-                                student_required,
-                        })
-                    );
-
-                    if (data[0].length) {
-                        $.each(data[0], function (i, student) {
-                            $("#common_select_student").append(
-                                $("<option>", {
-                                    value: student.id,
-                                    text: student.full_name,
-                                })
-                            );
-                        });
-                    }
-                    $('#common_select_student').niceSelect('update');
-                    $('#common_select_student').trigger('change');
-                },
-                error: function (data) {
-                    console.log("Error:", data);
-                },
-                complete: function () {
-                    i--;
-                    if (i <= 0) {
-                        $('#common_select_student_loader').removeClass('pre_loader')
-                            .addClass('loader');
-                    }
-                }
-            });
-            }
-            // get subject from section
-            if(subject == true)
-            {
-                getSubject(class_id, section_id);
-            }
-        });
-
-        function getSubject(class_id, section_id) {
-            var url = $("#url").val();
-            var i = 0;
-            $.ajax({
-                type: "GET",
-                data: {class: class_id, section: section_id},
-                dataType: "json",
-                url: url + "/" + "ajaxSelectSubject",
-
-                beforeSend: function () {
-                    $('#common_select_student_loader').addClass('pre_loader').removeClass('loader');
-                },
-
-                success: function (data) {
-
-                    $("#common_select_subject").empty().append(
-                        $("<option>", {
-                            value: '',
-                            text: window.jsLang('select_subject'),
-                        })
-                    );
-
-                    if (data[0].length) {
-                        $.each(data[0], function (i, subject) {
-                            $("#common_select_subject").append(
-                                $("<option>", {
-                                    value: subject.id,
-                                    text: subject.subject_name,
-                                })
-                            );
-                        });
-                    }
-                    $('#common_select_subject').niceSelect('update');
-                    $('#common_select_subject').trigger('change');
-                },
-                error: function (data) {
-                    console.log("Error:", data);
-                },
-                complete: function () {
-                    i--;
-                    if (i <= 0) {
-                        $('#common_select_student_loader').removeClass('pre_loader').addClass(
-                            'loader');
-                    }
-                }
-            });
-        }
-    });
-</script>
 @endpush
