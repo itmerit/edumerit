@@ -434,7 +434,8 @@ class SmSubjectAttendanceController extends Controller
                 ->where('school_id',Auth::user()->school_id)
                 ->get();
 
-            return view('backEnd.studentInformation.subject_attendance_report_view', compact('classes', 'types', 'genders'));
+            $records = [];
+            return view('backEnd.studentInformation.subject_attendance_report_view', compact('records','classes', 'types', 'genders'));
         }catch (\Exception $e) {
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
@@ -800,7 +801,8 @@ class SmSubjectAttendanceController extends Controller
                 $writer->save($path);
                 return response()->download($path)->deleteFileAfterSend();
             } else {
-                return back();
+                Toastr::success("There aren't anything.", "Success");
+                return redirect()->back();
             }
         }catch (\Exception $e) {
             Toastr::error('Operation Failed', 'Failed');
