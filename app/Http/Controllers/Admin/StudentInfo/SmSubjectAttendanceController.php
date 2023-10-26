@@ -28,6 +28,8 @@ use App\Http\Requests\Admin\StudentInfo\StudentSubjectWiseAttendanceStoreRequest
 use App\Http\Requests\Admin\StudentInfo\StudentSubjectWiseAttendancSearchRequest;
 use App\Http\Requests\Admin\StudentInfo\StudentSubjectWiseAttendanceSearchRequest;
 use App\Http\Requests\Admin\StudentInfo\subjectAttendanceAverageReportSearchRequest;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
 
 class SmSubjectAttendanceController extends Controller
 {
@@ -432,7 +434,8 @@ class SmSubjectAttendanceController extends Controller
                 ->where('school_id',Auth::user()->school_id)
                 ->get();
 
-            return view('backEnd.studentInformation.subject_attendance_report_view', compact('classes', 'types', 'genders'));
+            $records = [];
+            return view('backEnd.studentInformation.subject_attendance_report_view', compact('records','classes', 'types', 'genders'));
         }catch (\Exception $e) {
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
@@ -464,35 +467,30 @@ class SmSubjectAttendanceController extends Controller
                 ->where('school_id',Auth::user()->school_id)
                 ->get();
 
-            $student_records = StudentRecord::query();
-            $student_records->where('school_id',auth()->user()->school_id)
+            $query = StudentRecord::query()
+                ->where('school_id',auth()->user()->school_id)
                 ->where('academic_id',getAcademicId())
                 ->where('is_promote',0)
+                ->whereHas('subjectAttendances', function ($q) use ($year, $month) {
+                    $q->where('attendance_date', 'like', $year . '-' . $month . '%')
+                        ->where('academic_id', getAcademicId())
+                        ->where('school_id',Auth::user()->school_id);
+                })
                 ->whereHas('student', function ($q)  {
                     $q->where('active_status', 1);
                 });
-            if ($class_id != "") {
-                $student_records->where('class_id', $class_id);
-            }
-            if ($section_id != "") {
-                $student_records->where('section_id', $section_id);
-            }
-            $student_records = $student_records->get();
-            $attendances = [];
-            foreach ($student_records as $record) {
-                $attendance = SmSubjectAttendance::with('student')->where('student_record_id',$record->id)
-                    ->where('attendance_date', 'like', $year . '-' . $month . '%')
-                    ->where('academic_id', getAcademicId())
-                    ->where('school_id',Auth::user()->school_id)
-                    ->get();
 
-                if ($attendance) {
-                    $attendances[] = $attendance;
-                }
-            }
+            if ($class_id != "")
+                $query->where('class_id', $class_id);
 
-            return view('backEnd.studentInformation.subject_attendance_report_view', compact('classes', 'attendances', 'days', 'year', 'month', 'current_day', 'class_id', 'section_id','subject_id'));
+            if ($section_id != "")
+                $query->where('section_id', $section_id);
+
+            $records = $query->get();
+
+            return view('backEnd.studentInformation.subject_attendance_report_view', compact('classes', 'records', 'days', 'year', 'month', 'current_day', 'class_id', 'section_id','subject_id'));
         }catch (\Exception $e) {
+            dd($e);
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
         }
@@ -658,41 +656,180 @@ class SmSubjectAttendanceController extends Controller
     {
         set_time_limit(2700);
         try{
-            $current_day = date('d');
-
             $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-            $student_records = StudentRecord::query();
-            $student_records->where('school_id',auth()->user()->school_id)
+            $query = StudentRecord::query()
+                ->where('school_id',auth()->user()->school_id)
                 ->where('academic_id',getAcademicId())
                 ->where('is_promote',0)
+                ->whereHas('subjectAttendances', function ($q) use ($year, $month) {
+                    $q->where('attendance_date', 'like', $year . '-' . $month . '%')
+                        ->where('academic_id', getAcademicId())
+                        ->where('school_id',Auth::user()->school_id);
+                })
                 ->whereHas('student', function ($q)  {
                     $q->where('active_status', 1);
                 });
-            if ($class_id != "") {
-                $student_records->where('class_id', $class_id);
-            }
-            if ($section_id != "") {
-                $student_records->where('section_id', $section_id);
-            }
-            $student_records = $student_records->get();
-            $attendances = [];
-            foreach ($student_records as $record) {
-                $attendance = SmSubjectAttendance::with('student')->where('student_record_id',$record->id)
-                    ->where('attendance_date', 'like', $year . '-' . $month . '%')
-                    ->where('academic_id', getAcademicId())
-                    ->where('school_id',Auth::user()->school_id)
-                    ->get();
 
-                if ($attendance) {
-                    $attendances[] = $attendance;
+            if ($class_id != "")
+                $query->where('class_id', $class_id);
+
+            if ($section_id != "")
+                $query->where('section_id', $section_id);
+
+            // xls
+            if ($query->count()) {
+                $hColumns = ["SL", "Name", "Admission No", "P", "L", "A", "F", "H", "%"];
+                for ($i = 1; $i <= $days; $i++) {
+                    $date = $year . '-' . $month . '-' . $i;
+                    if (date('w', strtotime($date)) > 0) {
+                        $hColumns[] = $i . '/' . date('D', strtotime($date));
+                    }
                 }
+
+                $columns = [$hColumns];
+                foreach ($query->get() as $record) {
+                    $column = [];
+                    $totalGrandPresent = 0;
+                    $totalLate = 0;
+                    $totalAbsent = 0;
+                    $totalHoliday = 0;
+                    $totalHalfDay = 0;
+                    $totalAttendance = 0;
+                    $countAbsent = 0;
+
+                    $p = 0;
+                    $l = 0;
+                    $a = 0;
+                    $f = 0;
+                    $h = 0;
+                    $column[] = $record->student?->full_name;
+                    $column[] = $record->student?->admission_no;
+                    foreach ($record->subjectAttendances as $attendance) {
+
+                        if ($attendance->attendance_type == 'P') {
+                            $p++;
+                            $totalAttendance++;
+                            $totalGrandPresent++;
+                        }
+
+                        if ($attendance->attendance_type == 'L') {
+                            $l++;
+                            $totalAttendance++;
+                            $totalLate++;
+                        }
+
+                        if ($attendance->attendance_type == 'A') {
+                            $a++;
+                            $countAbsent++;
+                            $totalAttendance++;
+                            $totalAbsent++;
+                        }
+
+                        if ($attendance->attendance_type == 'F') {
+                            $f++;
+                            $totalAttendance++;
+                            $totalHalfDay++;
+                        }
+
+                        if ($attendance->attendance_type == 'H') {
+                            $h++;
+                            $totalAttendance++;
+                            $totalHoliday++;
+                        }
+                    }
+
+                    $column[] = $p;
+                    $column[] = $l;
+                    $column[] = $a;
+                    $column[] = $f;
+                    $column[] = $h;
+
+                    $totalPresent = $totalAttendance - $countAbsent;
+                    $column[] = $totalPresent . '/' . $totalAttendance;
+                    if ($countAbsent == 0) {
+                        $column[] = '100%';
+                    } else {
+                        $percentage = ($totalPresent / $totalAttendance) * 100;
+                        $column[] = number_format((float)$percentage, 2, '.', '') . '%';
+                    }
+
+                    for ($i = 1; $i <= $days; $i++) {
+                        $date = $year . '-' . $month . '-' . $i;
+                        if (date('w', strtotime($date)) > 0) {
+                            $date = $year . '-' . $month . '-' . $i;
+                            $datePresent = 0;
+                            $dateAbsent = 0;
+                            $dateTotalClass = 0;
+
+                            foreach ($record->subjectAttendances as $attendance) {
+                                if (strtotime($attendance->attendance_date) == strtotime($date)) {
+                                    if ($attendance->attendance_type == 'P' || $attendance->attendance_type == 'F' || $attendance->attendance_type == 'L') {
+                                        $datePresent++;
+                                    } else {
+                                        $dateAbsent++;
+                                    }
+                                    $dateTotalClass = $datePresent + $dateAbsent;
+                                }
+                            }
+
+                            $last = "";
+                            if ($dateTotalClass != 0) {
+                                $last = $datePresent . '/' . $dateTotalClass . "\n";
+                                foreach ($record->subjectAttendances as $attendance) {
+                                    $last .= $attendance?->subject?->subject_code . ": " . ($attendance->grade ?? 0) . "\n";
+                                }
+                            }
+                            $column[] = $last;
+                        }
+                    }
+                    $columns[] = $column;
+                }
+
+                $spreadsheet = new Spreadsheet();
+                $sheet = $spreadsheet->getActiveSheet();
+                $sHeaders = $this->getSheetHeaders($hColumns);
+
+                foreach ($columns as $k => $col) {
+                    for ($i = 0; $i < count($sHeaders); $i++) {
+                        $sheet->setCellValue($sHeaders[$i] . ($k + 1), $col[$i]);
+                        $sheet->getColumnDimension($sHeaders[$i])->setAutoSize(true);
+                    }
+                }
+
+                $writer = new Xls($spreadsheet);
+                $path = storage_path('app/report.xls');
+                $writer->save($path);
+                return response()->download($path)->deleteFileAfterSend();
+            } else {
+                Toastr::success("There aren't anything.", "Success");
+                return redirect()->back();
             }
-
-            return view('backEnd.studentInformation.student_subject_attendance',compact('attendances','days' , 'year'  , 'month','class_id'  ,'section_id'));
-
         }catch (\Exception $e) {
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
         }
+    }
+
+    private function getSheetHeaders($columns) {
+        $letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        $cc = count($columns);
+        $lc = count($letters);
+
+        if ($cc>$lc) {
+            $m = (int)($cc/$lc);
+            $xtColumns = [];
+            $resultColumns = $letters;
+            for ($i=0;$i<$m;$i++){
+                $fj = $cc%$lc;
+                if ($fj > 0){
+                    for ($j=0;$j<$fj;$j++){
+                        $xtColumns[] = $letters[$m-1].$letters[$j];
+                    }
+                }
+            }
+            return array_merge($resultColumns, $xtColumns);
+        }
+
+        return $letters;
     }
 }
