@@ -471,10 +471,13 @@ class SmSubjectAttendanceController extends Controller
                 ->where('school_id',auth()->user()->school_id)
                 ->where('academic_id',getAcademicId())
                 ->where('is_promote',0)
-                ->whereHas('subjectAttendances', function ($q) use ($year, $month) {
-                    $q->where('attendance_date', 'like', $year . '-' . $month . '%')
-                        ->where('academic_id', getAcademicId())
-                        ->where('school_id',Auth::user()->school_id);
+                ->where(function ($query) use ($year, $month) {
+                    $query->has('subjectAttendances')
+                        ->orWheredoesntHave('subjectAttendances', function ($query) use ($year, $month) {
+                            $query->where('attendance_date', 'like', $year . '-' . $month . '%')
+                                ->where('academic_id', getAcademicId())
+                                ->where('school_id',Auth::user()->school_id);
+                        });
                 })
                 ->whereHas('student', function ($q)  {
                     $q->where('active_status', 1);
@@ -486,7 +489,89 @@ class SmSubjectAttendanceController extends Controller
             if ($section_id != "")
                 $query->where('section_id', $section_id);
 
-            $records = $query->get();
+            $records = [];
+            if ($query->count()){
+                $total_grand_present = 0;
+                $total_late = 0;
+                $total_absent = 0;
+                $total_holiday = 0;
+                $total_halfday = 0;
+                foreach ($query->get() as $record) {
+                    $total_attendance = 0;
+                    $count_absent = 0;
+                    $r = [
+                        'full_name' => $record->student?->full_name,
+                        'admission_no' => $record->student?->admission_no,
+                        'p' => $record->subjectAttendances!=null?$record->subjectAttendances
+                            ->filter(function ($r) use ($total_attendance, $total_grand_present) {
+                                $total_attendance++;
+                                $total_grand_present++;
+                                return $r->attendance_type == 'P';
+                            })->count():0,
+                        'l' => $record->subjectAttendances!==null?$record->subjectAttendances
+                            ->filter(function ($r) use ($total_attendance, $total_late) {
+                                $total_attendance++;
+                                $total_late++;
+                                return $r->attendance_type == 'L';
+                            })->count():0,
+                        'a' => $record->subjectAttendances!==null?$record->subjectAttendances
+                            ->filter(function ($r) use ($count_absent,$total_attendance,$total_absent) {
+                                $count_absent++;
+                                $total_attendance++;
+                                $total_absent++;
+                                return $r->attendance_type == 'A';
+                            })->count():0,
+                        'f' => $record->subjectAttendances!=null?$record->subjectAttendances
+                            ->filter(function ($r) use ($total_attendance,$total_halfday) {
+                                $total_attendance++;
+                                $total_halfday++;
+                                return $r->attendance_type == 'F';
+                            })->count():0,
+                        'h' => $record->subjectAttendances!==null?$record->subjectAttendances
+                            ->filter(function ($r) use ($total_attendance,$total_holiday) {
+                                $total_attendance++;
+                                $total_holiday++;
+                                return $r->attendance_type == 'H';
+                            })->count():0,
+                    ];
+                    $total_present = $total_attendance - $count_absent;
+                    $lines = [$total_present . '/' . $total_attendance];
+                    if ($count_absent == 0) {
+                        $lines[]= '100%';
+                    } else {
+                        $percentage = ($total_present / $total_attendance) * 100;
+                        $lines[]= number_format((float) $percentage, 2, '.', '') . '%';
+                    }
+
+                    $r[] = $lines;
+                    for ($i = 1; $i <= $days; $i++) {
+                        $day = [];
+                        $date_present = 0;
+                        $date_absent = 0;
+                        $date_total_class = 0;
+                        foreach ($record->subjectAttendances as $value) {
+                            if (strtotime($value->attendance_date) == strtotime("$year-$month-$i")) {
+                                if ($value->attendance_type == 'P' || $value->attendance_type == 'F' || $value->attendance_type == 'L') {
+                                    $date_present++;
+                                } else {
+                                    $date_absent++;
+                                }
+                                $date_total_class = $date_present + $date_absent;
+                            }
+                        }
+                        if ($date_total_class != 0) {
+                            $day[] = $date_present . '/' . $date_total_class;
+                            foreach($record->subjectAttendances as $attendance){
+                                if ($attendance->grade&&$attendance->subject!=null) {
+                                    $day[] = $attendance->subject->subject_code.": ".($attendance->grade??0);
+                                }
+                            }
+                        }
+                        $r[] = $day;
+                    }
+                    $records[]=$r;
+                }
+            }
 
             return view('backEnd.studentInformation.subject_attendance_report_view', compact('classes', 'records', 'days', 'year', 'month', 'current_day', 'class_id', 'section_id','subject_id'));
         }catch (\Exception $e) {

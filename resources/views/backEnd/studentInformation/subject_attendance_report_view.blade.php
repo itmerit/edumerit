@@ -287,104 +287,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                        $total_grand_present = 0;
-                                        $total_late = 0;
-                                        $total_absent = 0;
-                                        $total_holiday = 0;
-                                        $total_halfday = 0;
-                                    @endphp
                                     @foreach ($records as $record)
-                                        @php
-                                            $total_attendance = 0;
-                                            $count_absent = 0;
-                                        @endphp
                                         <tr>
-                                            <td>{{ $record->student?->full_name }}</td>
-                                            <td>{{ $record->student?->admission_no }}</td>
-                                            <td>{{ $record->subjectAttendances
-                                                    ->filter(function ($r) use ($total_attendance, $total_grand_present) {
-                                                        $total_attendance++;
-                                                        $total_grand_present++;
-                                                        return $r->attendance_type == 'P';
-                                                    })->count()
-                                                }}</td>
-                                            <td>{{ $record->subjectAttendances
-                                                    ->filter(function ($r) use ($total_attendance, $total_late) {
-                                                        $total_attendance++;
-                                                        $total_late++;
-                                                        return $r->attendance_type == 'L';
-                                                    })->count()
-                                                }}</td>
-                                            <td>{{ $record->subjectAttendances
-                                                    ->filter(function ($r) use ($count_absent,$total_attendance,$total_absent) {
-                                                        $count_absent++;
-                                                        $total_attendance++;
-                                                        $total_absent++;
-                                                        return $r->attendance_type == 'A';
-                                                    })->count()
-                                                }}</td>
-                                            <td>{{ $record->subjectAttendances
-                                                     ->filter(function ($r) use ($total_attendance,$total_halfday) {
-                                                        $total_attendance++;
-                                                        $total_halfday++;
-                                                        return $r->attendance_type == 'F';
-                                                    })->count()
-                                                }}</td>
-                                            <td>{{ $record->subjectAttendances
-                                                    ->filter(function ($r) use ($total_attendance,$total_holiday) {
-                                                        $total_attendance++;
-                                                        $total_holiday++;
-                                                        return $r->attendance_type == 'H';
-                                                    })->count()
-                                                }}</td>
-                                            <td>
-                                                @php
-                                                    $total_present = $total_attendance - $count_absent;
-                                                @endphp
-                                                {{ $total_present . '/' . $total_attendance }}
-                                                <hr>
-                                                @php
-                                                    if ($count_absent == 0) {
-                                                        echo '100%';
-                                                    } else {
-                                                        $percentage = ($total_present / $total_attendance) * 100;
-                                                        echo number_format((float) $percentage, 2, '.', '') . '%';
-                                                    }
-                                                @endphp
-                                            </td>
-                                            @for ($i = 1; $i <= $days; $i++)
-                                                @php
-                                                    $date = $year . '-' . $month . '-' . $i;
-                                                    $y = 0;
-                                                @endphp
-                                                <td width="3%" class="{{ $i <= 18 ? 'all' : 'none' }}">
-                                                    @php
-                                                        $date_present = 0;
-                                                        $date_absent = 0;
-                                                        $date_total_class = 0;
-                                                    @endphp
-                                                    @foreach ($record->subjectAttendances as $value)
-                                                        @if (strtotime($value->attendance_date) == strtotime($date))
-                                                            @php
-                                                                if ($value->attendance_type == 'P' || $value->attendance_type == 'F' || $value->attendance_type == 'L') {
-                                                                    $date_present++;
-                                                                } else {
-                                                                    $date_absent++;
-                                                                }
-                                                                $date_total_class = $date_present + $date_absent;
-                                                            @endphp
-                                                        @endif
-                                                    @endforeach
-                                                    @if ($date_total_class != 0)
-                                                        {{ $date_present . '/' . $date_total_class }}
-                                                        <hr>
-                                                        @foreach($record->subjectAttendances as $attendance)
-                                                            {{$attendance->subject?->subject_code.": ".($attendance->grade??0)}}<br>
-                                                        @endforeach
-                                                    @endif
-                                                </td>
-                                            @endfor
+                                            @foreach($record as $val)
+                                                @if(is_array($val))
+                                                    <td>{!! implode("<br>", $val) !!}</td>
+                                                @else
+                                                    <td>{{ $val }}</td>
+                                                @endif
+                                            @endforeach
                                         </tr>
                                     @endforeach
                                 </tbody>

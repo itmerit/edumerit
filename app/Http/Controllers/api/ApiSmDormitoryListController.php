@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\api;
 
-use List;
-use Validator;
 use App\SmClass;
 use App\SmStudent;
 use App\ApiBaseMethod;
