@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/test-hikvision', 'SmApiController@testHikvision');
+
 Route::get('db-correction', 'SmApiController@dbCorrections');
 Route::post('deviceInfo', 'api\ApiSmStudentAttendanceController@deviceInfo');
 // Route::post('system-disable', 'SmApiController@systemDisbale');
@@ -12,18 +14,18 @@ Route::post('deviceInfo', 'api\ApiSmStudentAttendanceController@deviceInfo');
     Route::get('user-demo', 'SmApiController@DemoUser');
     Route::any('saas-login', 'SmApiController@saasLogin');
 
-   
+
     Route::any('login', 'SmApiController@mobileLogin');
 
     Route::get('user-permission/{role_id}/{school_id}/{is_saas}', 'SmApiController@userPermission');
-    
+
     Route::group(['middleware' => ['auth:api']], function () {
         Route::post('auth/logout', 'api\SmAdminController@logout');
     });
 
 Route::group(['middleware' => ['XSS','auth:api','json.response']], function () {
     Route::get('send-sms', 'SmApiController@SendSMS');
-    Route::post('user_delete', 'SmApiController@deleteUser'); 
+    Route::post('user_delete', 'SmApiController@deleteUser');
     Route::get('sync', 'SmApiController@sync');
     Route::get('set-fcm-token', 'SmApiController@setFcmToken');
 
@@ -36,7 +38,7 @@ Route::group(['middleware' => ['XSS','auth:api','json.response']], function () {
 
 
 
-    // payment process and call back 
+    // payment process and call back
 
     Route::post('payment-data-save','api\SmPaymentGatewayController@dataSave');
     Route::post('payment-success-callback','api\SmPaymentGatewayController@successCallback');
@@ -44,7 +46,7 @@ Route::group(['middleware' => ['XSS','auth:api','json.response']], function () {
     // -------------------Start admin Module------------------
     Route::any('is-enabled', 'SmApiController@checkColumnAvailable');
 
- 
+
     Route::any('schools', 'SmApiController@allSchools');
 
 
@@ -168,7 +170,7 @@ Route::group(['middleware' => ['XSS','auth:api','json.response']], function () {
     Route::get('student-attendance-store-second', 'api\ApiSmStudentAttendanceController@studentAttendanceStoreSecond');
     Route::get('school/{school_id}/student-attendance-store-second', 'api\ApiSmStudentAttendanceController@saas_studentAttendanceStoreSecond');
 
-    
+
     //Subject Wise Attendance
 
     Route::get('section-subject', 'api\SubjectWiseAttendanceController@SelectSubject');
@@ -245,8 +247,8 @@ Route::group(['middleware' => ['XSS','auth:api','json.response']], function () {
     Route::post('save-upload-content', 'SmApiController@saveUploadContent'); // incomplete for API
     Route::get('delete-upload-content/{id}', 'SmApiController@deleteUploadContent');
     Route::get('school/{school_id}/delete-upload-content/{id}', 'SmApiController@saas_deleteUploadContent');
-    Route::get('upload-content-view/{id}', 'api\ApiSmTeacherController@viewContent'); 
-  
+    Route::get('upload-content-view/{id}', 'api\ApiSmTeacherController@viewContent');
+
     // Start rest of the routes
     Route::get('assignment-list', 'SmApiController@assignmentList');
     Route::get('school/{school_id}/assignment-list', 'SmApiController@saas_assignmentList');
@@ -264,7 +266,7 @@ Route::group(['middleware' => ['XSS','auth:api','json.response']], function () {
     Route::get('add-homeworks','api\ApiSmHomeWorkController@addHomework');
     Route::post('save-homework-data', ['as' => 'saveHomeworkData', 'uses' => 'api\ApiSmHomeWorkController@saveHomeworkData']);
 
-  
+
     // ------------------End HomeWork -----------------
 
 
@@ -616,12 +618,12 @@ Route::group(['middleware' => ['XSS','auth:api','json.response']], function () {
     Route::post('homework-list', ['as' => 'homework-list_post', 'uses' => 'api\ApiSmHomeWorkController@searchHomework']);
     Route::post('school/{school_id}/homework-list', ['as' => 'saas_homework-list_post', 'uses' => 'SmApiController@saas_searchHomework']);
     Route::get('evaluation-homework/{class_id}/{section_id}/{homework_id}', ['as' => 'evaluation-homework', 'uses' => 'api\ApiSmHomeWorkController@evaluationHomework']);
-    
+
     Route::get('school/{school_id}/evaluation-homework/{class_id}/{section_id}/{homework_id}', ['as' => 'saas-evaluation-homework', 'uses' => 'api\ApiSmHomeWorkController@saas_evaluationHomework']);
-    
+
     Route::post('evaluate-homework', ['as' => 'evaluate-homework', 'uses' => 'api\ApiSmHomeWorkController@saveHomeworkEvaluationData']);
      Route::post('school/{school_id}/evaluate-homework', ['as' => 'saas-evaluate-homework', 'uses' => 'api\ApiSmHomeWorkController@saasSaveHomeworkEvaluationData']);
-    
+
 
     Route::any('add-homework', 'api\ApiSmHomeWorkController@addHomework');
     Route::post('update-homework', 'api\ApiSmHomeWorkController@homeworkUpdate');
@@ -993,7 +995,7 @@ Route::group(['middleware' => ['XSS','auth:api','json.response']], function () {
 
     Route::any('change-password', 'SmApiController@updatePassowrdStoreApi');
     Route::any('school/{school_id}/change-password', 'SmApiController@saas_updatePassowrdStoreApi');
-    // exam routine 
+    // exam routine
     Route::get('exam-schedule-create', 'api\ApiSmExamRoutineController@examRoutine');
     Route::post('exam-schedule-create', 'api\ApiSmExamRoutineController@examScheduleSearch');
     Route::post('add-exam-routine-store', 'api\ApiSmExamRoutineController@addExamRoutineStore');
@@ -1147,7 +1149,7 @@ Route::group(['middleware' => ['XSS','auth:api','json.response']], function () {
     Route::post('student-final-result', 'CustomResultSettingController@studentFinalResult');
     //User Info for demo
 
-    
+
     Route::get('school/{school_id}/user-demo', 'SmApiController@SaasDemoUser');
     Route::get('currency-converter', 'SmApiController@convertCurrency'); //api/currency-converter?amount=2&from_currency=USD&to_currency=BDT
     Route::any('student-fees-payment', 'SmApiController@studentFeesPayment');
@@ -1173,7 +1175,7 @@ Route::group(['middleware' => ['XSS','auth:api','json.response']], function () {
     //Attendance store all
     Route::post('student-attendance-store-all', 'api\ApiSmStudentAttendanceController@studentStoreAttendanceAllApi');
 
-  
+
     Route::get('student-fees-installments/{record_id}', 'api\DirectFeesApiController@getInstallments');
     Route::get('student-fees-installment-make-payment/{record_id}', 'api\DirectFeesApiController@makePayment');
     Route::post('student-fees-installment-submit-payment/{record_id}', 'api\DirectFeesApiController@submitPayment');
