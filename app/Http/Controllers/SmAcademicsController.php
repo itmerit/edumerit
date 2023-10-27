@@ -257,22 +257,21 @@ class SmAcademicsController extends Controller
     public function ajaxSelectSubject(Request $request)
     {
         try {
-            $staff_info = SmStaff::where('user_id', Auth::user()->id)->first();
             // return $staff_info;
+            $subject_all = SmAssignSubject::where('class_id', '=', $request->class);
             if (teacherAccess()) {
-                $subject_all = SmAssignSubject::where('class_id', '=', $request->class)
-                    ->where('section_id', $request->section)
-                    ->where('teacher_id', $staff_info->id)
-                    ->distinct('subject_id')
-                    ->get();
-            } else {
-                $subject_all = SmAssignSubject::where('class_id', '=', $request->class)
-                    ->where('section_id', $request->section)
-                    ->distinct('subject_id')
-                    ->get();
+                $staff_info = SmStaff::where('user_id', Auth::user()->id)->first();
+                if ($staff_info!=null)
+                    $subject_all->where('teacher_id', $staff_info->id);
             }
+
+            if ($request->section) {
+                $subject_all->where('section_id', $request->section);
+            }
+
             $students = [];
-            foreach ($subject_all as $allSubject) {
+            $subject_all->distinct('subject_id');
+            foreach ($subject_all->get() as $allSubject) {
                 $students[] = SmSubject::where('id', $allSubject->subject_id)->first(['id','subject_name','subject_type']);
             }
             return response()->json([$students]);
