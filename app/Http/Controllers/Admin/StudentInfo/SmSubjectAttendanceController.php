@@ -478,9 +478,10 @@ class SmSubjectAttendanceController extends Controller
                                 ->where('academic_id', getAcademicId())
                                 ->where('school_id',Auth::user()->school_id);
                         });
-                })
-                ->whereHas('student', function ($q)  {
-                    $q->where('active_status', 1);
+                    $query->has('student')
+                        ->orWheredoesntHave('student', function ($query) {
+                            $query->where('active_status', 1);
+                        });
                 });
 
             if ($class_id != "")
@@ -571,11 +572,12 @@ class SmSubjectAttendanceController extends Controller
                     }
                     $records[]=$r;
                 }
+            }else {
+                Toastr::error('Student not assigned.', 'Failed');
             }
 
             return view('backEnd.studentInformation.subject_attendance_report_view', compact('classes', 'records', 'days', 'year', 'month', 'current_day', 'class_id', 'section_id','subject_id'));
         }catch (\Exception $e) {
-            dd($e);
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
         }
