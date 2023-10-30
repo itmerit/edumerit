@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Console\Commands\ImportCameraData;
+use App\Jobs\ImportCameraDataJob;
 use App\Role;
 use App\User;
 use App\SmBook;
@@ -105,6 +107,7 @@ use App\SmOptionalSubjectAssign;
 use App\SmStudentTakeOnlineExam;
 use App\SmUploadHomeworkContent;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
@@ -125,9 +128,85 @@ use Modules\RolePermission\Entities\Permission;
 use Modules\InfixBiometrics\Entities\InfixBioSetting;
 use Modules\RolePermission\Entities\AssignPermission;
 use App\Notifications\StudyMeterialCreatedNotification;
+use GuzzleHttp\Client;
 
 class SmApiController extends Controller
 {
+
+    public function testHikvision()
+    {
+        dd(now()->hour);
+        $startHour = 7;
+        $endHour = 19;
+        $searchResultPosition = 30;
+
+        $client = new Client([
+            'auth' => [
+                'admin',
+                '12345678a',
+                'digest',
+            ],
+        ]);
+
+        $page = 0;
+        $response = $client->post('http://192.168.100.9/ISAPI/AccessControl/AcsEvent?format=json', [
+            'json' => [
+                "AcsEventCond" => [
+                    "searchID" => $page . "-page",
+                    "searchResultPosition" => 30,
+                    "maxResults" => 30,
+                    "major" => 0,
+                    "minor" => 0,
+                    "startTime" => "2023-10-30T08:50:00+05:00",
+                    "endTime" => "2023-10-30T19:00:00+05:00"
+                ],
+            ],
+        ]);
+        if ($response->getStatusCode() == 200) {
+            $data = json_decode($response->getBody(), JSON_PRETTY_PRINT);
+
+            $attendanceArray = [];
+            foreach ($data['AcsEvent']['InfoList'] as $item) {
+                if (isset($item['employeeNoString']) && isset($item['time'])) {
+                    $attendanceArray[$item['employeeNoString']] = ['attendanceStatus' => $item['attendanceStatus'], 'time' => $item['time']];
+                }
+            }
+
+            if (!empty($attendanceArray)) {
+//                dd(date('Y-m-d', strtotime($request->date));
+//                dd($attendanceArray);
+                $staffIds = DB::table('sm_staffs')->whereIn('custom_field->hikvision_no', array_keys($attendanceArray))
+                    ->get()->pluck('custom_field', 'id');
+                foreach ($attendanceArray as $employeeId => $value) {
+//                    $attendanceType = '';
+                    if ($value['time'] >= 9 && $value['attendanceStatus'] == 'checkIn') {
+                        $attendanceType = 'L';
+                    } elseif ($value['time'] < 9 && $value['attendanceStatus'] == 'checkIn') {
+                        $attendanceType = 'P';
+                    }
+
+                    $attendanceTime = Carbon::parse($value['time'])->toDateTimeString();
+                    $attendanceDate = date('Y-m-d', strtotime($attendanceTime));
+                    foreach ($staffIds as $staffKey => $staffValue) {
+
+                        SmStaffAttendence::updateOrCreate(
+                            [
+                                'attendence_date' => $attendanceDate,
+                                'staff_id'=>$staffKey
+                            ],
+                            [
+                                'staff_id' => $staffKey,
+                                'attendence_type' => $attendanceType,
+                                'attendance_time' => $attendanceTime,
+                                'attendence_date' => $attendanceTime,
+                            ]
+                        );
+                    }
+
+                }
+            }
+        }
+    }
 
 
     // send sms
@@ -205,7 +284,7 @@ class SmApiController extends Controller
         }
 
     }
-    
+
     public function privacyPermissionStatus(Request $request)
     {
         if (ApiBaseMethod::checkUrl($request->fullUrl())) {
@@ -1534,10 +1613,10 @@ class SmApiController extends Controller
                     $notifications = SmNotification::where('user_id',$user->id)->where('is_read',0)->count();
                     $data['user'] = $user->toArray();
                     $data['unread_notifications'] = @$notifications;
-                    
-                   
+
+
                     $role_id = $user->role_id;
-                    
+
                     if ($role_id == 2) {
 
                         $data['userDetails'] = DB::table('sm_students')->select('sm_students.*','sm_students.user_id as student_user_id', 'sm_students.id as s_id', 'sm_parents.*','sm_parents.user_id as parent_user_id')
@@ -1594,7 +1673,7 @@ class SmApiController extends Controller
         }
     }
     public function get_class_name(Request $request, $id)
-    { 
+    {
         $get_class_name = SmClass::select('class_name as name')->where('id', $id)->first();
         return $get_class_name;
     }
@@ -8739,10 +8818,10 @@ class SmApiController extends Controller
                             ->where('role_id', $role_id)
                             ->with('roles', 'departments', 'designations', 'genders')
                             ->get();
-            
+
             $staffs_api->map( function($staff) {
-               
-                
+
+
                     $staff->name = $staff->roles ? $staff->roles->name : null;
                     $staff->type = $staff->roles ? $staff->roles->type : null;
                     $staff->title = $staff->designations ? $staff->designations->title : null;
@@ -8761,7 +8840,7 @@ class SmApiController extends Controller
             //     ->join('sm_base_setups', 'sm_staffs.gender_id', '=', 'sm_base_setups.id')
             //     ->get()->toArray();
 
-            
+
             if (ApiBaseMethod::checkUrl($request->fullUrl())) {
 
                 return ApiBaseMethod::sendResponse($staffs_api, null);
@@ -8781,10 +8860,10 @@ class SmApiController extends Controller
                             ->where('role_id', $role_id)
                             ->with('roles', 'departments', 'designations', 'genders')
                             ->get();
-            
+
             $staffs_api->map( function($staff) {
-             
-                
+
+
                     $staff->name = $staff->roles ? $staff->roles->name : null;
                     $staff->type = $staff->roles ? $staff->roles->type : null;
                     $staff->title = $staff->designations ? $staff->designations->title : null;
@@ -16350,7 +16429,7 @@ class SmApiController extends Controller
         try{
             $student = SmStudent::where('user_id', $id)->where('school_id',$school_id)->first();
             $record = StudentRecord::where('id', $record_id)->where('student_id', $student->id)->first();
-            
+
             $assignSubjects = DB::table('sm_assign_subjects')
                 ->leftjoin('sm_subjects', 'sm_subjects.id', '=', 'sm_assign_subjects.subject_id')
                 ->leftjoin('sm_staffs', 'sm_staffs.id', '=', 'sm_assign_subjects.teacher_id')
@@ -16366,9 +16445,9 @@ class SmApiController extends Controller
                 })->toArray();
                 return ApiBaseMethod::sendResponse($data, null);
             }
-        } 
+        }
         catch (\Exception $e) {
-        }       
+        }
 
     }
     public function studentLibrary(Request $request, $id)
@@ -18033,7 +18112,7 @@ class SmApiController extends Controller
                     if($user){
                         Notification::send($user, new StudyMeterialCreatedNotification($notification));
                     }
-                    
+
                 }
             } else {
                 $students = SmStudent::select('id')->where('class_id', $request->input('class'))->where('section_id', $request->input('section'))->get();
@@ -18050,7 +18129,7 @@ class SmApiController extends Controller
                     if($user){
                         Notification::send($user, new StudyMeterialCreatedNotification($notification));
                     }
-                    
+
                 }
             }
         }
