@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\SmStaffAttendence;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +24,7 @@ class ImportCameraData extends Command
 
     public function handle()
     {
-                        Log::info('API Response:', ['response' => now()->hour]);
+        Log::info('API Response:', ['response' => now()->hour]);
 
         $startHour = 7;
         $endHour = 19;
@@ -36,7 +38,7 @@ class ImportCameraData extends Command
             ],
         ]);
 
-        while (now()->hour >= 1 && now()->hour <= 10) {
+        while (now()->hour >= 6 && now()->hour <= 20) {
             // Build your API request data and endpoint URL.
             $page = 0;
             do {
@@ -54,6 +56,47 @@ class ImportCameraData extends Command
                     ],
                 ]);
                 $data = json_decode($response->getBody(), JSON_PRETTY_PRINT);
+                if ($response->getStatusCode() == 200) {
+                    $data = json_decode($response->getBody(), JSON_PRETTY_PRINT);
+
+                    $attendanceArray = [];
+                    foreach ($data['AcsEvent']['InfoList'] as $item) {
+                        if (isset($item['employeeNoString']) && isset($item['time'])) {
+                            $attendanceArray[$item['employeeNoString']] = ['attendanceStatus' => $item['attendanceStatus'], 'time' => $item['time']];
+                        }
+                    }
+
+                    if (!empty($attendanceArray)) {
+                        $staffIds = DB::table('sm_staffs')->whereIn('custom_field->hikvision_no', array_keys($attendanceArray))
+                            ->get()->pluck('custom_field', 'id');
+                        foreach ($attendanceArray as $employeeId => $value) {
+                            if ($value['time'] >= 9 && $value['attendanceStatus'] == 'checkIn') {
+                                $attendanceType = 'L';
+                            } elseif ($value['time'] < 9 && $value['attendanceStatus'] == 'checkIn') {
+                                $attendanceType = 'P';
+                            }
+
+                            $attendanceTime = \Illuminate\Support\Carbon::parse($value['time'])->toDateTimeString();
+                            $attendanceDate = date('Y-m-d', strtotime($attendanceTime));
+                            foreach ($staffIds as $staffKey => $staffValue) {
+
+                                SmStaffAttendence::updateOrCreate(
+                                    [
+                                        'attendence_date' => $attendanceDate,
+                                        'staff_id'=>$staffKey
+                                    ],
+                                    [
+                                        'staff_id' => $staffKey,
+                                        'attendence_type' => $attendanceType,
+                                        'attendance_time' => $attendanceTime,
+                                        'attendence_date' => $attendanceTime,
+                                    ]
+                                );
+                            }
+
+                        }
+                    }
+                }
 
                 Log::channel('daily')->info('API Response', [
                     'data' => $data

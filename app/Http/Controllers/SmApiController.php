@@ -135,6 +135,7 @@ class SmApiController extends Controller
 
     public function testHikvision()
     {
+        dd(now()->hour);
         $startHour = 7;
         $endHour = 19;
         $searchResultPosition = 30;
@@ -149,25 +150,62 @@ class SmApiController extends Controller
 
         $page = 0;
         $response = $client->post('http://192.168.100.9/ISAPI/AccessControl/AcsEvent?format=json', [
-                'json' => [
-                    "AcsEventCond" => [
-                        "searchID" => $page. "-page",
-                        "searchResultPosition" => $searchResultPosition + 30,
-                        "maxResults" => 30,
-                        "major" => 0,
-                        "minor" => 0,
-                        "startTime" => "2023-10-25T06:00:00+05:00",
-                        "endTime"=> "2023-10-25T19:00:00+05:00"
-                    ],
+            'json' => [
+                "AcsEventCond" => [
+                    "searchID" => $page . "-page",
+                    "searchResultPosition" => 30,
+                    "maxResults" => 30,
+                    "major" => 0,
+                    "minor" => 0,
+                    "startTime" => "2023-10-30T08:50:00+05:00",
+                    "endTime" => "2023-10-30T19:00:00+05:00"
                 ],
-            ]);
-        $data = json_decode($response->getBody(), JSON_PRETTY_PRINT);
-//        dd($data);
-//
-        Log::channel('daily')->info('API Response', [
-            'page' => $page,
+            ],
         ]);
-        // Process
+        if ($response->getStatusCode() == 200) {
+            $data = json_decode($response->getBody(), JSON_PRETTY_PRINT);
+
+            $attendanceArray = [];
+            foreach ($data['AcsEvent']['InfoList'] as $item) {
+                if (isset($item['employeeNoString']) && isset($item['time'])) {
+                    $attendanceArray[$item['employeeNoString']] = ['attendanceStatus' => $item['attendanceStatus'], 'time' => $item['time']];
+                }
+            }
+
+            if (!empty($attendanceArray)) {
+//                dd(date('Y-m-d', strtotime($request->date));
+//                dd($attendanceArray);
+                $staffIds = DB::table('sm_staffs')->whereIn('custom_field->hikvision_no', array_keys($attendanceArray))
+                    ->get()->pluck('custom_field', 'id');
+                foreach ($attendanceArray as $employeeId => $value) {
+//                    $attendanceType = '';
+                    if ($value['time'] >= 9 && $value['attendanceStatus'] == 'checkIn') {
+                        $attendanceType = 'L';
+                    } elseif ($value['time'] < 9 && $value['attendanceStatus'] == 'checkIn') {
+                        $attendanceType = 'P';
+                    }
+
+                    $attendanceTime = Carbon::parse($value['time'])->toDateTimeString();
+                    $attendanceDate = date('Y-m-d', strtotime($attendanceTime));
+                    foreach ($staffIds as $staffKey => $staffValue) {
+
+                        SmStaffAttendence::updateOrCreate(
+                            [
+                                'attendence_date' => $attendanceDate,
+                                'staff_id'=>$staffKey
+                            ],
+                            [
+                                'staff_id' => $staffKey,
+                                'attendence_type' => $attendanceType,
+                                'attendance_time' => $attendanceTime,
+                                'attendence_date' => $attendanceTime,
+                            ]
+                        );
+                    }
+
+                }
+            }
+        }
     }
 
 
