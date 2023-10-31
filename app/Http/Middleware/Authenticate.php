@@ -4,7 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 
 class Authenticate extends Middleware
 {
@@ -22,9 +25,12 @@ class Authenticate extends Middleware
     public function handle($request, Closure $next, ...$guards)
     {
 
-        if ( Auth::user()->access_status == 0) {
+
+        $response = $next($request);
+
+        if ( !Auth::guest() && Auth::user()->access_status == 0) {
             Auth::logout();
         }
-        return $next($request);
+        return $response;
     }
 }
