@@ -126,7 +126,11 @@ class SmSubjectAttendanceController extends Controller
                 $attendance->student_id = gv($student, 'student');
                 $attendance->class_id = gv($student, 'class');
                 $attendance->section_id = gv($student, 'section');
-                $attendance->attendance_type = gv($student, 'attendance_type');
+
+//                $timestamp = gv($student, 'attendance_type');
+//                $currentDateTime = date('Y-m-d');
+//                $attendance->attendance_time = date('Y-m-d H:i:s', strtotime($currentDateTime . " " . $timestamp));
+
                 $attendance->behaviour_type = gv($student, 'behaviour_type');
                 $attendance->grade = gv($student, 'grade');
                 $attendance->notes = gv($student, 'note');

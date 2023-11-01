@@ -246,42 +246,20 @@ $breadCrumbs = [
                                         </td>
                                         <td>{{$student->roll_no}}</td>
                                         <td>
-                                            <div class="d-flex radio-btn-flex">
-                                                <div class="mr-20">
-                                                    <input type="radio"
-                                                        name="attendance[{{$student->id}}][attendance_type]"
-                                                        id="attendanceP{{$student->id}}" value="P"
-                                                        class="common-radio attendanceP attendance_type"
-                                                        {{ $student->studentDetail->DateWiseAttendances !=null ? ($student->studentDetail->DateWiseAttendances->attendance_type == "P" ? 'checked' :'') : ($attendance_type != "" ? '' :'checked') }}>
-                                                    <label
-                                                        for="attendanceP{{$student->id}}">@lang('student.present')</label>
+                                            <div class="row no-gutters input-right-icon">
+                                                <div class="col">
+                                                    <div class="primary_input">
+                                                        <input class="primary_input_field time start_time form-control"
+                                                               name="attendance[{{$student->id}}][attendance_time]" type="text"
+                                                               value="{{($student->studentDetail?->DateWiseAttendances!=null?date('H:i:s', strtotime($student->studentDetail?->DateWiseAttendances->attendance_time)):'')}}"
+                                                               required>
+                                                        <span class="text-danger start_time_error"></span>
+                                                    </div>
                                                 </div>
-                                                <div class="mr-20">
-                                                    <input type="radio"
-                                                        name="attendance[{{$student->id}}][attendance_type]"
-                                                        id="attendanceL{{$student->id}}" value="L"
-                                                        class="common-radio attendance_type"
-                                                        {{ $student->studentDetail->DateWiseAttendances !=null ? ($student->studentDetail->DateWiseAttendances->attendance_type == "L" ? 'checked' :''):''}}>
-                                                    <label
-                                                        for="attendanceL{{$student->id}}">@lang('student.late')</label>
-                                                </div>
-                                                <div class="mr-20">
-                                                    <input type="radio"
-                                                        name="attendance[{{$student->id}}][attendance_type]"
-                                                        id="attendanceA{{$student->id}}" value="A"
-                                                        class="common-radio attendance_type"
-                                                        {{$student->studentDetail->DateWiseAttendances !=null ? ($student->studentDetail->DateWiseAttendances->attendance_type == "A" ? 'checked' :''):''}}>
-                                                    <label
-                                                        for="attendanceA{{$student->id}}">@lang('student.absent')</label>
-                                                </div>
-                                                <div>
-                                                    <input type="radio"
-                                                        name="attendance[{{$student->id}}][attendance_type]"
-                                                        id="attendanceH{{$student->id}}" value="F"
-                                                        class="common-radio attendance_type"
-                                                        {{$student->studentDetail->DateWiseAttendances !=null ? ($student->studentDetail->DateWiseAttendances->attendance_type == "F" ? 'checked' :'') : ''}}>
-                                                    <label
-                                                        for="attendanceH{{$student->id}}">@lang('student.half_day')</label>
+                                                <div class="col-auto">
+                                                    <button class="" type="button">
+                                                        <i class="ti-timer"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </td>
@@ -312,9 +290,9 @@ $breadCrumbs = [
                                 </tbody>
                             </table>
                         </x-table>
-                        {{ Form::close() }}
                     </div>
                 </div>
+                {{ Form::close() }}
             </div>
         </div>
         @endisset
