@@ -47,7 +47,7 @@
              });
            
              $(".primary_input_field.time").datetimepicker({
-               format: "LT",
+               format: "H:ss:mm",
              });
            
              if ($)

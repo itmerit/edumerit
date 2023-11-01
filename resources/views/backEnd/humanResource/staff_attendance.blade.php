@@ -25,8 +25,9 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <a href="{{ route('staff-attendance-import') }}" class="primary-btn small fix-gr-bg pull-right "><span
-                            class="ti-plus pr-2"></span>@lang('hr.import_attendance')</a>
+                    <a href="{{ route('staff-attendance-import') }}"
+                       class="primary-btn small fix-gr-bg pull-right "><span
+                                class="ti-plus pr-2"></span>@lang('hr.import_attendance')</a>
                 </div>
             </div>
             <div class="row">
@@ -39,13 +40,15 @@
                             <input type="hidden" name="url" id="url" value="{{ URL::to('/') }}">
                             <div class="col-lg-6 mt-30-md col-md-6">
                                 <label class="primary_input_label" for="">@lang('hr.role') <span
-                                        class="text-danger"> *</span></label>
+                                            class="text-danger"> *</span></label>
                                 <select class="primary_select  form-control{{ $errors->has('role') ? ' is-invalid' : '' }}"
-                                    id="select_class" name="role">
-                                    <option data-display="@lang('hr.select_role') *" value="">@lang('hr.select_role') *</option>
+                                        id="select_class" name="role">
+                                    <option data-display="@lang('hr.select_role') *" value="">@lang('hr.select_role')
+                                        *
+                                    </option>
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->id }}"
-                                            {{ isset($role_id) ? ($role->id == $role_id ? 'selected' : '') : '' }}>
+                                                {{ isset($role_id) ? ($role->id == $role_id ? 'selected' : '') : '' }}>
                                             {{ $role->name }}</option>
                                     @endforeach
                                 </select>
@@ -58,16 +61,17 @@
 
                             <div class="col-lg-6 mt-30-md col-md-6">
                                 <div class="primary_input mb-15">
-                                    <label for="startDate">@lang('hr.attendance_date')<span class="text-danger"> *</span></label>
+                                    <label for="startDate">@lang('hr.attendance_date')<span
+                                                class="text-danger"> *</span></label>
                                     <div class="primary_datepicker_input">
                                         <div class="no-gutters input-right-icon">
                                             <div class="col">
                                                 <div class="">
-                                                    <input class="primary_input_field primary_input_field date form-control"
-                                                        {{ isset($date) ? 'read-only-input' : '' }}" id="startDate"
-                                                        type="text" name="attendance_date" autocomplete="off"
-                                                        value="{{ isset($date) ? $date : date('m/d/Y') }}"
-                                                        autocomplete="off">
+                                                    <input class="primary_input_field date form-control"
+                                                    {{ isset($date) ? 'read-only-input' : '' }} id="startDate"
+                                                    type="text" name="attendance_date" autocomplete="off"
+                                                    value="{{ isset($date) ? $date : date('m/d/Y') }}"
+                                                    autocomplete="off">
                                                 </div>
                                             </div>
                                             <button class="btn-date" type="button">
@@ -136,81 +140,74 @@
                         </div>
                         {{ Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'staff-attendance-store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) }}
                         <input class="staff_attendance_date" type="hidden" name="date"
-                            value="{{ isset($date) ? $date : '' }}">
+                               value="{{ isset($date) ? $date : '' }}">
                         <div class="row">
                             <div class="col-lg-12">
                                 <table class="table school-table-style" cellspacing="0" width="100%">
                                     <thead>
 
-                                        <tr>
-                                            <th>@lang('hr.staff_no')</th>
-                                            <th>@lang('hr.staff_name')</th>
-                                            <th>@lang('hr.role')</th>
-                                            <th>@lang('hr.attendance')</th>
-                                            <th>@lang('hr.note')</th>
-                                        </tr>
+                                    <tr>
+                                        <th>@lang('hr.staff_no')</th>
+                                        <th>@lang('hr.staff_name')</th>
+                                        <th>@lang('hr.role')</th>
+                                        <th>@lang('hr.attendance')</th>
+                                        <th>@lang('hr.note')</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($staffs as $staff)
-                                            <tr>
-                                                <td>{{ $staff->staff_no }}<input type="hidden" name="id[]"
-                                                        value="{{ $staff->id }}"></td>
-                                                <td>{{ $staff->first_name . ' ' . $staff->last_name }}</td>
-                                                <td>{{ $staff->roles != '' ? $staff->roles->name : '' }}</td>
-                                                <td>
-                                                    <div class="d-flex">
-                                                        <div class="mr-20">
-                                                            <input type="radio" name="attendance[{{ $staff->id }}]"
-                                                                id="attendanceP{{ $staff->id }}" value="P"
-                                                                class="common-radio attendanceP attendance_type_staff"
-                                                                {{ $staff->DateWiseStaffAttendance != null ? ($staff->DateWiseStaffAttendance->attendence_type == 'P' ? 'checked' : '') : 'checked' }}>
-                                                            <label
-                                                                for="attendanceP{{ $staff->id }}">@lang('hr.present')</label>
-                                                        </div>
-                                                        <div class="mr-20">
-                                                            <input type="radio" name="attendance[{{ $staff->id }}]"
-                                                                id="attendanceL{{ $staff->id }}" value="L"
-                                                                class="common-radio attendance_type_staff"
-                                                                {{ $staff->DateWiseStaffAttendance != null ? ($staff->DateWiseStaffAttendance->attendence_type == 'L' ? 'checked' : '') : '' }}>
-                                                            <label
-                                                                for="attendanceL{{ $staff->id }}">@lang('hr.late')</label>
-                                                        </div>
-                                                        <div class="mr-20">
-                                                            <input type="radio" name="attendance[{{ $staff->id }}]"
-                                                                id="attendanceA{{ $staff->id }}" value="A"
-                                                                class="common-radio attendance_type_staff"
-                                                                {{ $staff->DateWiseStaffAttendance != null ? ($staff->DateWiseStaffAttendance->attendence_type == 'A' ? 'checked' : '') : '' }}>
-                                                            <label
-                                                                for="attendanceA{{ $staff->id }}">@lang('hr.absent')</label>
+                                    @foreach ($staffs as $staff)
+                                        <tr>
+                                            <td>{{ $staff->staff_no }}<input type="hidden" name="id[]"
+                                                                             value="{{ $staff->id }}"></td>
+                                            <td>{{ $staff->first_name . ' ' . $staff->last_name }}</td>
+                                            <td>{{ $staff->roles != '' ? $staff->roles->name : '' }}</td>
+                                            <td>
+                                                <div class="row no-gutters input-right-icon">
+                                                    <div class="col">
+                                                        <div class="primary_input">
+                                                            <input class="primary_input_field time start_time form-control"
+                                                                   name="attendance[{{$staff->id}}]" type="text"
+                                                                   value="{{($staff->DateWiseStaffAttendance!=null?date('H:i:s', strtotime($staff->DateWiseStaffAttendance->attendance_time)):'')}}"
+                                                                   required>
+                                                            <span class="text-danger start_time_error"></span>
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <div class="primary_input">
-                                                        <textarea class="primary_input_field form-control note_{{ $staff->id }}" cols="0" rows="2"
-                                                            name="note[{{ $staff->id }}]" id="">{{ $staff->DateWiseStaffAttendance != null ? $staff->DateWiseStaffAttendance->notes : '' }}</textarea>
-                                                        <label class="primary_input_label"
-                                                            for="">@lang('hr.add_note_here')</label>
-                                                        <span class="focus-border textarea"></span>
-                                                        <span class="invalid-feedback">
+                                                    <div class="col-auto">
+                                                        <button class="" type="button">
+                                                            <i class="ti-timer"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="primary_input">
+                                                        <textarea
+                                                                class="primary_input_field form-control note_{{ $staff->id }}"
+                                                                cols="0" rows="2"
+                                                                name="note[{{ $staff->id }}]"
+                                                                id="">{{ $staff->DateWiseStaffAttendance != null ? $staff->DateWiseStaffAttendance->notes : '' }}</textarea>
+                                                    <label class="primary_input_label"
+                                                           for="">@lang('hr.add_note_here')</label>
+                                                    <span class="focus-border textarea"></span>
+                                                    <span class="invalid-feedback">
                                                             <strong>@lang('hr.error')</strong>
                                                         </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="text-center">
-                                                <button type="submit" class="primary-btn mr-40 fix-gr-bg nowrap submit">
-                                                    @lang('hr.save_attendance')
-                                                </button>
+                                                </div>
                                             </td>
-                                            <td></td>
                                         </tr>
+                                    @endforeach
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            <button type="submit" class="primary-btn mr-40 fix-gr-bg nowrap submit">
+                                                @lang('hr.save_attendance')
+                                            </button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>

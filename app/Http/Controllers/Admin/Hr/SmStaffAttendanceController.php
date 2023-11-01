@@ -53,15 +53,17 @@ class SmStaffAttendanceController extends Controller
             $roles = InfixRole::where('active_status', '=', '1')->whereNotIn('id', [1, 2, 3, 10])->whereOr(['school_id', Auth::user()->school_id], ['school_id', 1])->get();
             $role_id = $request->role;
             $staffs = SmStaff::with('DateWiseStaffAttendance', 'roles')
-            ->where(function($q) use ($request) {
-                $q->where('role_id', $request->role)->orWhere('previous_role_id', $request->role);
-            })
-            ->status()->get();
+                ->where(function ($q) use ($request) {
+                    $q->where('role_id', $request->role)->orWhere('previous_role_id', $request->role);
+                })
+                ->status()->get();
 
             if ($staffs->isEmpty()) {
                 Toastr::error('No result found', 'Failed');
                 return redirect('staff-attendance');
             }
+
+//            dd($staffs);
 
             $attendance_type = $staffs[0]['DateWiseStaffAttendance'] != null ? $staffs[0]['DateWiseStaffAttendance']['attendance_type'] : '';
 
@@ -88,7 +90,11 @@ class SmStaffAttendanceController extends Controller
                 $attendance = new SmStaffAttendence();
                 $attendance->staff_id = $staff;
                 $attendance->school_id = Auth::user()->school_id;
-                $attendance->attendence_type = $request->attendance[$staff];
+                $timestamp = $request->attendance[$staff];
+
+                $currentDateTime = date('Y-m-d');
+                $attendance->attendance_time = date('Y-m-d H:i:s', strtotime($currentDateTime . " " . $timestamp));
+
                 $attendance->notes = $request->note[$staff];
                 $attendance->attendence_date = date('Y-m-d', strtotime($request->date));
                 $attendance->save();
@@ -98,11 +104,11 @@ class SmStaffAttendanceController extends Controller
                 $compact['user_email'] = $staffInfo->email;
                 $compact['staff_name'] = $staffInfo->full_name;
                 $compact['attendance_date'] = date('Y-m-d', strtotime($request->date));
-                if($request->attendance[$staff] == "P"){
+                if ($request->attendance[$staff] == "P") {
                     @send_sms($staffInfo->mobile, 'staff_attendance', $compact);
-                }elseif($request->attendance[$staff] == "A"){
+                } elseif ($request->attendance[$staff] == "A") {
                     @send_sms($staffInfo->mobile, 'staff_absent', $compact);
-                }elseif($request->attendance[$staff] == "L"){
+                } elseif ($request->attendance[$staff] == "L") {
                     @send_sms($staffInfo->mobile, 'staff_late', $compact);
                 }
             }
@@ -179,7 +185,7 @@ class SmStaffAttendanceController extends Controller
             $month = $request->month;
             $role_id = $request->role;
             $current_day = date('d');
-            
+
             $days = cal_days_in_month(CAL_GREGORIAN, $request->month, $request->year);
             $roles = InfixRole::whereNotIn('id', [1, 2, 3, 10])->where(function ($q) {
                 $q->where('school_id', Auth::user()->school_id)->orWhere('type', 'System');
@@ -238,7 +244,7 @@ class SmStaffAttendanceController extends Controller
             //     ]
             // )->setPaper('A4', 'landscape');
             // return $pdf->stream('staff_attendance.pdf');
-            return view('backEnd.humanResource.staff_attendance_print', compact('attendances', 'days', 'year', 'month', 'current_day', 'roles', 'role_id','role'));
+            return view('backEnd.humanResource.staff_attendance_print', compact('attendances', 'days', 'year', 'month', 'current_day', 'roles', 'role_id', 'role'));
         } catch (\Exception $e) {
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
