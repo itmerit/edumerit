@@ -250,7 +250,7 @@
 
                         if (data[0].length) {
                             $.each(data[0], function (i, subject) {
-                                $("#common_select_subject").append(
+                                $("#common_select_section").append(
                                     $("<option>", {
                                         value: subject.id,
                                         text: subject.subject_name,
@@ -258,8 +258,8 @@
                                 );
                             });
                         }
-                        $('#common_select_subject').niceSelect('update');
-                        $('#common_select_subject').trigger('change');
+                        $('#common_select_section').niceSelect('update');
+                        $('#common_select_section').trigger('change');
                     },
                     error: function (data) {
                         console.log("Error:", data);

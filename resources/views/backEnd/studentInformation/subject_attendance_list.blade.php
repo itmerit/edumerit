@@ -303,22 +303,24 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex radio-btn-flex">
-                                                    @foreach(['P'=>'present','L' => 'late','A' => 'absent'] as $k=>$v)
-                                                        <div class="mr-20">
-                                                            <input type="radio"
-                                                                   name="attendance[{{$student->id}}][attendance_type]"
-                                                                   id="attendance{{$k}}{{$student->id}}" value="{{$k}}"
-                                                                   class="common-radio subject_attendance_type"
-                                                                    {{ $attendance ? ($attendance->attendance_type == $k ? 'checked' :($k=='P'?'checked':'')) : ($k=='P'?'checked':'') }}>
-                                                            <label for="attendance{{$k}}{{$student->id}}">@lang('student.'.$v)</label>
+
+                                                <div class="row no-gutters input-right-icon">
+                                                    <div class="col">
+                                                        <div class="primary_input">
+                                                            <input class="primary_input_field time start_time form-control"
+                                                                   name="attendance[{{$student->id}}]" type="text"
+                                                                   value="{{($attendance!=null?date('H:i:s', strtotime($attendance->attendance_time)):'')}}"
+                                                                   required>
+                                                            <span class="text-danger start_time_error"></span>
                                                         </div>
-                                                    @endforeach
-                                                    {{--<div>--}}
-                                                    {{--<input type="radio" name="attendance[{{$student->id}}][attendance_type]" id="attendanceH{{$student->id}}" value="F" class="common-radio subject_attendance_type" {{isset($student->todaySubjectAttendance[0]) ? ($student->todaySubjectAttendance[0]->attendance_type == "F" ? 'checked' :'') : ''}}>--}}
-                                                    {{--<label for="attendanceH{{$student->id}}">@lang('student.half_day')</label>--}}
-                                                    {{--</div>--}}
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <button class="" type="button">
+                                                            <i class="ti-timer"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
+
                                             </td>
                                             <td>
                                                 <div class="primary_input">
