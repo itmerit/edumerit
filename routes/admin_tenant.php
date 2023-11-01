@@ -1894,7 +1894,7 @@ Route::group(['middleware' => ['XSS','subscriptionAccessUrl']], function () {
         Route::post('login-access-control', 'SmLoginAccessControlController@searchUser')->name('login-access-control');
         Route::get('login-access-permission', 'SmLoginAccessControlController@loginAccessPermission');
         Route::get('login-password-reset', 'SmLoginAccessControlController@loginPasswordDefault');
-        Route::post('secret-login', 'SmLoginAccessControlController@secretLogin');
+        Route::post('secret-login', 'SmLoginAccessControlController@secretLogin')->name('secret-login');
 
         Route::get('button-disable-enable', 'Admin\SystemSettings\SmSystemSettingController@buttonDisableEnable')->name('button-disable-enable')->middleware('userRolePermission:button-disable-enable');
 
