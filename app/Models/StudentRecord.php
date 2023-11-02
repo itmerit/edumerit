@@ -121,11 +121,6 @@ class StudentRecord extends Model
         return $this->hasMany(SmSubjectAttendance::class,'student_record_id', 'id');
     }
 
-    public function todaySubjectAttendance()
-    {
-        return $this->subjectAttendances()->where('attendance_date', '=', date('Y-m-d'));
-    }
-
     public function studentAttendanceByMonth($month, $year)
     {
         return $this->studentAttendance()->where('attendance_date', 'like', $year . '-' . $month . '%')->get();
