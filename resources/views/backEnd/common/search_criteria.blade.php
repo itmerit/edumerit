@@ -1,171 +1,171 @@
 @php
-$div = isset($div) ? $div : 'col-lg-4';
-$mt = isset($mt) ? $mt : 'mt-30-md';
-$subject = isset($subject) ? true : false;
-$required = $required ?? [];
-$selected = isset($selected) ? $selected : null;
-$academic_year = $selected && isset($selected['academic_year']) ? $selected['academic_year'] : null;
-$class_id = $selected && isset($selected['class_id']) ? $selected['class_id'] : null;
-$section_id = $selected && isset($selected['section_id']) ? $selected['section_id'] : null;
-$subject_id = $selected && isset($selected['subject_id']) ? $selected['subject_id'] : null;
-$student_id = $selected && isset($selected['student_id']) ? $selected['student_id'] : null;
+    $div = isset($div) ? $div : 'col-lg-4';
+    $mt = isset($mt) ? $mt : 'mt-30-md';
+    $subject = isset($subject) ? true : false;
+    $required = $required ?? [];
+    $selected = isset($selected) ? $selected : null;
+    $academic_year = $selected && isset($selected['academic_year']) ? $selected['academic_year'] : null;
+    $class_id = $selected && isset($selected['class_id']) ? $selected['class_id'] : null;
+    $section_id = $selected && isset($selected['section_id']) ? $selected['section_id'] : null;
+    $subject_id = $selected && isset($selected['subject_id']) ? $selected['subject_id'] : null;
+    $student_id = $selected && isset($selected['student_id']) ? $selected['student_id'] : null;
 
-if ($academic_year) {
-$classes = classes($academic_year) ?? null;
-$sections = $class_id ? sections($class_id, $academic_year) : null;
-$subjects = $class_id && $section_id ? subjects($class_id, $section_id, $academic_year) : null;
-$students = $class_id && $section_id ? students($class_id, $section_id, $academic_year) : null;
-} else {
-$sections = $class_id ? sections($class_id) : null;
-$subjects = $class_id && $section_id ? subjects($class_id, $section_id) : null;
-}
-$visiable = $visiable ?? [];
+    if ($academic_year) {
+    $classes = classes($academic_year) ?? null;
+    $sections = $class_id ? sections($class_id, $academic_year) : null;
+    $subjects = $class_id && $section_id ? subjects($class_id, $section_id, $academic_year) : null;
+    $students = $class_id && $section_id ? students($class_id, $section_id, $academic_year) : null;
+    } else {
+    $sections = $class_id ? sections($class_id) : null;
+    $subjects = $class_id && $section_id ? subjects($class_id, $section_id) : null;
+    }
+    $visiable = $visiable ?? [];
 
 @endphp
 @if (in_array('academic', $visiable))
-<div class="{{ $div . ' ' . $mt }}">
-    <div class="primary_input ">
-        <label class="primary_input_label" for="">{{ __('common.academic_year') }}
-            <span class="text-danger">{{ in_array('academic', $required) ? '*' : '' }}</span>
-        </label>
-        <select
-            class="primary_select  form-control{{ $errors->has('academic_year') ? ' is-invalid' : '' }} common_academic_year"
-            name="academic_year" id="common_academic_year">
-            <option data-display="@lang('common.academic_year') {{ in_array('academic', $required) ? '*' : '' }}"
-                value="">
-                @lang('common.academic_year') {{ in_array('academic', $required) ? '*' : '' }}
-            </option>
-            @isset($sessions)
-            @foreach ($sessions as $session)
-            <option value="{{ $session->id }}"
-                {{ isset($academic_year) && $academic_year == $session->id ? 'selected' : (getAcademicId() == $session->id ? 'selected' : '') }}>
-                {{ $session->year }}[{{ $session->title }}]</option>
-            @endforeach
-            @endisset
+    <div class="{{ $div . ' ' . $mt }}">
+        <div class="primary_input ">
+            <label class="primary_input_label" for="">{{ __('common.academic_year') }}
+                <span class="text-danger">{{ in_array('academic', $required) ? '*' : '' }}</span>
+            </label>
+            <select
+                    class="primary_select  form-control{{ $errors->has('academic_year') ? ' is-invalid' : '' }} common_academic_year"
+                    name="academic_year" id="common_academic_year">
+                <option data-display="@lang('common.academic_year') {{ in_array('academic', $required) ? '*' : '' }}"
+                        value="">
+                    @lang('common.academic_year') {{ in_array('academic', $required) ? '*' : '' }}
+                </option>
+                @isset($sessions)
+                    @foreach ($sessions as $session)
+                        <option value="{{ $session->id }}"
+                                {{ isset($academic_year) && $academic_year == $session->id ? 'selected' : (getAcademicId() == $session->id ? 'selected' : '') }}>
+                            {{ $session->year }}[{{ $session->title }}]</option>
+                    @endforeach
+                @endisset
 
-        </select>
+            </select>
 
-        @if ($errors->has('academic_year'))
-        <span class="text-danger" role="alert">
+            @if ($errors->has('academic_year'))
+                <span class="text-danger" role="alert">
             {{ $errors->first('academic_year') }}
         </span>
-        @endif
+            @endif
+        </div>
     </div>
-</div>
 @endif
 @if (in_array('class', $visiable))
-<div class="{{ $div . ' ' . $mt }}" id="common_select_class_div">
-    <div class="primary_input mb-25">
-        <label class="primary_input_label" for="">{{ __('common.class') }}
-            <span class="text-danger">{{ in_array('class', $required) ? '*' : '' }}</span>
-        </label>
-        <select class="primary_select form-control{{ $errors->has('class_id') ? ' is-invalid' : '' }}" name="class_id"
-            id="common_select_class">
-            <option data-display="@lang('common.select_class') {{ in_array('class', $required) ? '*' : '' }}" value="">
-                {{ __('common.select_class') }} {{ in_array('class', $required) ? '*' : '' }}</option>
-            @if (isset($classes))
-            @foreach ($classes as $class)
-            <option value="{{ $class->id }}" {{ isset($class_id) ? ($class_id == $class->id ? 'selected' : '') : '' }}>
-                {{ $class->class_name }}</option>
-            @endforeach
-            @endif
-        </select>
-        <div class="pull-right loader loader_style" id="common_select_class_loader">
-            <img class="loader_img_style" src="{{ asset('public/backEnd/img/demo_wait.gif') }}" alt="loader">
+    <div class="{{ $div . ' ' . $mt }}" id="common_select_class_div">
+        <div class="primary_input mb-25">
+            <label class="primary_input_label" for="">{{ __('common.class') }}
+                <span class="text-danger">{{ in_array('class', $required) ? '*' : '' }}</span>
+            </label>
+            <select class="primary_select form-control{{ $errors->has('class_id') ? ' is-invalid' : '' }}" name="class_id"
+                    id="common_select_class">
+                <option data-display="@lang('common.select_class') {{ in_array('class', $required) ? '*' : '' }}" value="">
+                    {{ __('common.select_class') }} {{ in_array('class', $required) ? '*' : '' }}</option>
+                @if (isset($classes))
+                    @foreach ($classes as $class)
+                        <option value="{{ $class->id }}" {{ isset($class_id) ? ($class_id == $class->id ? 'selected' : '') : '' }}>
+                            {{ $class->class_name }}</option>
+                    @endforeach
+                @endif
+            </select>
+            <div class="pull-right loader loader_style" id="common_select_class_loader">
+                <img class="loader_img_style" src="{{ asset('public/backEnd/img/demo_wait.gif') }}" alt="loader">
+            </div>
+            <span class="text-danger">{{ $errors->first('class_id') }}</span>
         </div>
-        <span class="text-danger">{{ $errors->first('class_id') }}</span>
     </div>
-</div>
 
 @endif
 @if (in_array('section', $visiable))
-<div class="{{ $div . ' ' . $mt }}" id="common_select_section_div">
-    <label class="primary_input_label" for="">{{ __('common.section') }}
-        <span class="text-danger">{{ in_array('section', $required) ? '*' : '' }}</span>
-    </label>
-    <select class="primary_select form-control{{ $errors->has('section_id') ? ' is-invalid' : '' }} select_section"
-        id="common_select_section" name="section_id">
-        <option data-display="@lang('common.select_section') {{ in_array('section', $required) ? '*' : '' }}" value="">
-            @lang('common.select_section') {{ in_array('section', $required) ? '*' : '' }}</option>
-        @isset($sections)
-        @foreach ($sections as $section)
-        <option value="{{ $section->id }}"
-            {{ isset($section_id) ? ($section_id == $section->section_id ? 'selected' : '') : '' }}>
-            {{ $section->sectionName->section_name }}
-        </option>
-        @endforeach
-        @endisset
-    </select>
-    <div class="pull-right loader loader_style" id="common_select_section_loader" style="margin-top: -30px;padding-right: 21px;">
-        <img src="{{ asset('public/backEnd/img/demo_wait.gif') }}" alt="" style="width: 28px;height:28px;">
-    </div>
+    <div class="{{ $div . ' ' . $mt }}" id="common_select_section_div">
+        <label class="primary_input_label" for="">{{ __('common.section') }}
+            <span class="text-danger">{{ in_array('section', $required) ? '*' : '' }}</span>
+        </label>
+        <select class="primary_select form-control{{ $errors->has('section_id') ? ' is-invalid' : '' }} select_section"
+                id="common_select_section" name="section_id">
+            <option data-display="@lang('common.select_section') {{ in_array('section', $required) ? '*' : '' }}" value="">
+                @lang('common.select_section') {{ in_array('section', $required) ? '*' : '' }}</option>
+            @isset($sections)
+                @foreach ($sections as $section)
+                    <option value="{{ $section->id }}"
+                            {{ isset($section_id) ? ($section_id == $section->section_id ? 'selected' : '') : '' }}>
+                        {{ $section->sectionName->section_name }}
+                    </option>
+                @endforeach
+            @endisset
+        </select>
+        <div class="pull-right loader loader_style" id="common_select_section_loader" style="margin-top: -30px;padding-right: 21px;">
+            <img src="{{ asset('public/backEnd/img/demo_wait.gif') }}" alt="" style="width: 28px;height:28px;">
+        </div>
 
 
-    @if ($errors->has('section_id'))
-    <span class="text-danger">
+        @if ($errors->has('section_id'))
+            <span class="text-danger">
         {{ $errors->first('section_id') }}
     </span>
-    @endif
-</div>
+        @endif
+    </div>
 @endif
 @if (in_array('subject', $visiable))
-<div class="{{ $div . ' ' . $mt }}" id="common_select_subject_div">
-    <label class="primary_input_label" for="">{{ __('common.subject') }}
-        <span class="text-danger">{{ in_array('subject', $required) ? '*' : '' }}</span>
-    </label>
-    <select class="primary_select form-control{{ $errors->has('subject_id') ? ' is-invalid' : '' }} select_subject"
-        id="common_select_subject" name="subject_id">
-        <option data-display="@lang('common.select_subject') {{ in_array('subject', $required) ? ' *' : '' }}" value="">
-            @lang('common.select_subject') {{ in_array('subject', $required) ? ' *' : '' }}</option>
-        @isset($subjects)
-        @foreach ($subjects as $subject)
-        <option value="{{ $subject->subject_id }}"
-            {{ isset($subject_id) ? ($subject_id == $subject->subject_id ? 'selected' : '') : '' }}>
-            {{ $subject->subject->subject_name }}</option>
-        @endforeach
-        @endisset
-    </select>
-    <div class="pull-right loader loader_style" id="common_select_subject_loader" style="margin-top: -30px;padding-right: 21px;">
-        <img src="{{ asset('public/backEnd/img/demo_wait.gif') }}" alt="" style="width: 28px;height:28px;">
-    </div>
+    <div class="{{ $div . ' ' . $mt }}" id="common_select_subject_div">
+        <label class="primary_input_label" for="">{{ __('common.subject') }}
+            <span class="text-danger">{{ in_array('subject', $required) ? '*' : '' }}</span>
+        </label>
+        <select class="primary_select form-control{{ $errors->has('subject_id') ? ' is-invalid' : '' }} select_subject"
+                id="common_select_subject" name="subject_id">
+            <option data-display="@lang('common.select_subject') {{ in_array('subject', $required) ? ' *' : '' }}" value="">
+                @lang('common.select_subject') {{ in_array('subject', $required) ? ' *' : '' }}</option>
+            @isset($subjects)
+                @foreach ($subjects as $subject)
+                    <option value="{{ $subject->subject_id }}"
+                            {{ isset($subject_id) ? ($subject_id == $subject->subject_id ? 'selected' : '') : '' }}>
+                        {{ $subject->subject->subject_name }}</option>
+                @endforeach
+            @endisset
+        </select>
+        <div class="pull-right loader loader_style" id="common_select_subject_loader" style="margin-top: -30px;padding-right: 21px;">
+            <img src="{{ asset('public/backEnd/img/demo_wait.gif') }}" alt="" style="width: 28px;height:28px;">
+        </div>
 
-    @if ($errors->has('subject_id'))
-    <span class="text-danger">
+        @if ($errors->has('subject_id'))
+            <span class="text-danger">
         {{ $errors->first('subject_id') }}
     </span>
-    @endif
-</div>
+        @endif
+    </div>
 @endif
 @if (in_array('student', $visiable))
-<div class="{{ $div . ' ' . $mt }}" id="common_select_student_div">
-    <label class="primary_input_label" for="">{{ __('common.student') }}
-        <span class="text-danger">{{ in_array('student', $required) ? '*' : '' }}</span>
-    </label>
-    <select class="primary_select form-control{{ $errors->has('student') ? ' is-invalid' : '' }}"
-        id="common_select_student" name="student">
-        <option data-display="@lang('reports.select_student') {{ in_array('student', $required) ? '*' : '' }}" value="">
-            @lang('reports.select_student') <span>{{ in_array('student', $required) ? '*' : '' }}</span>
-        </option>
-        @isset($students)
-        @foreach ($students as $student)
-        <option value="{{ $student->id }}"
-            {{ isset($student_id) ? ($student_id == $student->id ? 'selected' : '') : '' }}>
-            {{ $student->full_name }}
-        </option>
-        @endforeach
-        @endisset
-    </select>
+    <div class="{{ $div . ' ' . $mt }}" id="common_select_student_div">
+        <label class="primary_input_label" for="">{{ __('common.student') }}
+            <span class="text-danger">{{ in_array('student', $required) ? '*' : '' }}</span>
+        </label>
+        <select class="primary_select form-control{{ $errors->has('student') ? ' is-invalid' : '' }}"
+                id="common_select_student" name="student">
+            <option data-display="@lang('reports.select_student') {{ in_array('student', $required) ? '*' : '' }}" value="">
+                @lang('reports.select_student') <span>{{ in_array('student', $required) ? '*' : '' }}</span>
+            </option>
+            @isset($students)
+                @foreach ($students as $student)
+                    <option value="{{ $student->id }}"
+                            {{ isset($student_id) ? ($student_id == $student->id ? 'selected' : '') : '' }}>
+                        {{ $student->full_name }}
+                    </option>
+                @endforeach
+            @endisset
+        </select>
 
-    <div class="pull-right loader loader_style" id="common_select_student_loader">
-        <img class="loader_img_style" src="{{ asset('public/backEnd/img/demo_wait.gif') }}" alt="loader">
-    </div>
+        <div class="pull-right loader loader_style" id="common_select_student_loader">
+            <img class="loader_img_style" src="{{ asset('public/backEnd/img/demo_wait.gif') }}" alt="loader">
+        </div>
 
-    @if ($errors->has('student'))
-    <span class="text-danger">
+        @if ($errors->has('student'))
+            <span class="text-danger">
         {{ $errors->first('student') }}
     </span>
-    @endif
-</div>
+        @endif
+    </div>
 @endif
 
 @push('script')

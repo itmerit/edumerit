@@ -14,6 +14,7 @@ use App\SmAssignSubject;
 use App\SmStudentAttendance;
 use App\SmFeesAssignDiscount;
 use App\SmClassOptionalSubject;
+use App\SmSubjectAttendance;
 use App\SmTeacherUploadContent;
 use App\SmStudentTakeOnlineExam;
 use Modules\Lms\Entities\Course;
@@ -113,6 +114,11 @@ class StudentRecord extends Model
     public function studentAttendance()
     {
         return $this->hasMany(SmStudentAttendance::class, 'student_record_id', 'id');
+    }
+
+    public function subjectAttendances()
+    {
+        return $this->hasMany(SmSubjectAttendance::class,'student_record_id', 'id');
     }
 
     public function studentAttendanceByMonth($month, $year)

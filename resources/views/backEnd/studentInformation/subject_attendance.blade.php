@@ -62,6 +62,7 @@
 
                                 </div>
                             @else
+
                             @include('backEnd.common.search_criteria', [
                             'div'=>'col-lg-3',
                             'subject'=>true,

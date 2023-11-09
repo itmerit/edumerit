@@ -55,8 +55,7 @@
                                         <thead>
                                             <tr>
                                                 <th>@lang('hr.teacher_name')</th>
-{{--                                                <th>@lang('common.email')</th>--}}
-{{--                                                <th>@lang('common.phone')</th>--}}
+
                                             </tr>
                                         </thead>
 
@@ -67,8 +66,6 @@
                                                     <img src="{{ file_exists(@$value->teacher->staff_photo) ? asset(@$value->teacher->staff_photo) : asset('public/uploads/staff/demo/staff.jpg') }}" class="img img-thumbnail" style="width: 60px; height: auto;">
                                                     {{@$value->teacher !=""?@$value->teacher->full_name:""}}
                                                 </td>
-{{--                                                <td>{{@$value->teacher !=""?@$value->teacher->email:""}}</td>--}}
-{{--                                                <td>{{@$value->teacher !=""?@$value->teacher->mobile:""}}</td>--}}
                                             </tr>
                                             @endforeach
                                         </tbody>
