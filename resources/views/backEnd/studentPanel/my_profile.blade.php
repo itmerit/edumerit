@@ -126,9 +126,9 @@
                     @endif
 
 
-                    <li class="nav-item edit-button">
-                	    <a href="{{route('update-my-profile',$student_detail->id)}}" class="primary-btn small fix-gr-bg pull-right">@lang('common.edit')</a>
-                    </li>
+{{--                    <li class="nav-item edit-button">--}}
+{{--                	    <a href="{{route('update-my-profile',$student_detail->id)}}" class="primary-btn small fix-gr-bg pull-right">@lang('common.edit')</a>--}}
+{{--                    </li>--}}
                 </ul>
 
                 <!-- Tab panes -->
@@ -1743,7 +1743,7 @@
                     <!-- Start Attendance Tab -->
                     @include('backEnd.studentPanel.inc._subject_attendance_tab')
                     <!-- End Attendance Tab -->
-                    
+
                     @if(moduleStatusCheck('Wallet'))
                         <div role="tabpanel" class="tab-pane fade {{Session::get('studentWallet') == 'active'? 'show active':''}}" id="studentWallet">
                             <div class="white-box">
