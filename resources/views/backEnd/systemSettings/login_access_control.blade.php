@@ -147,6 +147,7 @@
 
                                         <th>@lang('rolepermission::role.parents_permission')</th>
                                         <th style="width: 200px;">@lang('rolepermission::role.parents_password')</th>
+                                        <th style="width: 200px;">Secret login</th>
                                     </tr>
                                 </thead>
 
@@ -286,6 +287,17 @@
                                             </div>
                                             {{ Form::close() }}
                                         </td>
+                                        <td>
+                                            <form class="d-block"
+                                                  action="{{ route('secret-login') }}"
+                                                  method="post" target="_blank">
+                                                @csrf
+                                                <input type="hidden" name="user_id"
+                                                       value="{{ $student->user_id }}">
+                                                <button class="dropdown-item"
+                                                        role="button">{{ __('Login') }}</button>
+                                            </form>
+                                        </td>
                                     </tr>
 
                                     @endforeach
@@ -322,6 +334,8 @@
                                         <th>@lang('common.email')</th>
                                         <th>@lang('rolepermission::role.login_permission')</th>
                                         <th>@lang('common.password')</th>
+                                        <th>@lang('secret login')</th>
+
                                     </tr>
                                 </thead>
 
@@ -396,6 +410,17 @@
                                                 </div>
                                             </div>
                                             {{ Form::close() }}
+                                        </td>
+                                        <td>
+                                            <form class="d-block"
+                                                  action="{{ route('secret-login') }}"
+                                                  method="post" target="_blank">
+                                                @csrf
+                                                <input type="hidden" name="user_id"
+                                                       value="{{ $value->user_id }}">
+                                                <button class="dropdown-item"
+                                                        role="button">{{ __('Login') }}</button>
+                                            </form>
                                         </td>
 
                                     </tr>

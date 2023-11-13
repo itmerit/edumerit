@@ -12,6 +12,7 @@ class StudentSubjectWiseAttendancSearchRequest extends FormRequest
     }
     public function rules()
     {
+        $this->redirect = 'subject-wise-attendance';
         if (moduleStatusCheck('University')) {
             return [
                 'attendance_date' => 'required|date',
