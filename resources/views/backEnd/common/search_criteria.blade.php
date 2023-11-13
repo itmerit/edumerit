@@ -223,13 +223,15 @@
 
             $("#common_select_class").on("change", function () {
                 var class_id = $(this).val();
-                getSubject(class_id);
+                var section_id = 1; // Replace with the desired section ID or "O'zbek"
+                getSubject(class_id, section_id);
             });
 
-            function getSubject(class_id) {
+            function getSubject(class_id, section_id) {
                 var url = $("#url").val();
                 var formData = {
                     class: class_id,
+                    section: section_id,
                 };
 
                 $.ajax({

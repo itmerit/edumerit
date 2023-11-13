@@ -97,6 +97,7 @@ class SmSubjectAttendanceController extends Controller
 
 
         }catch (\Exception $e) {
+             ;
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
         }
