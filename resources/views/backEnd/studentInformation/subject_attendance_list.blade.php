@@ -351,31 +351,20 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex radio-btn-flex">
-                                                    <div class="mr-20">
-                                                        <input type="radio"
-                                                               name="attendance[{{$student->id}}][attendance_type]"
-                                                               id="attendanceP{{$student->id}}" value="P"
-                                                               class="common-radio attendanceP subject_attendance_type" {{ $student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "P" ? 'checked' :'') : 'checked' }}>
-                                                        <label for="attendanceP{{$student->id}}">@lang('student.present')</label>
-                                                    </div>
-                                                    <div class="mr-20">
-                                                        <input type="radio"
-                                                               name="attendance[{{$student->id}}][attendance_type]"
-                                                               id="attendanceL{{$student->id}}" value="L"
-                                                               class="common-radio subject_attendance_type" {{ $student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "L" ? 'checked' :''):''}}>
-                                                        <label for="attendanceL{{$student->id}}">@lang('student.late')</label>
-                                                    </div>
-                                                    <div class="mr-20">
-                                                        <input type="radio"
-                                                               name="attendance[{{$student->id}}][attendance_type]"
-                                                               id="attendanceA{{$student->id}}" value="A"
-                                                               class="common-radio subject_attendance_type" {{$student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "A" ? 'checked' :''):''}}>
-                                                        <label for="attendanceA{{$student->id}}">@lang('student.absent')</label>
-                                                    </div>
-                                                    {{--                                                    <div>--}}
-                                                    {{--                                                        <input type="radio" name="attendance[{{$student->id}}][attendance_type]" id="attendanceH{{$student->id}}" value="F" class="common-radio subject_attendance_type" {{$student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->attendance_type == "F" ? 'checked' :'') : ''}}>--}}
-                                                    {{--                                                        <label for="attendanceH{{$student->id}}">@lang('student.half_day')</label>--}}
-                                                    {{--                                                    </div>--}}
+                                                    @foreach(['P'=>'present','L' => 'late','A' => 'absent'] as $k=>$v)
+                                                        <div class="mr-20">
+                                                            <input type="radio"
+                                                                   name="attendance[{{$student->id}}][attendance_type]"
+                                                                   id="attendance{{$k}}{{$student->id}}" value="{{$k}}"
+                                                                   class="common-radio subject_attendance_type"
+                                                                    {{ $attendance ? ($attendance->attendance_type == $k ? 'checked' :($k=='P'?'checked':'')) : ($k=='P'?'checked':'') }}>
+                                                            <label for="attendance{{$k}}{{$student->id}}">@lang('student.'.$v)</label>
+                                                        </div>
+                                                    @endforeach
+                                                    {{--<div>--}}
+                                                    {{--<input type="radio" name="attendance[{{$student->id}}][attendance_type]" id="attendanceH{{$student->id}}" value="F" class="common-radio subject_attendance_type" {{isset($student->todaySubjectAttendance[0]) ? ($student->todaySubjectAttendance[0]->attendance_type == "F" ? 'checked' :'') : ''}}>--}}
+                                                    {{--<label for="attendanceH{{$student->id}}">@lang('student.half_day')</label>--}}
+                                                    {{--</div>--}}
                                                 </div>
                                             </td>
                                             <td>
