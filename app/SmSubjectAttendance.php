@@ -27,11 +27,11 @@ class SmSubjectAttendance extends Model
     public static function getAbsentSubjectList($recored_id, $schoolId){
         $subjectLists = [];
         $subjects = SmSubjectAttendance::where('attendance_type','A')
-                    ->where('student_record_id', $recored_id)
-                    ->where('school_id', $schoolId)
-                    ->where('attendance_date', date('Y-m-d'))
-                    ->where('notify', 0)
-                    ->get();
+            ->where('student_record_id', $recored_id)
+            ->where('school_id', $schoolId)
+            ->where('attendance_date', date('Y-m-d'))
+            ->where('notify', 0)
+            ->get();
         foreach($subjects as $subject){
             $subjectLists [] = $subject->subject->subject_name;
         }
