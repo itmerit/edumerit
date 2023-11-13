@@ -17,9 +17,24 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+                if (Auth::user()->role_id == 1)
+                    return redirect()->route('admin-dashboard');
+                elseif (Auth::user()->role_id == 2)
+                    return redirect()->route('student-dashboard');
+                elseif (Auth::user()->role_id == 3)
+                    return redirect()->route('parent-dashboard');
+                elseif (Auth::user()->role_id == 4)
+                    return redirect()->route('admin-dashboard');
+                elseif (Auth::user()->role_id == 5)
+                    return redirect()->route('admin-dashboard');
+                elseif (Auth::user()->role_id == 6)
+                    return redirect()->route('parent-dashboard');
+                elseif (Auth::user()->role_id == 7)
+                    return redirect()->route('admin-dashboard');
+                else {
+                    return redirect()->back();
+                }
         }
 
         return $next($request);
