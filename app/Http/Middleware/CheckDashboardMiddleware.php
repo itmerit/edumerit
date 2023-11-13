@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Auth;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use App\User;
 
@@ -18,8 +18,12 @@ class CheckDashboardMiddleware
      */
     public function handle($request, Closure $next)
     {
+
         if (User::checkAuth() == false || User::checkAuth() == null) {
             return redirect()->route('system.config');
+        }
+        if ( !Auth::guest() && Auth::user()->access_status == 0) {
+            Auth::logout();
         }
 
 //        session_start();

@@ -53,7 +53,7 @@ class LoginController extends Controller
     public function redirectPath()
     {
         if (method_exists($this, 'redirectTo')) {
-            
+
             return $this->redirectTo();
         }
 
@@ -178,7 +178,7 @@ class LoginController extends Controller
         $gs = SmGeneralSettings::where('school_id',$school->id)->first();
         session()->forget('generalSetting');
         session()->put('generalSetting', $gs);
-        if ($school->id !=1 && $school->active_status !=1) {           
+        if ($school->id !=1 && $school->active_status !=1) {
             Toastr::error('Your Institution is not Active, Please contact with administrator.', 'Failed');
             return redirect()->route('login');
         }
@@ -196,11 +196,11 @@ class LoginController extends Controller
             }
 
             $user = User::where('username', $request->email)->where('school_id', $school->id)->first();
-          
+
             if(!$user){
                 $user = User::where('phone_number', $request->email)->where('school_id', $school->id)->first();
             }
-            
+
             if($user){
                 if(Hash::check($request->password, $user->password)) {
                     $this->guard()->login($user);
@@ -259,7 +259,7 @@ class LoginController extends Controller
             $systemLanguage = SmLanguage::where('school_id', Auth::user()->school_id)->get();
             session()->put('systemLanguage', $systemLanguage);
             //session put academic years
-            
+
             if(moduleStatusCheck('University')){
                 $academic_years = Auth::check() ? UnAcademicYear::where('active_status', 1)->where('school_id', Auth::user()->school_id)->get() : '';
             }else{
@@ -291,7 +291,7 @@ class LoginController extends Controller
                 } else{
                     $session = UnAcademicYear::find($session_id);
                 }
-             
+
                 session()->put('sessionId', $session->id);
                 session()->put('session', $session);
             }
@@ -306,7 +306,7 @@ class LoginController extends Controller
                 }
 
                 session()->put('sessionId', $session->id);
-                session()->put('session', $session); 
+                session()->put('session', $session);
             }
 
 
@@ -335,11 +335,11 @@ class LoginController extends Controller
 
             userStatusChange(auth()->user()->id, 1);
 
-            //generate two factor code if setting true for role 
+            //generate two factor code if setting true for role
             if(moduleStatusCheck('TwoFactorAuth') && generalSetting()->two_factor){
                 $this->twoFactorAuth(auth()->user());
             }
-           
+
 
             return $this->sendLoginResponse($request);
 
@@ -590,10 +590,10 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
 
-        $user = Auth::user();        
+        $user = Auth::user();
         userStatusChange($user->id, 0);
         Session::flush();
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->away('https://iftixormaktabi.uz');
     }
 }
