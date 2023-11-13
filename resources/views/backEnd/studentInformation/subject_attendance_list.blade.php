@@ -120,30 +120,20 @@
                                         <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>
 
 
-                            </div>
-                        @else
-                            @include('backEnd.common.search_criteria', [
-                           'div'=>'col-lg-3',
-                           'subject'=>true,
-                           'required'=>['class', 'subject'],
-                           'visiable'=>['class', 'subject'],
-                           ])
-
-                            <div class="col-lg-3 mt-30-md md_mb_20">
-
                                         @if ($errors->has('attendance_date'))
                                         <span class="text-danger" >
                                             {{ $errors->first('attendance_date') }}
                                         </span>
                                         @endif
                                     </div>
-                                    <span class="text-danger">{{ $errors->first('attendance_date') }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <button class="" type="button">
                                         <i class="ti-calendar" id="start-date-icon"></i>
                                     </button>
                                 </div>
+                            </div>
+                        </div>
                         @endif
                         <div class="col-lg-12 mt-20 text-right">
                             <button type="submit" class="primary-btn small fix-gr-bg">
@@ -152,7 +142,6 @@
                             </button>
                         </div>
                         </div>
-
                     {{ Form::close() }}
                 </div>
             </div>
