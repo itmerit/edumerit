@@ -57,10 +57,6 @@ class SmSubjectAttendanceController extends Controller
             $input['class']= $request->class_id;
             $input['subject']= $request->subject_id;
             $input['section']= SmClassSection::where('class_id', $request->class_id)->first()->section_id;
-<<<<<<< HEAD
-
-=======
->>>>>>> 9fb0ca2 (select fix)
 
             $classes = SmClass::get();
             $sections = SmClassSection::with('sectionName')->where('class_id', $input['class'])->get();
