@@ -41,9 +41,12 @@
                                     <div class="row no-gutters input-right-icon">
                                         <div class="col">
                                             <div class="primary_input">
-                                                <input class="primary_input_field  primary_input_field date form-control form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }} {{isset($date)? 'read-only-input': ''}}" id="startDate" type="text"
-                                                    name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">
-                                                <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>
+                                                <input class="primary_input_field  primary_input_field date form-control form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }} {{isset($date)? 'read-only-input': ''}}"
+                                                       id="startDate" type="text"
+                                                       name="attendance_date" autocomplete="off"
+                                                       value="{{isset($date)? $date: date('m/d/Y')}}">
+                                                <label for="startDate">@lang('student.attendance_date')<span
+                                                            class="text-danger"> *</span></label>
 
 
                                                 @if ($errors->has('attendance_date'))
@@ -72,14 +75,18 @@
 
                             <div class="col-lg-3 mt-30-md md_mb_20">
 
-                                <div class="primary_input">
-                                    <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>
-                                    <div class="primary_datepicker_input">
-                                        <div class="no-gutters input-right-icon">
-                                            <div class="col">
-                                                <div class="">
-                                                    <input class="primary_input_field  primary_input_field date form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }}" id="attendance_date" type="text"
-                                                    name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">
+                                    <div class="primary_input">
+                                        <label for="startDate">@lang('student.attendance_date')<span
+                                                    class="text-danger"> *</span></label>
+                                        <div class="primary_datepicker_input">
+                                            <div class="no-gutters input-right-icon">
+                                                <div class="col">
+                                                    <div class="">
+                                                        <input class="primary_input_field  primary_input_field date form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }}"
+                                                               id="attendance_date" type="text"
+                                                               name="attendance_date" autocomplete="off"
+                                                               value="{{isset($date)? $date: date('m/d/Y')}}">
+                                                    </div>
                                                 </div>
                                             </div>
                                             <button class="btn-date" data-id="#attendance_date" type="button">
