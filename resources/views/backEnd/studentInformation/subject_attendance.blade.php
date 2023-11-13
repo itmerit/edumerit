@@ -62,12 +62,13 @@
 
                                 </div>
                             @else
-                                    @include('backEnd.common.search_criteria', [
-                                   'div'=>'col-lg-3',
-                                   'subject'=>true,
-                                   'required'=>['class', 'subject'],
-                                   'visiable'=>['class', 'subject'],
-                                   ])
+
+                            @include('backEnd.common.search_criteria', [
+                            'div'=>'col-lg-3',
+                            'subject'=>true,
+                            'required'=>['class', 'subject'],
+                            'visiable'=>['class', 'subject'],
+                            ])
 
                             <div class="col-lg-3 mt-30-md md_mb_20">
 
