@@ -34,35 +34,91 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="white-box">
-                    {{ Form::open(['class' => 'form-horizontal', 'route' => 'subject-attendance-search', 'method' => 'POST', 'id' => 'search_studentA']) }}
-                    <div class="row">
-                        <input type="hidden" name="url" id="url" value="{{URL::to('/')}}">
-
+                    {{ Form::open(['class' => 'form-horizontal','route' => 'subject-attendance-search', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'search_studentA']) }}
+                        <div class="row">
+                            <input type="hidden" name="url" id="url" value="{{URL::to('/')}}">
                         @if(moduleStatusCheck('University'))
-                            @includeIf('university::common.session_faculty_depart_academic_semester_level',['required'=>['USN','UD', 'UA', 'US','USL', 'USEC', 'USUB']])
-
+                            @includeIf('university::common.session_faculty_depart_academic_semester_level',['required'=>['USN','UD', 'UA', 'US','USL','USUB']])
                             <div class="col-lg-3 mt-25">
                                 <div class="row no-gutters input-right-icon">
                                     <div class="col">
                                         <div class="primary_input">
                                             <input class="primary_input_field  primary_input_field date form-control form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }} {{isset($date)? 'read-only-input': ''}}" id="startDate" type="text"
-                                                   name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">
-                                            <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>
-
+                                                name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">
 
                                             @if ($errors->has('attendance_date'))
-                                                <span class="text-danger" >
-                                                    {{ $errors->first('attendance_date') }}
-                                                </span>
+                                            <span class="text-danger custom-error-message" role="alert">
+                                                {{ $errors->first('attendance_date') }}
+                                            </span>
                                             @endif
                                         </div>
                                     </div>
-                                    <button class="btn-date" type="button">
-                                        <label class="m-0 p-0" for="startDate">
-                                            <i class="ti-calendar" id="admission-date-icon"></i>
-                                        </label>
+                                    <button class="" type="button">
+                                        <i class="ti-calendar" id="start-date-icon"></i>
                                     </button>
                                 </div>
+                            </div>
+                        @else
+                        <div class="col-lg-3 mt-30-md">
+                            <select class="primary_select form-control {{ $errors->has('class') ? ' is-invalid' : '' }}" id="select_class" name="class">
+                                <option data-display="@lang('common.select_class')*" value="">@lang('common.select_class') *</option>
+                                @foreach($classes as $class)
+                                <option value="{{$class->id}}"  {{isset($input['class'])? ($input['class'] == $class->id? 'selected':''):''}}>{{$class->class_name}}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('class'))
+                            <span class="text-danger invalid-select" role="alert">
+                                {{ $errors->first('class') }}
+                            </span>
+                            @endif
+                        </div>
+                        <div class="col-lg-3 mt-30-md" id="select_section_div">
+                            <select class="primary_select form-control{{ $errors->has('section') ? ' is-invalid' : '' }} select_section" id="select_section" name="section">
+                                <option data-display="@lang('common.select_section') *" value="">@lang('common.select_section') *</option>
+                                @isset($sections)
+                                @foreach($sections as $section)
+                                    <option value="{{$section->section_id}}"  {{isset($input['section'])? ($input['section'] == $section->section_id? 'selected':''):''}}>{{$section->sectionName->section_name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                            <div class="pull-right loader loader_style" id="select_section_loader">
+                                <img class="loader_img_style" src="{{asset('public/backEnd/img/demo_wait.gif')}}" alt="loader">
+                            </div>
+                            @if ($errors->has('section'))
+                            <span class="text-danger invalid-select" role="alert">
+                                {{ $errors->first('section') }}
+                            </span>
+                            @endif
+                        </div>
+                        <div class="col-lg-3 mt-30-md" id="select_subject_div">
+                            <select class="primary_select form-control{{ $errors->has('subject') ? ' is-invalid' : '' }} select_subject" id="select_subject" name="subject">
+                                <option data-display="{{__('student.select_subject')}} *" value="">{{__('student.select_subject')}} *</option>
+                                @isset($subjects)
+                                    @foreach($subjects as $subject)
+                                        @php
+                                        $type = $subject->subject->subject_type == 'T' ? 'Theory' : 'Practical';
+                                        @endphp
+                                        <option value="{{$subject->subject_id}}"  {{isset($input['subject'])? ($input['subject'] == $subject->subject_id? 'selected':''):''}}>{{$subject->subject->subject_name}} ({{$type}})</option>
+                                    @endforeach
+                                @endisset
+                            </select>
+                            <div class="pull-right loader loader_style" id="select_subject_loader">
+                                <img class="loader_img_style" src="{{asset('public/backEnd/img/demo_wait.gif')}}" alt="loader">
+                            </div>
+                            @if ($errors->has('subject'))
+                            <span class="text-danger invalid-select" role="alert">
+                                {{ $errors->first('subject') }}
+                            </span>
+                            @endif
+                        </div>
+                        <div class="col-lg-3 mt-30-md">
+                            <div class="row no-gutters input-right-icon">
+                                <div class="col">
+                                    <div class="primary_input">
+                                        <input class="primary_input_field  primary_input_field date form-control form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }} {{isset($date)? 'read-only-input': ''}}" id="startDate" type="text"
+                                            name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">
+                                        <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>
+
 
                             </div>
                         @else
@@ -75,26 +131,19 @@
 
                             <div class="col-lg-3 mt-30-md md_mb_20">
 
-                                <div class="primary_input">
-                                    <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>
-                                    <div class="primary_datepicker_input">
-                                        <div class="no-gutters input-right-icon">
-                                            <div class="col">
-                                                <div class="">
-                                                    <input class="primary_input_field  primary_input_field date form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }}" id="attendance_date" type="text"
-                                                           name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">
-                                                </div>
-                                            </div>
-                                            <button class="btn-date" data-id="#attendance_date" type="button">
-                                                <label class="m-0 p-0" for="attendance_date">
-                                                    <i class="ti-calendar" id="start-date-icon"></i>
-                                                </label>
-                                            </button>
-                                        </div>
+                                        @if ($errors->has('attendance_date'))
+                                        <span class="text-danger" >
+                                            {{ $errors->first('attendance_date') }}
+                                        </span>
+                                        @endif
                                     </div>
                                     <span class="text-danger">{{ $errors->first('attendance_date') }}</span>
                                 </div>
-                            </div>
+                                <div class="col-auto">
+                                    <button class="" type="button">
+                                        <i class="ti-calendar" id="start-date-icon"></i>
+                                    </button>
+                                </div>
                         @endif
                         <div class="col-lg-12 mt-20 text-right">
                             <button type="submit" class="primary-btn small fix-gr-bg">
@@ -102,7 +151,8 @@
                                 @lang('common.search')
                             </button>
                         </div>
-                    </div>
+                        </div>
+
                     {{ Form::close() }}
                 </div>
             </div>
