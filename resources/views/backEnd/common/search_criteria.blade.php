@@ -223,13 +223,15 @@
 
             $("#common_select_class").on("change", function () {
                 var class_id = $(this).val();
-                getSubject(class_id);
+                var section_id = 1; // Replace with the desired section ID or "O'zbek"
+                getSubject(class_id, section_id);
             });
 
-            function getSubject(class_id) {
+            function getSubject(class_id, section_id) {
                 var url = $("#url").val();
                 var formData = {
                     class: class_id,
+                    section: section_id,
                 };
 
                 $.ajax({
@@ -250,7 +252,7 @@
 
                         if (data[0].length) {
                             $.each(data[0], function (i, subject) {
-                                $("#common_select_section").append(
+                                $("#common_select_subject").append(
                                     $("<option>", {
                                         value: subject.id,
                                         text: subject.subject_name,
@@ -258,8 +260,8 @@
                                 );
                             });
                         }
-                        $('#common_select_section').niceSelect('update');
-                        $('#common_select_section').trigger('change');
+                        $('#common_select_subject').niceSelect('update');
+                        $('#common_select_subject').trigger('change');
                     },
                     error: function (data) {
                         console.log("Error:", data);

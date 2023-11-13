@@ -90,6 +90,7 @@ class SmSubjectAttendanceController extends Controller
 
             $attendance_type = $students[0]['studentDetail']['DateSubjectWiseAttendances'] != null ? $students[0]['studentDetail']['DateSubjectWiseAttendances']['attendance_type'] : '';
 
+
             if (generalSetting()->attendance_layout == 1) {
                 return view('backEnd.studentInformation.subject_attendance_list', compact('students', 'classes', 'subjects', 'attendance_type', 'input'))->with($data);
             } else {
@@ -126,11 +127,7 @@ class SmSubjectAttendanceController extends Controller
                 $attendance->student_id = gv($student, 'student');
                 $attendance->class_id = gv($student, 'class');
                 $attendance->section_id = gv($student, 'section');
-
-//                $timestamp = gv($student, 'attendance_type');
-//                $currentDateTime = date('Y-m-d');
-//                $attendance->attendance_time = date('Y-m-d H:i:s', strtotime($currentDateTime . " " . $timestamp));
-
+                $attendance->attendance_type = gv($student, 'attendance_type');
                 $attendance->behaviour_type = gv($student, 'behaviour_type');
                 $attendance->grade = gv($student, 'grade');
                 $attendance->notes = gv($student, 'note');
