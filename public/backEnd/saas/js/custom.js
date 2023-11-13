@@ -1043,7 +1043,7 @@ $(document).ready(function() {
 // Student attendance
 
 $("#search_student").on("submit", function() {
-    var date = $("#startDate").datepicker({ dateFormat: "yyyy-MM-dd" }).val();
+    var date = $("#startDate").datepicker({ dateFormat: "dd,MM,yyyy" }).val();
 
     if ($("#select_class").val() == "") {
         $("#class_error").removeClass("d-none");

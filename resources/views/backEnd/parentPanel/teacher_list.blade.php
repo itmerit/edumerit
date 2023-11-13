@@ -55,6 +55,7 @@
                                         <thead>
                                             <tr>
                                                 <th>@lang('hr.teacher_name')</th>
+
                                             </tr>
                                         </thead>
 

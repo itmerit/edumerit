@@ -54,6 +54,8 @@ class Kernel extends ConsoleKernel
             ->timezone('Asia/Tashkent') // Set your timezone
             ->everyMinute()
             ->between('7:00', '19:00');
+
+
         // $schedule->command('demo:cron')->everyMinute();
         $schedule->command('absent_notification:sms')->everyMinute();
 
