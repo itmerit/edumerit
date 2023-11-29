@@ -190,19 +190,19 @@
             var url = $("#url").val();
             var i = 0;
 
-          var class_id = $(this).val();
+            var class_id = $(this).val();
 
-          $("#sectionSelectStudent").empty().append(
-            $("<option>", {
-                value:  '',
-                text: window.jsLang('select_section') + ' *',
-            })
-        );
+            $("#sectionSelectStudent").empty().append(
+                $("<option>", {
+                    value:  '',
+                    text: window.jsLang('select_section') + ' *',
+                })
+            );
 
-        if (!class_id){
-            $("#sectionSelectStudent").trigger('change').niceSelect('update');
-            return;
-        }
+            if (!class_id){
+                $("#sectionSelectStudent").trigger('change').niceSelect('update');
+                return;
+            }
             var formData = {
                 id: $(this).val(),
             };
@@ -5481,8 +5481,8 @@
                     url: url + "/" + "staff-disable-enable",
                     success: function(data) {
                         if(data.status == false) {
-                           toastr.error(data.message);
-                           $(".hr_"+id).prop("checked", false);
+                            toastr.error(data.message);
+                            $(".hr_"+id).prop("checked", false);
                         } else {
                             toastr.success("Operation Success!");
                         }
@@ -5933,241 +5933,174 @@
 
 
 
-        // Globla Assign subject
-        $(document).ready(function() {
-            $("#addNewGlobalSubject").on("click", function() {
-                var url = $("#url").val();
-                var count = $("#assign-subject").children().length;
-                var divCount = count + 1;
+    // Globla Assign subject
+    $(document).ready(function() {
+        $("#addNewGlobalSubject").on("click", function() {
+            var url = $("#url").val();
+            var count = $("#assign-subject").children().length;
+            var divCount = count + 1;
 
-                // get section for student
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: url + "/" + "global-assign-subject-get-by-ajax",
-                    success: function(data) {
-                        var subject_teacher = "";
+            // get section for student
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: url + "/" + "global-assign-subject-get-by-ajax",
+                success: function(data) {
+                    var subject_teacher = "";
+                    subject_teacher +=
+                        "<div class='col-lg-12 mb-30' id='assign-subject-" +
+                        divCount +
+                        "'>";
+                    subject_teacher += "<div class='row'>";
+                    subject_teacher += "<div class='col-lg-5 mt-30-md'>";
+                    subject_teacher +=
+                        "<select class='primary_select' name='subjects[]' style='display:none'>";
+                    subject_teacher +=
+                        "<option data-display='"+window.jsLang('select_subject')+"'  value=''>"+window.jsLang('select_subject')+"</option>";
+                    $.each(data[0], function(key, subject) {
                         subject_teacher +=
-                            "<div class='col-lg-12 mb-30' id='assign-subject-" +
-                            divCount +
-                            "'>";
-                        subject_teacher += "<div class='row'>";
-                        subject_teacher += "<div class='col-lg-5 mt-30-md'>";
-                        subject_teacher +=
-                            "<select class='primary_select' name='subjects[]' style='display:none'>";
-                        subject_teacher +=
-                            "<option data-display='"+window.jsLang('select_subject')+"'  value=''>"+window.jsLang('select_subject')+"</option>";
-                        $.each(data[0], function(key, subject) {
-                            subject_teacher +=
-                                "<option value=" +
-                                subject.id +
-                                ">" +
-                                subject.subject_name +
-                                "</option>";
-                        });
-                        subject_teacher += "</select>";
-
-                        subject_teacher +=
-                            "<div class='nice-select primary_select form-control' tabindex='0'>";
-                        subject_teacher += "<span class='current'>"+window.jsLang('select_subject')+"</span>";
-                        subject_teacher +=
-                            "<div class='nice-select-search-box'><input type='text' class='nice-select-search' placeholder='Search...'></div>";
-                        subject_teacher += "<ul class='list'>";
-                        subject_teacher +=
-                            "<li data-value='' data-display='"+window.jsLang('select_subject')+"' class='option selected'>"+window.jsLang('select_subject')+"</li>";
-                        $.each(data[0], function(key, subject) {
-                            subject_teacher +=
-                                "<li data-value=" +
-                                subject.id +
-                                " class='option'>" +
-                                subject.subject_name +
-                                "</li>";
-                        });
-                        subject_teacher += "</ul>";
-                        subject_teacher += "</div>";
-                        subject_teacher += "</div>";
-                        subject_teacher += "<div class='col-lg-5 mt-30-md'>";
-                        subject_teacher +=
-                            "<select class='primary_select form-control' name='teachers[]' style='display:none'>";
-                        subject_teacher +=
-                            "<option data-display='"+window.jsLang('select_teacher')+"' value=''>"+window.jsLang('select_teacher')+"</option>";
-                        $.each(data[1], function(key, teacher) {
-                            subject_teacher +=
-                                "<option value=" +
-                                teacher.id +
-                                ">" +
-                                teacher.full_name +
-                                "</option>";
-                        });
-                        subject_teacher += "</select>";
-                        subject_teacher +=
-                            "<div class='nice-select primary_select form-control' tabindex='0'>";
-                        subject_teacher += "<span class='current'>"+window.jsLang('select_teacher')+"</span>";
-                        subject_teacher +=
-                            "<div class='nice-select-search-box'><input type='text' class='nice-select-search' placeholder='Search...'></div>";
-                        subject_teacher += "<ul class='list'>";
-                        subject_teacher +=
-                            "<li data-value='' data-display='"+window.jsLang('select_teacher')+"' class='option selected'>"+window.jsLang('select_teacher')+"</li>";
-                        $.each(data[1], function(key, teacher) {
-                            subject_teacher +=
-                                "<li data-value=" +
-                                teacher.id +
-                                " class='option'>" +
-                                teacher.full_name +
-                                "</li>";
-                        });
-                        subject_teacher += "</ul>";
-                        subject_teacher += "</div>";
-                        subject_teacher += "</div>";
-                        subject_teacher += "<div class='col-lg-2'>";
-                        subject_teacher +=
-                            "<button class='primary-btn icon-only fix-gr-bg' id='removeSubject' onclick='deleteSubject(" +
-                            divCount +
-                            ")' type='button'>";
-                        subject_teacher += "<span class='ti-trash' ></span>";
-                        subject_teacher += "</button>";
-                        subject_teacher += "</div>";
-                        subject_teacher += "</div>";
-                        subject_teacher += "</div>";
-                        $("#assign-subject").append(subject_teacher);
-                    },
-                    error: function(data) {
-                        // console.log("Error:", data);
-                    },
-                });
-            });
-        });
-
-        //get academic year by school id
-        $(document).ready(function() {
-            $("form#parent-registration #select-school").on("change", function() {
-                var url = $("#url").val();
-        console.log(url);
-                var formData = {
-                    id: $(this).val(),
-                };
-                // get section for student
-                $.ajax({
-                    type: "GET",
-                    data: formData,
-                    dataType: "json",
-                    url: url + "/" + "ajax-get-class-academicyear",
-                    success: function(data) {
-                        console.log(data);
-
-                        var a = "";
-
-                        if (data[1].length) {
-                            $("#select-academic-year").find("option").not(":first").remove();
-                            $("#academic-year-div ul").find("li").not(":first").remove();
-
-                            $.each(data[1], function(i, academicYear) {
-                                $("#select-academic-year").append(
-                                    $("<option>", {
-                                        value: academicYear.id,
-                                        text: academicYear.year,
-                                        text: academicYear.title,
-                                    })
-                                );
-
-                                $("#academic-year-div ul").append(
-                                    "<li data-value='" +
-                                    academicYear.id +
-                                    "' class='option'>" +
-                                    academicYear.year +
-                                    " [" +
-                                    academicYear.title +
-                                    "]" +
-                                    "</li>"
-                                );
-                            });
-                        } else {
-                            $("#academic-year-div .current").html("SELECT ACADEMIC YEAR *");
-                            $("#select-academic-year").find("option").not(":first").remove();
-                            $("#academic-year-div ul").find("li").not(":first").remove();
-                        }
-                    },
-                    error: function(data) {
-                        // console.log('Error:', data);
-                    },
-                });
-            });
-        });
-
-        //get class by academic & school id
-        $(document).ready(function() {
-            $("form#parent-registration #select-academic-year").on(
-                "change",
-                function() {
-                    var url = $("#url").val();
-                    var i = 0;
-                    var formData = {
-                        id: $(this).val(),
-                    };
-                    // get section for student
-                    $.ajax({
-                        type: "GET",
-                        data: formData,
-                        dataType: "json",
-                        url: url + "/" + "ajax-get-classes",
-
-                        beforeSend: function() {
-                            $('#select_class_loader').addClass('pre_loader');
-                            $('#select_class_loader').removeClass('loader');
-                        },
-
-                        success: function(data) {
-                            var a = "";
-                            // $.each(data[0], function (i, item) {
-
-                            if (data[0].length) {
-                                $("#select-class").find("option").not(":first").remove();
-                                $("#class-div ul").find("li").not(":first").remove();
-
-                                $.each(data[0], function(i, className) {
-                                    $("#select-class").append(
-                                        $("<option>", {
-                                            value: className.id,
-                                            text: className.class_name,
-                                        })
-                                    );
-
-                                    $("#class-div ul").append(
-                                        "<li data-value='" +
-                                        className.id +
-                                        "' class='option'>" +
-                                        className.class_name +
-                                        "</li>"
-                                    );
-                                });
-                            } else {
-                                $("#class-div .current").html("SELECT CLASS *");
-                                $("#select-class").find("option").not(":first").remove();
-                                $("#class-div ul").find("li").not(":first").remove();
-                            }
-                        },
-                        error: function(data) {
-                            // console.log('Error:', data);
-                        },
-                        complete: function() {
-                            i--;
-                            if (i <= 0) {
-                                $('#select_class_loader').removeClass('pre_loader');
-                                $('#select_class_loader').addClass('loader');
-                            }
-                        }
+                            "<option value=" +
+                            subject.id +
+                            ">" +
+                            subject.subject_name +
+                            "</option>";
                     });
-                }
-            );
+                    subject_teacher += "</select>";
+
+                    subject_teacher +=
+                        "<div class='nice-select primary_select form-control' tabindex='0'>";
+                    subject_teacher += "<span class='current'>"+window.jsLang('select_subject')+"</span>";
+                    subject_teacher +=
+                        "<div class='nice-select-search-box'><input type='text' class='nice-select-search' placeholder='Search...'></div>";
+                    subject_teacher += "<ul class='list'>";
+                    subject_teacher +=
+                        "<li data-value='' data-display='"+window.jsLang('select_subject')+"' class='option selected'>"+window.jsLang('select_subject')+"</li>";
+                    $.each(data[0], function(key, subject) {
+                        subject_teacher +=
+                            "<li data-value=" +
+                            subject.id +
+                            " class='option'>" +
+                            subject.subject_name +
+                            "</li>";
+                    });
+                    subject_teacher += "</ul>";
+                    subject_teacher += "</div>";
+                    subject_teacher += "</div>";
+                    subject_teacher += "<div class='col-lg-5 mt-30-md'>";
+                    subject_teacher +=
+                        "<select class='primary_select form-control' name='teachers[]' style='display:none'>";
+                    subject_teacher +=
+                        "<option data-display='"+window.jsLang('select_teacher')+"' value=''>"+window.jsLang('select_teacher')+"</option>";
+                    $.each(data[1], function(key, teacher) {
+                        subject_teacher +=
+                            "<option value=" +
+                            teacher.id +
+                            ">" +
+                            teacher.full_name +
+                            "</option>";
+                    });
+                    subject_teacher += "</select>";
+                    subject_teacher +=
+                        "<div class='nice-select primary_select form-control' tabindex='0'>";
+                    subject_teacher += "<span class='current'>"+window.jsLang('select_teacher')+"</span>";
+                    subject_teacher +=
+                        "<div class='nice-select-search-box'><input type='text' class='nice-select-search' placeholder='Search...'></div>";
+                    subject_teacher += "<ul class='list'>";
+                    subject_teacher +=
+                        "<li data-value='' data-display='"+window.jsLang('select_teacher')+"' class='option selected'>"+window.jsLang('select_teacher')+"</li>";
+                    $.each(data[1], function(key, teacher) {
+                        subject_teacher +=
+                            "<li data-value=" +
+                            teacher.id +
+                            " class='option'>" +
+                            teacher.full_name +
+                            "</li>";
+                    });
+                    subject_teacher += "</ul>";
+                    subject_teacher += "</div>";
+                    subject_teacher += "</div>";
+                    subject_teacher += "<div class='col-lg-2'>";
+                    subject_teacher +=
+                        "<button class='primary-btn icon-only fix-gr-bg' id='removeSubject' onclick='deleteSubject(" +
+                        divCount +
+                        ")' type='button'>";
+                    subject_teacher += "<span class='ti-trash' ></span>";
+                    subject_teacher += "</button>";
+                    subject_teacher += "</div>";
+                    subject_teacher += "</div>";
+                    subject_teacher += "</div>";
+                    $("#assign-subject").append(subject_teacher);
+                },
+                error: function(data) {
+                    // console.log("Error:", data);
+                },
+            });
         });
+    });
 
-        // get section by academic , school and class id
+    //get academic year by school id
+    $(document).ready(function() {
+        $("form#parent-registration #select-school").on("change", function() {
+            var url = $("#url").val();
+            console.log(url);
+            var formData = {
+                id: $(this).val(),
+            };
+            // get section for student
+            $.ajax({
+                type: "GET",
+                data: formData,
+                dataType: "json",
+                url: url + "/" + "ajax-get-class-academicyear",
+                success: function(data) {
+                    console.log(data);
 
-        $(document).ready(function() {
-            $("form#parent-registration #select-class").on("change", function() {
+                    var a = "";
+
+                    if (data[1].length) {
+                        $("#select-academic-year").find("option").not(":first").remove();
+                        $("#academic-year-div ul").find("li").not(":first").remove();
+
+                        $.each(data[1], function(i, academicYear) {
+                            $("#select-academic-year").append(
+                                $("<option>", {
+                                    value: academicYear.id,
+                                    text: academicYear.year,
+                                    text: academicYear.title,
+                                })
+                            );
+
+                            $("#academic-year-div ul").append(
+                                "<li data-value='" +
+                                academicYear.id +
+                                "' class='option'>" +
+                                academicYear.year +
+                                " [" +
+                                academicYear.title +
+                                "]" +
+                                "</li>"
+                            );
+                        });
+                    } else {
+                        $("#academic-year-div .current").html("SELECT ACADEMIC YEAR *");
+                        $("#select-academic-year").find("option").not(":first").remove();
+                        $("#academic-year-div ul").find("li").not(":first").remove();
+                    }
+                },
+                error: function(data) {
+                    // console.log('Error:', data);
+                },
+            });
+        });
+    });
+
+    //get class by academic & school id
+    $(document).ready(function() {
+        $("form#parent-registration #select-academic-year").on(
+            "change",
+            function() {
                 var url = $("#url").val();
                 var i = 0;
-
                 var formData = {
                     id: $(this).val(),
                 };
@@ -6176,43 +6109,41 @@
                     type: "GET",
                     data: formData,
                     dataType: "json",
-                    url: url + "/" + "ajax-get-sections",
+                    url: url + "/" + "ajax-get-classes",
 
                     beforeSend: function() {
-                        $('#select_section_loader').addClass('pre_loader');
-                        $('#select_section_loader').removeClass('loader');
+                        $('#select_class_loader').addClass('pre_loader');
+                        $('#select_class_loader').removeClass('loader');
                     },
 
                     success: function(data) {
-                        console.log(data);
-
                         var a = "";
                         // $.each(data[0], function (i, item) {
 
-                        if (data.length) {
-                            $("#select-section").find("option").not(":first").remove();
-                            $("#section-div ul").find("li").not(":first").remove();
+                        if (data[0].length) {
+                            $("#select-class").find("option").not(":first").remove();
+                            $("#class-div ul").find("li").not(":first").remove();
 
-                            $.each(data, function(i, className) {
-                                $("#select-section").append(
+                            $.each(data[0], function(i, className) {
+                                $("#select-class").append(
                                     $("<option>", {
                                         value: className.id,
-                                        text: className.section_name,
+                                        text: className.class_name,
                                     })
                                 );
 
-                                $("#section-div ul").append(
+                                $("#class-div ul").append(
                                     "<li data-value='" +
                                     className.id +
                                     "' class='option'>" +
-                                    className.section_name +
+                                    className.class_name +
                                     "</li>"
                                 );
                             });
                         } else {
-                            $("#section-div .current").html("SELECT SECTION *");
-                            $("#select-section").find("option").not(":first").remove();
-                            $("#section-div ul").find("li").not(":first").remove();
+                            $("#class-div .current").html("SELECT CLASS *");
+                            $("#select-class").find("option").not(":first").remove();
+                            $("#class-div ul").find("li").not(":first").remove();
                         }
                     },
                     error: function(data) {
@@ -6221,13 +6152,82 @@
                     complete: function() {
                         i--;
                         if (i <= 0) {
-                            $('#select_section_loader').removeClass('pre_loader');
-                            $('#select_section_loader').addClass('loader');
+                            $('#select_class_loader').removeClass('pre_loader');
+                            $('#select_class_loader').addClass('loader');
                         }
                     }
                 });
+            }
+        );
+    });
+
+    // get section by academic , school and class id
+
+    $(document).ready(function() {
+        $("form#parent-registration #select-class").on("change", function() {
+            var url = $("#url").val();
+            var i = 0;
+
+            var formData = {
+                id: $(this).val(),
+            };
+            // get section for student
+            $.ajax({
+                type: "GET",
+                data: formData,
+                dataType: "json",
+                url: url + "/" + "ajax-get-sections",
+
+                beforeSend: function() {
+                    $('#select_section_loader').addClass('pre_loader');
+                    $('#select_section_loader').removeClass('loader');
+                },
+
+                success: function(data) {
+                    console.log(data);
+
+                    var a = "";
+                    // $.each(data[0], function (i, item) {
+
+                    if (data.length) {
+                        $("#select-section").find("option").not(":first").remove();
+                        $("#section-div ul").find("li").not(":first").remove();
+
+                        $.each(data, function(i, className) {
+                            $("#select-section").append(
+                                $("<option>", {
+                                    value: className.id,
+                                    text: className.section_name,
+                                })
+                            );
+
+                            $("#section-div ul").append(
+                                "<li data-value='" +
+                                className.id +
+                                "' class='option'>" +
+                                className.section_name +
+                                "</li>"
+                            );
+                        });
+                    } else {
+                        $("#section-div .current").html("SELECT SECTION *");
+                        $("#select-section").find("option").not(":first").remove();
+                        $("#section-div ul").find("li").not(":first").remove();
+                    }
+                },
+                error: function(data) {
+                    // console.log('Error:', data);
+                },
+                complete: function() {
+                    i--;
+                    if (i <= 0) {
+                        $('#select_section_loader').removeClass('pre_loader');
+                        $('#select_section_loader').addClass('loader');
+                    }
+                }
             });
         });
+    });
 
 
 
