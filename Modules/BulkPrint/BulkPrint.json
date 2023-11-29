@@ -1,0 +1,23 @@
+{
+    "BulkPrint": {
+
+        "item_id": "23876323",
+
+        "migration": [
+           "Modules/BulkPrint/Database/Migrations/2021_06_06_070142_create_invoice_settings_table.php"
+        ],
+        "names": [
+                "create_invoice_settings"
+
+        ],
+        "versions": [
+            "1.0"
+        ],
+        "url": [
+            "https://spondonit.com/contact"
+        ],
+        "notes": [
+            "This is Jitsi module for live virtual class and meeting in this system at a time. Thanks for using."
+        ]
+    }
+}

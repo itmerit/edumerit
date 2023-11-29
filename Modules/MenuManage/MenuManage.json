@@ -1,0 +1,27 @@
+{
+    "MenuManage": {
+        
+        "item_id": "321321",
+
+        "migration": [
+            "2021_03_14_131442_create_menu_manages_table.php",
+            "2021_03_14_131748_create_sidebars_table.php",
+            "2021_03_24_133318_create_user_menus_table.php"
+        
+        ],
+        "names": [
+            "menu_manages",
+            "sidebars",
+            "user_menus"
+        ],
+        "versions": [
+            "0.1"
+        ],
+        "url": [
+            "https://spondonit.com/contact"
+        ],
+        "notes": [
+            "This is MenuManage module for manage and organize your sidebar menu. Thanks for using."
+        ]
+    }
+}

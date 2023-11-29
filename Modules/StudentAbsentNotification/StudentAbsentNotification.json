@@ -1,0 +1,21 @@
+{
+    "StudentAbsentNotification": {
+        "item_id": "30626608",
+
+        "migration": [
+            "2021_02_10_110920_create_absent_notification_time_setups_table.php"
+        ],
+        "names": [
+            "absent_notification_time_setups"
+        ],
+        "versions": [
+            "1.0"
+        ],
+        "url": [
+            "https://spondonit.com/contact"
+        ],
+        "notes": [
+            "This is Parent StudentAbsentNotification module for Multiple Image Question. Thanks for using."
+        ]
+    }
+}

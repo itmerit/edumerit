@@ -1,0 +1,107 @@
+{
+  "admin_section": {
+    "lang": "admin.admin_section",
+    "module_id": 11
+  },
+  "student_info": {
+    "lang": "student.student_information",
+    "module_id": 61
+  },
+  "academics": {
+    "lang": "academics.academics",
+    "module_id": 245
+  },
+  "study_material": {
+    "lang": "study.study_material",
+    "module_id": 87
+  },
+  "accounts": {
+    "lang": "accounts.accounts",
+    "module_id": 137
+  },
+  "human_resource": {
+    "lang": "hr.human_resource",
+    "module_id": 160
+  },
+  "leave": {
+    "lang": "leave.leave",
+    "module_id": 188
+  },
+  "custom_field": {
+    "lang": "student.custom_field",
+    "module_id": 1100
+  },
+  "examination": {
+    "lang": "exam.examination",
+    "module_id": 207
+  },
+  "online_exam": {
+    "lang": "exam.online_exam",
+    "module_id": 875
+  },
+  "homework": {
+    "lang": "homework.home_work",
+    "module_id": 277
+  },
+  "communicate": {
+    "lang": "communicate.communicate",
+    "module_id": 286
+  },
+  "library": {
+    "lang": "library.library",
+    "module_id": 298
+  },
+  "inventory": {
+    "lang": "inventory.inventory",
+    "module_id": 315
+  },
+  "transport": {
+    "lang": "transport.transport",
+    "module_id": 348
+  },
+  "dormitory": {
+    "lang": "dormitory.dormitory",
+    "module_id": 362
+  },
+
+  "system_settings": {
+    "lang": "common.general_settings",
+    "module_id": 398
+  },
+  "style": {
+    "lang": "style.style",
+    "module_id": 485
+  },
+  "front_setting": {
+    "lang": "common.frontend_cms",
+    "module_id": 492
+  },
+  "fees_settings": {
+    "lang": "common.fees_settings",
+    "module_id": 492
+  },
+  "exam_settings": {
+    "lang": "common.exam_settings",
+    "module_id": 492
+  },
+  "students_report": {
+    "lang": "common.student_report",
+    "module_id": 492
+  },
+  "exam_report": {
+    "lang": "common.exam_report",
+    "module_id": 492
+  },
+  "staff_report": {
+    "lang": "common.staff_report",
+    "module_id": 492
+  },
+  "fees_report": {
+    "lang": "common.fees_report",
+    "module_id": 492
+  },
+  "accounts_report": {
+    "lang": "common.accounts_report",
+    "module_id": 492
+  }
+}

@@ -1,0 +1,138 @@
+.client .testimonial-area .owl-nav .owl-prev img,
+.client .testimonial-area .owl-nav .owl-next img {
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+    display: block;
+}
+.client .testimonial-area .owl-nav .owl-prev,
+.client .testimonial-area .owl-nav .owl-next {
+    color: #ffffff;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+.client .testimonial-area .owl-nav .owl-prev {
+    margin-right: 30px;
+    text-align: right;
+}
+@media (min-width: 1200px) {
+    .box-1420 {
+        max-width: 1420px;
+        margin: 0 auto;
+    }
+}
+.client .testimonial-area .owl-nav .owl-prev:hover,
+.client .testimonial-area .owl-nav .owl-next:hover {
+    filter: brightness(80%);
+    -o-filter: brightness(80%);
+    -ms-filter: brightness(80%);
+    -moz-filter: brightness(80%);
+    -webkit-filter: brightness(80%);
+}
+.client .notice-item {
+    padding-bottom: 23px;
+    margin-top: 18px;
+    border-bottom: 1px solid #ecedf4;
+}
+
+/* Herder Menu Start */
+.main_menu ul.navbar-nav li.nav-item {
+    position: relative;
+}
+
+.main_menu ul.navbar-nav li ul.sumbmenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffff;
+    width: 200px;
+    transition: 0.4s;
+    opacity: 0;
+    visibility: hidden;
+    top: 120%;
+    padding-left: 0;
+}
+
+.main_menu ul.navbar-nav li:hover ul.sumbmenu {
+    opacity: 1;
+    visibility: visible;
+    top: 100%;
+}
+
+.main_menu ul.navbar-nav li ul.sumbmenu li:hover > ul.sumbmenu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.main_menu ul.navbar-nav li ul.sumbmenu li a {
+    font-weight: 500;
+    text-transform: capitalize;
+    padding: 16px 20px;
+    line-height: 1;
+    display: block;
+    border-top: 1px solid #f3f3f3;
+}
+
+.main_menu ul.navbar-nav li ul.sumbmenu li {
+    display: block;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.main_menu ul.navbar-nav li ul.sumbmenu li ul.sumbmenu {
+    right: 100%;
+    top: 0%;
+    opacity: 0;
+    visibility: hidden;
+    right: 100% !important;
+    left: auto !important;
+}
+
+.main_menu ul.navbar-nav li:hover > a {
+    color: #7c31ff !important;
+}
+
+.main_menu ul.navbar-nav li ul.sumbmenu li a {
+    font-weight: 400;
+    text-transform: uppercase;
+    padding: 16px 20px;
+    line-height: 1;
+    display: block;
+    border-top: 1px solid #f3f3f3;
+    color: #4b4c51;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.main_menu ul.navbar-nav li.submenu_left_control ul.sumbmenu li ul.sumbmenu {
+    right: auto !important;
+    left: 100% !important;
+}
+
+.main_menu
+    ul.navbar-nav
+    li.submenu_left_control
+    ul.sumbmenu
+    li
+    ul.sumbmenu.submenu_left {
+    right: 100% !important;
+    left: auto !important;
+}
+
+.main_menu
+    ul.navbar-nav
+    li.submenu_left_control
+    ul.sumbmenu
+    li.menu_list_left
+    ul.sumbmenu {
+    right: 100% !important;
+    left: auto !important;
+}
+/* Herder Menu End */

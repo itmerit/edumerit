@@ -1,0 +1,20 @@
+{
+    "HimalayaSms": {
+        "item_id": "23876323",
+        "migration": {
+            "himalayasms_setting" : "Modules/HimalayaSms/Database/Migrations/2021_07_28_103704_create_himalayasms_setting_table.php"
+        },
+        "names": [
+            "himalayasms_setting"
+        ],
+        "versions": [
+            "1.0"
+        ],
+        "url": [
+            "https://spondonit.com/contact"
+        ],
+        "notes": [
+            "This is himalaysms module for sending message via api with student & parent in our system. Thanks for using."
+        ]
+    }
+}

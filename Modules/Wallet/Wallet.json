@@ -1,0 +1,22 @@
+{
+    "Wallet": {
+        "migration": {
+            "no_table": "",
+            "wm__wallet_settings":"Modules/Wallet/Database/Migrations/2021_08_04_040918_create_wm__wallet_settings_table.php",
+            "wallet_transactions":"Modules/Wallet/Database/Migrations/2021_08_25_092306_create_wallet_transactions_table.php"
+        },
+        "names": [
+            "wm__wallet_settings",
+            "wallet_transactions"
+        ],
+        "versions": [
+            "1.0"
+        ],
+        "url": [
+            "https://spondonit.com/contact"
+        ],
+        "notes": [
+            "This is an virtual wallet. Thanks for using."
+        ]
+    }
+}

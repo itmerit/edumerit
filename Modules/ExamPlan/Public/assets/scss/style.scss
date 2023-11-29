@@ -1,0 +1,213 @@
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+$black: #1A1818;
+$white: #ffffff;
+$red:#E50019;
+$green:#00973D;
+
+/* main */
+
+.table {
+    // font-family: 'Myriad Pro';
+    border-collapse: collapse;
+    & tr {
+        & td {
+            padding: 8px;
+        }
+    }
+}
+
+.border {
+    border: 2px solid $black;
+    &-3 {
+        border-width: 3px;
+    }
+    &-bottom {
+        border-bottom: 2px solid $black;
+    }
+    &-top {
+        border-top: 2px solid $black;
+    }
+}
+
+.gap {
+    &-2 {
+        gap: .5rem;
+    }
+}
+
+.flex {
+    display: flex !important;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.flex-wrap {
+    flex-wrap: wrap !important;
+}
+
+.items-center {
+    align-items: center !important;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.fs {
+    &-18 {
+        font-size: 18px;
+        line-height: (21px/18px);
+    }
+    &-14 {
+        font-size: 14px;
+        line-height: (18px/14px);
+    }
+    &-16 {
+        font-size: 16px;
+        line-height: (18px/16px);
+    }
+    &-22 {
+        font-size: 22px;
+        line-height: (26px/20px);
+    }
+    &-20 {
+        font-size: 20px;
+        line-height: (26px/20px);
+    }
+    &-24 {
+        font-size: 24px;
+        line-height: (30px/24px);
+    }
+}
+
+.fw {
+    &-bold {
+        font-weight: 700 !important;
+    }
+    &-meidum {
+        font-weight: 500 !important;
+    }
+}
+
+.text {
+    &-black {
+        color: $black !important;
+    }
+    &-red {
+        color: $red !important;
+    }
+    &-green {
+        color: $green !important;
+    }
+    &-center {
+        text-align: center !important;
+    }
+    &-end {
+        text-align: right !important;
+    }
+    &-underline {
+        text-decoration: underline;
+    }
+}
+
+.w {
+    &-full {
+        width: 100%;
+    }
+    &-110 {
+        width: 110px;
+    }
+}
+
+.h {
+    &-10 {
+        height: 10px;
+    }
+    &-30 {
+        height: 30px;
+    }
+    &-60 {
+        height: 60px;
+    }
+}
+
+.p {
+    &-10 {
+        padding: 10px;
+    }
+    &-0 {
+        padding: 0 !important;
+    }
+}
+
+.user {
+    --profile-width: 120px;
+    --gap: 8px;
+    gap: var(--gap);
+    &>.table {
+        max-width: calc(100% - var(--profile-width) - var(--gap));
+        flex: 0 0 100%;
+    }
+    & .profile {
+        max-width: var(--profile-width);
+        max-height: var(--profile-width);
+        flex: 0 0 100%;
+        overflow: hidden;
+        height: auto;
+        & img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    }
+}
+
+.info {
+    & ul {
+        padding: 0;
+        list-style: none;
+        & li {
+            display: flex;
+            & span {
+                --dot: .25rem;
+                display: inline-block;
+                width: var(--dot);
+                height: var(--dot);
+                border-radius: 50%;
+                background-color: $black;
+                margin: 5px;
+            }
+        }
+    }
+}
+
+.admit-card {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px dashed $black;
+}
+
+@media print {
+    .break {
+        page-break-after: always;
+    }
+}
+
+.card-item {
+    margin-top: 30px;
+}
+
+
+/* main */

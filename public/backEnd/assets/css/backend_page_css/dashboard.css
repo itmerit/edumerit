@@ -1,0 +1,61 @@
+
+.demo_wait {
+    margin-left: 35%;
+}
+.mb_5{
+    margin-bottom: 5px;
+}
+.white-box.single-summery:hover, .white-box.single-summery.active {
+  background: url(../../img/summery-bg1.png) no-repeat center;
+  box-shadow: 0px 10px 30px rgba(108, 39, 255, 0.3);
+  background-size: 100% 100%;
+}
+.white-box.single-summery.bg_active {
+background: url(../../img/summery-bg1.png) no-repeat center;
+  box-shadow: 0px 10px 30px rgba(108, 39, 255, 0.3);
+  background-size: 100% 100%;
+}
+
+.white-box.single-summery.bg_active::after,
+.white-box.single-summery.bg_active::before{
+  display: none;
+}
+
+.white-box.single-summery.bg_active:hover:after,
+.white-box.single-summery.bg_active:hover:before{
+  display: block;
+}
+
+.white-box.single-summery.bg_active h3,
+.white-box.single-summery.bg_active h1,
+.white-box.single-summery.bg_active p{
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.single-summery.active:hover {
+  background: none !important;
+  background-color: white !important;
+  box-shadow: 0 0 0 !important;
+}
+
+.single-summery.active:hover::before,.single-summery.active:hover:after {
+  display: none;
+}
+
+.single-summery.active:hover h3 {
+ color: #415094 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+.single-summery.active:hover h1 {
+  background: -webkit-linear-gradient(90deg, #7c32ff 0%, #c738d8 100%) !important;
+  background: -moz-linear-gradient(90deg, #7c32ff 0%, #c738d8 100%) !important;
+  background: -o-linear-gradient(90deg, #7c32ff 0%, #c738d8 100%) !important;
+  background: linear-gradient(90deg, #7c32ff 0%, #c738d8 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.white-box.single-summery.active h3, .white-box.single-summery.active p, .white-box.single-summery.active h1 {
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
+}
