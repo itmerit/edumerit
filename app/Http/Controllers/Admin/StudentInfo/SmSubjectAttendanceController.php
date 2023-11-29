@@ -97,6 +97,8 @@ class SmSubjectAttendanceController extends Controller
                 return view('backEnd.studentInformation.subject_attendance_list2', compact('students', 'classes', 'subjects', 'attendance_type', 'input'))->with($data);
             }
         } catch (\Exception $e) {
+
+
             Toastr::error('Operation Failed', 'Failed');
             return redirect()->back();
         }

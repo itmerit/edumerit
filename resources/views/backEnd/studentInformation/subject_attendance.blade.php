@@ -33,7 +33,6 @@
                         {{ Form::open(['class' => 'form-horizontal', 'route' => 'subject-attendance-search', 'method' => 'POST', 'id' => 'search_studentA']) }}
                         <div class="row">
                             <input type="hidden" name="url" id="url" value="{{URL::to('/')}}">
-
                             @if(moduleStatusCheck('University'))
                                 @includeIf('university::common.session_faculty_depart_academic_semester_level',['required'=>['USN','UD', 'UA', 'US','USL', 'USEC', 'USUB']])
 
@@ -78,7 +77,6 @@
                                                 <div class="col">
                                                     <div class="">
                                                         <input class="primary_input_field  primary_input_field date form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }}" id="attendance_date" type="text"
-                                                               name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">
                                                     </div>
                                                 </div>
                                                 <button class="btn-date" data-id="#attendance_date" type="button">
@@ -104,8 +102,6 @@
                 </div>
             </div>
             @if(isset($already_assigned_students))
-                {{ Form::open(['class' => 'form-horizontal', 'files' => true, 'method' => 'POST', 'enctype' => 'multipart/form-data'])}}
-
                 <div class="row mt-40">
                     <div class="col-lg-12">
                         <div class="row">
@@ -195,7 +191,6 @@
                                                         <label for="attendanceA{{$already_assigned_student->studentInfo->id}}">@lang('student.absent')</label>
                                                     </div>
                                                     <div>
-                                                        <input type="radio" name="attendance[{{$already_assigned_student->studentInfo->id}}]" id="attendanceH{{$already_assigned_student->studentInfo->id}}" value="F" class="common-radio" {{$already_assigned_student->attendance_type == "F"? 'checked':''}}>
                                                         <label for="attendanceH{{$already_assigned_student->studentInfo->id}}">@lang('student.half_day')</label>
                                                     </div>
                                                 </div>
@@ -261,6 +256,8 @@
         </div>
     </section>
 
+        </div>
+    </section>
 
 @endsection
 @include('backEnd.partials.data_table_js')

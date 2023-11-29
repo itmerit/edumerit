@@ -377,9 +377,7 @@
                                                         <div class="mr-20">
                                                             <input type="radio" name="attendance[{{$student->id}}][behaviour_type]" id="behaviourG{{$student->id}}" value="G" class="common-radio subject_attendance_type" {{$student->studentDetail->DateSubjectWiseAttendances !=null ? ($student->studentDetail->DateSubjectWiseAttendances->behaviour_type == "G" ? 'checked' :''):''}}>
                                                             <label for="behaviourG{{$student->id}}" style="color: green;">Green</label>
-                                                        </div>
                                                     </div>
-
 
                                                 </td>
                                                 <td>
@@ -432,6 +430,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{ Form::close() }}
                     </div>
                 @endif
             </div>
