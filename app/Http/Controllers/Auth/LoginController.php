@@ -594,6 +594,7 @@ class LoginController extends Controller
         userStatusChange($user->id, 0);
         Session::flush();
         Auth::logout();
-        return redirect()->away('https://iftixormaktabi.uz');
+        return redirect()->route('login');
+
     }
 }
