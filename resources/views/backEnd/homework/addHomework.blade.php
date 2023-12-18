@@ -151,9 +151,9 @@
                                             <div class="primary_input ">
                                                 <label class="primary_input_label" for="">@lang('homework.marks') <span
                                                         class="text-danger"> *</span></label>
-                                                <input oninput="numberCheckWithDot(this)"
+                                                <input step="0.1"
                                                     class="primary_input_field form-control{{ $errors->has('marks') ? ' is-invalid' : '' }}"
-                                                    type="text" name="marks" value="{{ old('marks') }}">
+                                                    type="number" name="marks" value="{{ old('marks') }}">
                                                 @if ($errors->has('marks'))
                                                     <span class="text-danger">
                                                         {{ $errors->first('marks') }}
