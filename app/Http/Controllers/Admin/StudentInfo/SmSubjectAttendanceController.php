@@ -65,7 +65,7 @@ class SmSubjectAttendanceController extends Controller
                 ->where('section_id', $input['section'])
                 ->get();
 
-            $students = StudentRecord::with('studentDetail', 'todaySubjectAttendance')
+            $students = StudentRecord::with('studentDetail', 'studentDetail.DateSubjectWiseAttendances')
                 ->where('class_id', $input['class'])
                 ->where('section_id', $input['section'])
                 ->where('academic_id', getAcademicId())
@@ -90,11 +90,19 @@ class SmSubjectAttendanceController extends Controller
 
             $attendance_type = $students[0]['studentDetail']['DateSubjectWiseAttendances'] != null ? $students[0]['studentDetail']['DateSubjectWiseAttendances']['attendance_type'] : '';
 
+            if (!moduleStatusCheck('University')) {
+                $search_info['class_name'] = SmClass::find($request->class_id)->class_name;
+                $search_info['section_name'] = SmSection::find($input['section'])->section_name;
+                $search_info['subject_name'] = SmSubject::find($request->subject_id)->subject_name;
+            }
+
+            $search_info['date'] = $input['attendance_date'];
+
 
             if (generalSetting()->attendance_layout == 1) {
-                return view('backEnd.studentInformation.subject_attendance_list', compact('students', 'classes', 'subjects', 'attendance_type', 'input'))->with($data);
+                return view('backEnd.studentInformation.subject_attendance_list', compact('students', 'classes', 'subjects', 'attendance_type','search_info', 'input'))->with($data);
             } else {
-                return view('backEnd.studentInformation.subject_attendance_list2', compact('students', 'classes', 'subjects', 'attendance_type', 'input'))->with($data);
+                return view('backEnd.studentInformation.subject_attendance_list2', compact('students', 'classes', 'subjects', 'attendance_type','search_info', 'input'))->with($data);
             }
         } catch (\Exception $e) {
 

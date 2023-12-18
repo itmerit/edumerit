@@ -31,82 +31,82 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="white-box">
-                        {{ Form::open(['class' => 'form-horizontal', 'route' => 'subject-attendance-search', 'method' => 'POST', 'id' => 'search_studentA']) }}
-                        <div class="row">
-                            <input type="hidden" name="url" id="url" value="{{URL::to('/')}}">
+{{--            <div class="row">--}}
+{{--                <div class="col-lg-12">--}}
+{{--                    <div class="white-box">--}}
+{{--                        {{ Form::open(['class' => 'form-horizontal', 'route' => 'subject-attendance-search', 'method' => 'POST', 'id' => 'search_studentA']) }}--}}
+{{--                        <div class="row">--}}
+{{--                            <input type="hidden" name="url" id="url" value="{{URL::to('/')}}">--}}
 
-                            @if(moduleStatusCheck('University'))
-                                @includeIf('university::common.session_faculty_depart_academic_semester_level',['required'=>['USN','UD', 'UA', 'US','USL', 'USEC', 'USUB']])
+{{--                            @if(moduleStatusCheck('University'))--}}
+{{--                                @includeIf('university::common.session_faculty_depart_academic_semester_level',['required'=>['USN','UD', 'UA', 'US','USL', 'USEC', 'USUB']])--}}
 
-                                <div class="col-lg-3 mt-25">
-                                    <div class="row no-gutters input-right-icon">
-                                        <div class="col">
-                                            <div class="primary_input">
-                                                <input class="primary_input_field  primary_input_field date form-control form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }} {{isset($date)? 'read-only-input': ''}}" id="startDate" type="text"
-                                                       name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">
-                                                <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>
+{{--                                <div class="col-lg-3 mt-25">--}}
+{{--                                    <div class="row no-gutters input-right-icon">--}}
+{{--                                        <div class="col">--}}
+{{--                                            <div class="primary_input">--}}
+{{--                                                <input class="primary_input_field  primary_input_field date form-control form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }} {{isset($date)? 'read-only-input': ''}}" id="startDate" type="text"--}}
+{{--                                                       name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">--}}
+{{--                                                <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>--}}
 
 
-                                                @if ($errors->has('attendance_date'))
-                                                    <span class="text-danger" >
-                                                    {{ $errors->first('attendance_date') }}
-                                                </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <button class="btn-date" type="button">
-                                            <label class="m-0 p-0" for="startDate">
-                                                <i class="ti-calendar" id="admission-date-icon"></i>
-                                            </label>
-                                        </button>
-                                    </div>
+{{--                                                @if ($errors->has('attendance_date'))--}}
+{{--                                                    <span class="text-danger" >--}}
+{{--                                                    {{ $errors->first('attendance_date') }}--}}
+{{--                                                </span>--}}
+{{--                                                @endif--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <button class="btn-date" type="button">--}}
+{{--                                            <label class="m-0 p-0" for="startDate">--}}
+{{--                                                <i class="ti-calendar" id="admission-date-icon"></i>--}}
+{{--                                            </label>--}}
+{{--                                        </button>--}}
+{{--                                    </div>--}}
 
-                                </div>
-                                @include('backEnd.common.search_criteria', [
-                               'div'=>'col-lg-3',
-                               'subject'=>true,
-                               'required'=>['class', 'subject'],
-                               'visiable'=>['class', 'subject'],
-                               ])
+{{--                                </div>--}}
+{{--                                @include('backEnd.common.search_criteria', [--}}
+{{--                               'div'=>'col-lg-3',--}}
+{{--                               'subject'=>true,--}}
+{{--                               'required'=>['class', 'subject'],--}}
+{{--                               'visiable'=>['class', 'subject'],--}}
+{{--                               ])--}}
 
-                                <div class="col-lg-3 mt-30-md md_mb_20">
+{{--                                <div class="col-lg-3 mt-30-md md_mb_20">--}}
 
-                                    <div class="primary_input">
-                                        <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>
-                                        <div class="primary_datepicker_input">
-                                            <div class="no-gutters input-right-icon">
-                                                <div class="col">
-                                                    <div class="">
-                                                        <input class="primary_input_field  primary_input_field date form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }}" id="attendance_date" type="text"
-                                                               name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">
-                                                    </div>
-                                                </div>
-                                                <button class="btn-date" data-id="#attendance_date" type="button">
-                                                    <label class="m-0 p-0" for="attendance_date">
-                                                        <i class="ti-calendar" id="start-date-icon"></i>
-                                                    </label>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <span class="text-danger">{{ $errors->first('attendance_date') }}</span>
-                                    </div>
-                                </div>
-                            @endif
-                            <div class="col-lg-12 mt-20 text-right">
-                                <button type="submit" class="primary-btn small fix-gr-bg">
-                                    <span class="ti-search pr-2"></span>
-                                    @lang('common.search')
-                                </button>
-                            </div>
-                        </div>
-                        {{ Form::close() }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
+{{--                                    <div class="primary_input">--}}
+{{--                                        <label for="startDate">@lang('student.attendance_date')<span class="text-danger"> *</span></label>--}}
+{{--                                        <div class="primary_datepicker_input">--}}
+{{--                                            <div class="no-gutters input-right-icon">--}}
+{{--                                                <div class="col">--}}
+{{--                                                    <div class="">--}}
+{{--                                                        <input class="primary_input_field  primary_input_field date form-control{{ $errors->has('attendance_date') ? ' is-invalid' : '' }}" id="attendance_date" type="text"--}}
+{{--                                                               name="attendance_date" autocomplete="off" value="{{isset($date)? $date: date('m/d/Y')}}">--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <button class="btn-date" data-id="#attendance_date" type="button">--}}
+{{--                                                    <label class="m-0 p-0" for="attendance_date">--}}
+{{--                                                        <i class="ti-calendar" id="start-date-icon"></i>--}}
+{{--                                                    </label>--}}
+{{--                                                </button>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <span class="text-danger">{{ $errors->first('attendance_date') }}</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            @endif--}}
+{{--                            <div class="col-lg-12 mt-20 text-right">--}}
+{{--                                <button type="submit" class="primary-btn small fix-gr-bg">--}}
+{{--                                    <span class="ti-search pr-2"></span>--}}
+{{--                                    @lang('common.search')--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        {{ Form::close() }}--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="row">--}}
+{{--                    <div class="col-lg-12">--}}
                         {{--                <div class="white-box">--}}
                         {{--                    {{ Form::open(['class' => 'form-horizontal','route' => 'subject-attendance-search', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'search_studentA']) }}--}}
                         {{--                        <div class="row">--}}
@@ -218,8 +218,8 @@
                         {{--                        </div>--}}
                         {{--                    {{ Form::close() }}--}}
                         {{--                </div>--}}
-                    </div>
-                </div>
+{{--                    </div>--}}
+{{--                </div>--}}
                 @if(isset($students))
                     <div class="row mt-40">
                         <div class="col-lg-12 ">
