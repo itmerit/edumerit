@@ -88,7 +88,7 @@
                                              <div class="col-lg-3 mt-30">
                                                  <div class="primary_input sm_mb_20 ">
                                                      <label class="primary_input_label" for="">@lang('student.admission_no')</label>
-                                                     <input class="primary_input_field" type="text" placeholder="@lang('student.admission_no')" name="admission_no" value="{{ isset($admission_no)?$admission_no:old('admission_no')}}"> 
+                                                     <input class="primary_input_field" type="number" placeholder="@lang('student.admission_no')" name="admission_no" value="{{ isset($admission_no)?$admission_no:old('admission_no')}}"> 
                                                  </div>
                                              </div>
                                          @endif
